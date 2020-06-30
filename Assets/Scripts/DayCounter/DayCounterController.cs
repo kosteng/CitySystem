@@ -14,6 +14,11 @@ public class DayCounterController
         _dayCounterView = dayCounterView;
     }
 
+    public void Awake()
+    {
+        _dayCounterDataBase.Clear();
+    }
+
     public void Update(float deltaTime)
     {
         if (_timer > _dayCounterDataBase.HoursCountIsEndedDay)

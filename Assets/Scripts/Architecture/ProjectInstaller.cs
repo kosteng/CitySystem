@@ -8,6 +8,7 @@ public class ProjectInstaller : MonoBehaviour
     private void Awake()
     {
         _projectInfrastructure = new ProjectInfrastructure(_monoBehaviourConteiner);
+        _projectInfrastructure.Awake();
     }
 
     void Start()
@@ -18,10 +19,5 @@ public class ProjectInstaller : MonoBehaviour
     void Update()
     {
         _projectInfrastructure.Update(Time.deltaTime);
-    }
-
-    private void FixedUpdate()
-    {
-        _projectInfrastructure.FixedUpdate(Time.deltaTime);
     }
 }

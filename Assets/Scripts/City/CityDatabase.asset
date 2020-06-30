@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82770481395e8c4cb0f66f6769647b6, type: 3}
   m_Name: CityDatabase
   m_EditorClassIdentifier: 
-  People: 254
-  Gold: 13711
-  Food: -7211
+  People: 58834196
+  Gold: 647184260
+  Food: -647167700
+  Wood: 164
+  Stone: 164
+  Iron: 164
+  Warrior: 0

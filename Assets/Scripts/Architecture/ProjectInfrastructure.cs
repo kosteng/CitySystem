@@ -20,13 +20,13 @@
     {
 
     }
-
+    public void Awake()
+    {
+        _cityController.Awake();
+        _dayCounterController.Awake();
+    }
     public void Update(float deltaTime)
     {
         _dayCounterController.Update(deltaTime);
-    }
-
-    public void FixedUpdate (float deltaTime)
-    { 
     }
 }
