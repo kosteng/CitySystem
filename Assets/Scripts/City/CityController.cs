@@ -4,14 +4,12 @@ public class CityController
 {
     private readonly CityDatabase _cityDatabase;
     private readonly CityView _cityView;
-    private readonly DayCounterController _dayCounterController;
 
     public CityController (CityDatabase cityDatabase, CityView cityView, DayCounterController dayCounterController)
     {
         _cityDatabase = cityDatabase;
         _cityView = cityView;
-        _dayCounterController = dayCounterController;
-        _dayCounterController.OnUpdateDay += NextDay;
+        dayCounterController.OnUpdateDay += NextDay;
     }
     public void Awake()
     {
