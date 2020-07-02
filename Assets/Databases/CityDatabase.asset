@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CityDatabase
   m_EditorClassIdentifier: 
   People: 12
-  Gold: 1609
-  Food: 1117
-  Wood: 286
-  Stone: 78
-  Iron: 22039
+  Gold: 594
+  Food: 927
+  Wood: 131
+  Stone: 21
+  Iron: 21
   Warrior: 0

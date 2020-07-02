@@ -12,4 +12,9 @@ public abstract class ABuildingDatabase : ScriptableObject, IBuildingIncome
     public void Income()
     {
     }
+
+    public void Clear()
+    {
+        IsBuy = false;
+    }
 }

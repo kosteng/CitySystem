@@ -1183,7 +1183,7 @@ MonoBehaviour:
   SawMill: {fileID: 3306628053656149103}
   Mine: {fileID: 7544135723898970890}
   House: {fileID: 8025661111792414487}
-  BuildingUIView: {fileID: 0}
+  BuildingUIView: {fileID: 1757295217}
   DayCounterDataBase: {fileID: 11400000, guid: 531abb0f20e500f42a631c3b20561103, type: 2}
   CityDatabase: {fileID: 11400000, guid: e25bf3dd33180af4d942db8d5a383589, type: 2}
   AllBuildingsDatabase: {fileID: 11400000, guid: cc083557591440749aa4ed37350d1ab3,
