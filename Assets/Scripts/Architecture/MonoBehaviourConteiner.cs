@@ -9,6 +9,7 @@ public class MonoBehaviourConteiner : MonoBehaviour
     public BuildingView Mine;
     public BuildingView House;
     public BuildingUIView BuildingUIView;
+    public BottomPanalView BottomPanalView;
 
     //Factories
 

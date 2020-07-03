@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CityDatabase: {fileID: 11400000, guid: e25bf3dd33180af4d942db8d5a383589, type: 2}
   Name: Mine
-  IsBuy: 1
-  _ironIncome: 1
-  _stoneIncome: 2
-  _goldCost: 400
-  _woodCost: 5
-  _stoneCost: 40
+  IsBuy: 0
+  _ironIncome: 10
+  _stoneIncome: 20
+  _goldCost: 4000
+  _woodCost: 50
+  _stoneCost: 400

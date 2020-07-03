@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b628566f3390247a88c9e490f55723, type: 3}
   m_Name: DayCountDatabase
   m_EditorClassIdentifier: 
-  Day: 26
-  HoursCountIsEndedDay: 1
+  Day: 347
+  HoursCountIsEndedDay: 24
