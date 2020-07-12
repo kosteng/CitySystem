@@ -4,20 +4,24 @@
     private readonly DayCounterController _dayCounterController;
     private readonly CityController _cityController;
     private readonly BuildingController _buildingController;
-    private readonly BottomPanalController _bottomPanalController;
+    private readonly BottomPanelController _bottomPanalController;
+
     public ProjectInfrastructure (MonoBehaviourConteiner monoBehaviourConteiner)
     {
         _monoBehaviourConteiner = monoBehaviourConteiner;
 
-        _bottomPanalController = new BottomPanalController(
+        _bottomPanalController = new BottomPanelController(
+
             _monoBehaviourConteiner.BottomPanalView,
             _monoBehaviourConteiner.BuildingUIView);
 
         _dayCounterController = new DayCounterController(
+
             _monoBehaviourConteiner.DayCounterDataBase, 
             _monoBehaviourConteiner.DayCounterView);
 
         _buildingController = new BuildingController(
+
             _monoBehaviourConteiner.AllBuildingsDatabase,
             _dayCounterController, 
             _monoBehaviourConteiner.BuildingUIView, 
@@ -27,12 +31,14 @@
             _bottomPanalController);
 
         _cityController = new CityController(
+
             _monoBehaviourConteiner.CityDatabase,
             _monoBehaviourConteiner.CityView,
             _dayCounterController,
             _buildingController);
 
-        _bottomPanalController = new BottomPanalController(
+        _bottomPanalController = new BottomPanelController(
+
             _monoBehaviourConteiner.BottomPanalView, 
             _monoBehaviourConteiner.BuildingUIView);
     }

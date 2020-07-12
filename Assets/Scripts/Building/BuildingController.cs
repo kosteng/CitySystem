@@ -6,21 +6,21 @@ public class BuildingController
     private readonly AllBuildingsDatabase _allBuildingsDatabase;
     private readonly DayCounterController _dayCounterController;
     private readonly List<IBuildingIncome> _buildingIncomes = new List<IBuildingIncome>();
-    private readonly BuildingUIView _buildingUIView;
+    private readonly BuildingUIInfoBuyView _buildingUIView;
     private readonly BuildingView _houseView;
     private readonly BuildingView _sawMillView;
     private readonly BuildingView _mineView;
-    private readonly BottomPanalController _bottomPanalController;
+    private readonly BottomPanelController _bottomPanalController;
     public event Action OnBuyBuilding;
 
     public BuildingController(
         AllBuildingsDatabase allBuildingsDatabase, 
         DayCounterController dayCounterController,
-        BuildingUIView buildingUIView, 
+        BuildingUIInfoBuyView buildingUIView, 
         BuildingView houseView, 
         BuildingView sawMillView, 
         BuildingView mineView,
-        BottomPanalController bottomPanalController)
+        BottomPanelController bottomPanalController)
     {
         _allBuildingsDatabase = allBuildingsDatabase;
         _dayCounterController = dayCounterController;

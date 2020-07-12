@@ -1,9 +1,9 @@
-﻿public class BottomPanalController
+﻿public class BottomPanelController
 {
-    private readonly BuildingUIView _buildingUIView; 
-    private readonly BottomPanalView _bottomPanalView;
+    private readonly BuildingUIInfoBuyView _buildingUIView; 
+    private readonly BottomPanelView _bottomPanalView;
 
-    public BottomPanalController(BottomPanalView bottomPanalView, BuildingUIView buildingUIView)
+    public BottomPanelController(BottomPanelView bottomPanalView, BuildingUIInfoBuyView buildingUIView)
     {
         _bottomPanalView = bottomPanalView;
         _buildingUIView = buildingUIView;

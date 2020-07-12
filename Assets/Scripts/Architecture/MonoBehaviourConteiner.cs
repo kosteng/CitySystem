@@ -8,8 +8,8 @@ public class MonoBehaviourConteiner : MonoBehaviour
     public BuildingView SawMill;
     public BuildingView Mine;
     public BuildingView House;
-    public BuildingUIView BuildingUIView;
-    public BottomPanalView BottomPanalView;
+    public BuildingUIInfoBuyView BuildingUIView;
+    public BottomPanelView BottomPanalView;
 
     //Factories
 
