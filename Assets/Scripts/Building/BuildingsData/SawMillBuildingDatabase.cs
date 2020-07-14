@@ -26,6 +26,11 @@ public class SawMillBuildingDatabase : ABuildingDatabase, IBuildingIncome
         IsBuy = true;
     }
 
+    public override string ShowCost()
+    {
+        return "Gold: " + _goldCost + " Wood: " + _woodCost;
+    }
+
     protected override bool TryBuyBuilding()
     {
         if (CityDatabase.Gold > _goldCost && CityDatabase.Wood > _woodCost)

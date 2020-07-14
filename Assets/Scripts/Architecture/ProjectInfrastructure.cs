@@ -4,17 +4,15 @@
     private readonly DayCounterController _dayCounterController;
     private readonly CityController _cityController;
     private readonly BuildingController _buildingController;
-    private readonly BottomPanelController _bottomPanalController;
+    private readonly BottomPanelPresenter _bottomPanalPresenter;
+    private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
 
     public ProjectInfrastructure (MonoBehaviourConteiner monoBehaviourConteiner)
     {
         _monoBehaviourConteiner = monoBehaviourConteiner;
 
-        _bottomPanalController = new BottomPanelController(
-
-            _monoBehaviourConteiner.BottomPanalView,
-            _monoBehaviourConteiner.BuildingUIView);
-
+        _bottomPanalPresenter = new BottomPanelPresenter(monoBehaviourConteiner.BottomPanalView)
+;
         _dayCounterController = new DayCounterController(
 
             _monoBehaviourConteiner.DayCounterDataBase, 
@@ -27,20 +25,17 @@
             _monoBehaviourConteiner.BuildingUIView, 
             _monoBehaviourConteiner.House,
             _monoBehaviourConteiner.SawMill, 
-            _monoBehaviourConteiner.Mine,
-            _bottomPanalController);
+            _monoBehaviourConteiner.Mine);
 
-        _cityController = new CityController(
+        _buildingInfoBuyPanelPresenter = new BuildingInfoBuyPanelPresenter(_monoBehaviourConteiner.BuildingUIView,
+                                                                           _bottomPanalPresenter,
+                                                                           _monoBehaviourConteiner.AllBuildingsDatabase);
 
-            _monoBehaviourConteiner.CityDatabase,
-            _monoBehaviourConteiner.CityView,
-            _dayCounterController,
-            _buildingController);
-
-        _bottomPanalController = new BottomPanelController(
-
-            _monoBehaviourConteiner.BottomPanalView, 
-            _monoBehaviourConteiner.BuildingUIView);
+        _cityController = new CityController( _monoBehaviourConteiner.CityDatabase,
+                                              _monoBehaviourConteiner.CityView,
+                                              _dayCounterController,
+                                              _buildingController,
+                                              _buildingInfoBuyPanelPresenter);
     }
 
     public void Start()
@@ -52,7 +47,8 @@
         _cityController.Awake();
         _dayCounterController.Awake();
         _buildingController.Awake();
-        _bottomPanalController.Awake();
+        _bottomPanalPresenter.Awake();
+        _buildingInfoBuyPanelPresenter.Awake();
     }
     public void Update(float deltaTime)
     {

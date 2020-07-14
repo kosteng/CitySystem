@@ -1,12 +1,13 @@
-﻿public class BottomPanelController
-{
-    private readonly BuildingUIInfoBuyView _buildingUIView; 
-    private readonly BottomPanelView _bottomPanalView;
+﻿using System;
 
-    public BottomPanelController(BottomPanelView bottomPanalView, BuildingUIInfoBuyView buildingUIView)
+public class BottomPanelPresenter
+{
+    private readonly BottomPanelView _bottomPanalView;
+    public event Action OnShowBuildingUIInfoBuyView;
+
+    public BottomPanelPresenter(BottomPanelView bottomPanalView)
     {
         _bottomPanalView = bottomPanalView;
-        _buildingUIView = buildingUIView;
     }
 
     public void Awake()
@@ -16,6 +17,6 @@
 
     public void Show()
     {
-        _buildingUIView.gameObject.SetActive(!_buildingUIView.gameObject.activeSelf);
+        OnShowBuildingUIInfoBuyView?.Invoke();
     }
 }

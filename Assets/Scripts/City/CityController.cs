@@ -6,12 +6,13 @@ public class CityController
     private readonly CityView _cityView;
 
     public CityController (CityDatabase cityDatabase, CityView cityView, 
-        DayCounterController dayCounterController, BuildingController buildingController)
+        DayCounterController dayCounterController, BuildingController buildingController, 
+        BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter)
     {
         _cityDatabase = cityDatabase;
         _cityView = cityView;
         dayCounterController.OnUpdateDay += NextDay;
-        buildingController.OnBuyBuilding += RefreshResourcesToView;
+        buildingInfoBuyPanelPresenter.OnBuyBuilding += RefreshResourcesToView;
     }
     public void Awake()
     {

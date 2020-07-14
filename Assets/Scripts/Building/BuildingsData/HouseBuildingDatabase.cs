@@ -6,7 +6,7 @@ public class HouseBuildingDatabase : ABuildingDatabase, IBuildingIncome
     [SerializeField] private float _goldIncome;
     [SerializeField] private float _goldCost;
     [SerializeField] private float _woodCost;
-    [SerializeField] private float _stoneCost;
+   // [SerializeField] private float _stoneCost;
 
     public void Income()
     {
@@ -24,13 +24,18 @@ public class HouseBuildingDatabase : ABuildingDatabase, IBuildingIncome
 
         CityDatabase.Gold -= _goldCost;
         CityDatabase.Wood -= _woodCost;
-        CityDatabase.Stone -= _stoneCost;
+       // CityDatabase.Stone -= _stoneCost;
         IsBuy = true;
+    }
+
+    public override string ShowCost()
+    {
+        return "Gold: " + _goldCost + " Wood: " + _woodCost;
     }
 
     protected override bool TryBuyBuilding()
     {
-        if (CityDatabase.Gold > _goldCost && CityDatabase.Wood > _woodCost && CityDatabase.Stone > _stoneCost)
+        if (CityDatabase.Gold > _goldCost && CityDatabase.Wood > _woodCost/* && CityDatabase.Stone > _stoneCost*/)
             return true;
         else return false;
     }
