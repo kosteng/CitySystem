@@ -31,62 +31,21 @@ public class BuildingController
     public void Awake()
     {
         _dayCounterController.OnUpdateDay += NextDay;
-       // _buildingUIInfoBuyView.OnHouseBuildingClickButton += BuyHouse;
-       // _buildingUIInfoBuyView.OnSawMillBuildingClickButton += BuySawMill;
-       // _buildingUIInfoBuyView.OnMineBuildingClickButton += BuyMine;
         _houseView.gameObject.SetActive(false);
         _sawMillView.gameObject.SetActive(false);
         _mineView.gameObject.SetActive(false);
 
 
         GetBuildings();
-
-        foreach (var building in _allBuildingsDatabase.Buildings)
+        foreach (var building in _allBuildingsDatabase.Buildings.Values)
         {
             building.Clear();
         }
     }
 
-    private void BuyHouse()
-    {
-      //var build = _allBuildingsDatabase.Buildings[(int)EBuildingType.House];
-     //   _buildingUIInfoBuyView.SetNameTextInfoPanel(build.Name);
-       // _buildingUIInfoBuyView.SetCostTextInfoPanel("Gold: " + 100f + " Wood: " + 75f + " Stone: " + 35f);
-        /*
-        build.PayBuilding();
-        if (!build.IsBuy)
-            return;
-        _houseView.gameObject.SetActive(true);
-        _buildingUIView.HouseBuldingButtonSetActive(false);
-        OnBuyBuilding?.Invoke();
-        */
-    }
-    
-    private void BuySawMill()
-    {
-        var build = _allBuildingsDatabase.Buildings[1];
-        build.PayBuilding();
-        if (!build.IsBuy)
-            return;
-        _sawMillView.gameObject.SetActive(true);
-        _buildingUIInfoBuyView.SawMillBuldingButtonSetActive(false);
-        OnBuyBuilding?.Invoke();
-    }
-
-    private void BuyMine()
-    {
-        var build = _allBuildingsDatabase.Buildings[2];
-        build.PayBuilding();
-        if (!build.IsBuy)
-            return;
-        _mineView.gameObject.SetActive(true);
-        _buildingUIInfoBuyView.MineBuldingButtonSetActive(false);
-        OnBuyBuilding?.Invoke();
-    }
-
     private void GetBuildings()
     {
-        foreach (var building in _allBuildingsDatabase.Buildings)
+        foreach (var building in _allBuildingsDatabase.Buildings.Values)
         {
             _buildingIncomes.Add(building);
         }

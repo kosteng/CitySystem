@@ -36,16 +36,16 @@ public class BuildingInfoBuyPanelPresenter
         _buildingUIInfoBuyView.gameObject.SetActive(false);
     }
 
-    private void ShowBuildingData(EBuildingType indexBuilding)
+    private void ShowBuildingData(EBuildingType buildingType)
     {
-        _currentBuild = _allBuildingsDatabase.Buildings[(int)indexBuilding];
+        _currentBuild = _allBuildingsDatabase.Buildings[buildingType];
         _buildingUIInfoBuyView.SetNameTextInfoPanel(_currentBuild.Name);
         _buildingUIInfoBuyView.SetCostTextInfoPanel(_currentBuild.ShowCost());
     }
 
     private void BuyBuilding(EBuildingType buildingType)
     {
-        var build = _allBuildingsDatabase.Buildings[(int)buildingType];
+        var build = _allBuildingsDatabase.Buildings[buildingType];
         build.PayBuilding();
         if (!build.IsBuy)
             return;
