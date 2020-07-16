@@ -6,11 +6,12 @@
     private readonly BuildingController _buildingController;
     private readonly BottomPanelPresenter _bottomPanalPresenter;
     private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
+    private readonly BuidingsStorageHandler _buidingsStorageHandler;
 
     public ProjectInfrastructure (MonoBehaviourConteiner monoBehaviourConteiner)
     {
         _monoBehaviourConteiner = monoBehaviourConteiner;
-
+        _buidingsStorageHandler = new BuidingsStorageHandler(_monoBehaviourConteiner.AllBuildingsDatabase);
         _bottomPanalPresenter = new BottomPanelPresenter(monoBehaviourConteiner.BottomPanalView)
 ;
         _dayCounterController = new DayCounterController(
@@ -20,15 +21,14 @@
         _buildingController = new BuildingController(
             _monoBehaviourConteiner.AllBuildingsDatabase,
             _dayCounterController, 
-            _monoBehaviourConteiner.BuildingUIView, 
-            _monoBehaviourConteiner.House,
-            _monoBehaviourConteiner.SawMill, 
-            _monoBehaviourConteiner.Mine);
+            _monoBehaviourConteiner.BuildingUIView,
+            _buidingsStorageHandler);
 
         _buildingInfoBuyPanelPresenter = new BuildingInfoBuyPanelPresenter(
             _monoBehaviourConteiner.BuildingUIView,                                                                          
             _bottomPanalPresenter,                                                                   
-            _monoBehaviourConteiner.AllBuildingsDatabase);
+            _monoBehaviourConteiner.AllBuildingsDatabase,
+            _buidingsStorageHandler);
 
         _cityController = new CityController( 
             _monoBehaviourConteiner.CityDatabase,

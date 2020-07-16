@@ -11,7 +11,9 @@ public class BuildingUIInfoBuyView : MonoBehaviour
     [SerializeField] private Button _closeInfoPanelButton;
     [SerializeField] private Text _nameBuildingText;
     [SerializeField] private Text _costBuildingText;
+
     private EBuildingType _currentType;
+
     public delegate void BuildingTypeHandler(EBuildingType type);
     public event BuildingTypeHandler OnBuildingClickButton;
     public event BuildingTypeHandler OnBuyBuildingClickButton;

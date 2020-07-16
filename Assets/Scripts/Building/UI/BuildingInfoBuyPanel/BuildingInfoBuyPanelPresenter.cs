@@ -4,17 +4,20 @@ public class BuildingInfoBuyPanelPresenter
     private readonly BuildingUIInfoBuyView _buildingUIInfoBuyView;
     private readonly BottomPanelPresenter _bottomPanelPresenter;
     private readonly AllBuildingsDatabase _allBuildingsDatabase;
+    private readonly BuidingsStorageHandler _buidingsStorageHandler;
     private ABuildingDatabase _currentBuild;
 
     public event Action OnBuyBuilding;
 
     public BuildingInfoBuyPanelPresenter(BuildingUIInfoBuyView buildingUIInfoBuyView, 
                                          BottomPanelPresenter bottomPanelPresenter, 
-                                         AllBuildingsDatabase allBuildingsDatabase)
+                                         AllBuildingsDatabase allBuildingsDatabase,
+                                         BuidingsStorageHandler buidingsStorageHandler)
     {
         _buildingUIInfoBuyView = buildingUIInfoBuyView;
         _bottomPanelPresenter = bottomPanelPresenter;
         _allBuildingsDatabase = allBuildingsDatabase;
+        _buidingsStorageHandler = buidingsStorageHandler; 
     }
 
     public void Awake()
@@ -38,17 +41,19 @@ public class BuildingInfoBuyPanelPresenter
 
     private void ShowBuildingData(EBuildingType buildingType)
     {
-        _currentBuild = _allBuildingsDatabase.Buildings[buildingType];
-        _buildingUIInfoBuyView.SetNameTextInfoPanel(_currentBuild.Name);
-        _buildingUIInfoBuyView.SetCostTextInfoPanel(_currentBuild.ShowCost());
+        var build = _allBuildingsDatabase.Buildings[buildingType];
+        _buildingUIInfoBuyView.SetNameTextInfoPanel(build.Name);
+        _buildingUIInfoBuyView.SetCostTextInfoPanel(build.ShowCost());
     }
 
     private void BuyBuilding(EBuildingType buildingType)
     {
         var build = _allBuildingsDatabase.Buildings[buildingType];
         build.PayBuilding();
-        if (!build.IsBuy)
-            return;
+    //    if (!build.IsBuy)
+      //      return;
+      if (buildingType == EBuildingType.House)
+        _buidingsStorageHandler.HouseBuildings.Add((HouseBuildingDatabase)_allBuildingsDatabase.Buildings[EBuildingType.House]);
         OnBuyBuilding?.Invoke();
     }
 }

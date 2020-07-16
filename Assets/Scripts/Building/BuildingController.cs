@@ -1,41 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 public class BuildingController 
 {
     private readonly AllBuildingsDatabase _allBuildingsDatabase;
     private readonly DayCounterController _dayCounterController;
     private readonly List<IBuildingIncome> _buildingIncomes = new List<IBuildingIncome>();
     private readonly BuildingUIInfoBuyView _buildingUIInfoBuyView;
-    private readonly BuildingView _houseView;
-    private readonly BuildingView _sawMillView;
-    private readonly BuildingView _mineView;
+    private readonly BuidingsStorageHandler _buidingsStorageHandler;
+
     public event Action OnBuyBuilding;
 
     public BuildingController(
         AllBuildingsDatabase allBuildingsDatabase, 
         DayCounterController dayCounterController,
-        BuildingUIInfoBuyView buildingUIView, 
-        BuildingView houseView, 
-        BuildingView sawMillView, 
-        BuildingView mineView)
+        BuildingUIInfoBuyView buildingUIView,
+        BuidingsStorageHandler buidingsStorageHandler)
     {
         _allBuildingsDatabase = allBuildingsDatabase;
         _dayCounterController = dayCounterController;
         _buildingUIInfoBuyView = buildingUIView;
-        _houseView = houseView;
-        _sawMillView = sawMillView;
-        _mineView = mineView;
+        _buidingsStorageHandler = buidingsStorageHandler;
     }
 
     public void Awake()
     {
         _dayCounterController.OnUpdateDay += NextDay;
-        _houseView.gameObject.SetActive(false);
-        _sawMillView.gameObject.SetActive(false);
-        _mineView.gameObject.SetActive(false);
-
-
+        _buidingsStorageHandler.Awake();
         GetBuildings();
         foreach (var building in _allBuildingsDatabase.Buildings.Values)
         {
@@ -53,7 +44,13 @@ public class BuildingController
 
     private void NextDay()
     {
-        foreach (var building in _buildingIncomes)
+        /*   foreach (var building in _buildingIncomes)
+           {
+               building.Income();
+           }
+           */
+        Debug.Log("Count " + _buidingsStorageHandler.HouseBuildings.Count);
+        foreach (var building in _buidingsStorageHandler.HouseBuildings)
         {
             building.Income();
         }

@@ -24,6 +24,7 @@ public class CityController
     {
         CalculateIncomeResources();
         RefreshResourcesToView();
+        Debug.Log("Gold " + _cityDatabase.Gold);
     }
 
     private float _peopleReproduce;
@@ -42,7 +43,7 @@ public class CityController
         Debug.Log(_peopleReproduce);
 
         _cityDatabase.Food += 50f - _cityDatabase.People - _cityDatabase.Warrior;
-        _cityDatabase.Gold += 50f + _cityDatabase.People - _cityDatabase.Warrior;
+        _cityDatabase.Gold += 50f /* _cityDatabase.People */- _cityDatabase.Warrior;
         _cityDatabase.Wood++;
         _cityDatabase.Stone++;
         _cityDatabase.Iron++;
