@@ -2,73 +2,76 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingUIInfoBuyView : MonoBehaviour
+namespace Building.UI.BuildingInfoBuyPanel
 {
-    [SerializeField] private Button _houseBuildingButton;
-    [SerializeField] private Button _sawMillBuildingButton;
-    [SerializeField] private Button _mineBuildingButton;
-    [SerializeField] private Button _buyBuildingButton;
-    [SerializeField] private Button _closeInfoPanelButton;
-    [SerializeField] private Text _nameBuildingText;
-    [SerializeField] private Text _costBuildingText;
-
-    private EBuildingType _currentType;
-
-    public delegate void BuildingTypeHandler(EBuildingType type);
-    public event BuildingTypeHandler OnBuildingClickButton;
-    public event BuildingTypeHandler OnBuyBuildingClickButton;
-    public event Action OnCloseInfoPanelBuildingClickButton;
-
-    public void HouseBuildingClick()
+    public class BuildingUIInfoBuyView : MonoBehaviour
     {
-        _currentType = EBuildingType.House;
-        OnBuildingClickButton?.Invoke(EBuildingType.House);
-    }
+        [SerializeField] private Button _houseBuildingButton;
+        [SerializeField] private Button _sawMillBuildingButton;
+        [SerializeField] private Button _mineBuildingButton;
+        [SerializeField] private Button _buyBuildingButton;
+        [SerializeField] private Button _closeInfoPanelButton;
+        [SerializeField] private Text _nameBuildingText;
+        [SerializeField] private Text _costBuildingText;
 
-    public void SawMillBuildingClick()
-    {
-        _currentType = EBuildingType.SawMill;
-        OnBuildingClickButton?.Invoke(EBuildingType.SawMill);
-    }
+        private EBuildingType _currentType;
 
-    public void MineBuildingClick()
-    {
-        _currentType = EBuildingType.Mine;
-        OnBuildingClickButton?.Invoke(EBuildingType.Mine);
-    }
+        public delegate void BuildingTypeHandler(EBuildingType type);
+        public event BuildingTypeHandler OnBuildingClickButton;
+        public event BuildingTypeHandler OnBuyBuildingClickButton;
+        public event Action OnCloseInfoPanelBuildingClickButton;
 
-    public void BuyBuildingClick()
-    {
-        OnBuyBuildingClickButton?.Invoke(_currentType);
-    }
+        public void HouseBuildingClick()
+        {
+            _currentType = EBuildingType.House;
+            OnBuildingClickButton?.Invoke(EBuildingType.House);
+        }
 
-    public void CloseInfoPanelBildingClick()
-    {
-        OnCloseInfoPanelBuildingClickButton?.Invoke();
-    }
+        public void SawMillBuildingClick()
+        {
+            _currentType = EBuildingType.SawMill;
+            OnBuildingClickButton?.Invoke(EBuildingType.SawMill);
+        }
 
-    public void HouseBuldingButtonSetActive(bool value)
-    {
-        _houseBuildingButton.gameObject.SetActive(value);
-    }
+        public void MineBuildingClick()
+        {
+            _currentType = EBuildingType.Mine;
+            OnBuildingClickButton?.Invoke(EBuildingType.Mine);
+        }
 
-    public void SawMillBuldingButtonSetActive(bool value)
-    {
-        _sawMillBuildingButton.gameObject.SetActive(value);
-    }
+        public void BuyBuildingClick()
+        {
+            OnBuyBuildingClickButton?.Invoke(_currentType);
+        }
 
-    public void MineBuldingButtonSetActive(bool value)
-    {
-        _mineBuildingButton.gameObject.SetActive(value);
-    }
+        public void CloseInfoPanelBuildingClick()
+        {
+            OnCloseInfoPanelBuildingClickButton?.Invoke();
+        }
 
-    public void SetNameTextInfoPanel(string name)
-    {
-        _nameBuildingText.text = name;
-    }
+        public void HouseBuildingButtonSetActive(bool value)
+        {
+            _houseBuildingButton.gameObject.SetActive(value);
+        }
 
-    public void SetCostTextInfoPanel(string cost)
-    {
-        _costBuildingText.text = cost;
+        public void SawMillBuildingButtonSetActive(bool value)
+        {
+            _sawMillBuildingButton.gameObject.SetActive(value);
+        }
+
+        public void MineBuildingButtonSetActive(bool value)
+        {
+            _mineBuildingButton.gameObject.SetActive(value);
+        }
+
+        public void SetNameTextInfoPanel(string name)
+        {
+            _nameBuildingText.text = name;
+        }
+
+        public void SetCostTextInfoPanel(string cost)
+        {
+            _costBuildingText.text = cost;
+        }
     }
 }

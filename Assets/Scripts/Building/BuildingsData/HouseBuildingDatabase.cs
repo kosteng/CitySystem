@@ -1,42 +1,25 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "DatabasesSO/HouseBuilding")]
-public class HouseBuildingDatabase : ABuildingDatabase, IBuildingIncome
+namespace Building.BuildingsData
 {
-    [SerializeField] private float _goldIncome;
-    [SerializeField] private float _goldCost;
-    [SerializeField] private float _woodCost;
-   // [SerializeField] private float _stoneCost;
-
-    public void Income()
+    [CreateAssetMenu(menuName = "DatabasesSO/HouseBuilding")]
+    public class HouseBuildingDatabase : ScriptableObject
     {
-        if(IsBuy)
-            CityDatabase.Gold += _goldIncome;
-    }
-
-    public override void PayBuilding()
-    {
-        if (!TryBuyBuilding())
+        public string Name;
+        public float GoldIncome;
+        public float GoldCost;
+        public float WoodCost;
+        [SerializeField] private CityDatabase _cityDatabase;
+        public string ShowCost()
         {
-            Debug.Log("Не хватает ресурсов");
-            return;
+            return "Gold: " + GoldCost + " Wood: " + WoodCost;
         }
-
-        CityDatabase.Gold -= _goldCost;
-        CityDatabase.Wood -= _woodCost;
-       // CityDatabase.Stone -= _stoneCost;
-        IsBuy = true;
-    }
-
-    public override string ShowCost()
-    {
-        return "Gold: " + _goldCost + " Wood: " + _woodCost;
-    }
-
-    protected override bool TryBuyBuilding()
-    {
-        if (CityDatabase.Gold > _goldCost && CityDatabase.Wood > _woodCost/* && CityDatabase.Stone > _stoneCost*/)
-            return true;
-        else return false;
+        
+        public bool TryBuyBuilding()
+        {
+            if (_cityDatabase.Gold > GoldCost && _cityDatabase.Wood > WoodCost)
+                return true;
+            else return false;
+        }
     }
 }

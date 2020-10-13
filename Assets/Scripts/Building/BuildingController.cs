@@ -1,58 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
+using Building.BuildingsData;
+using Building.UI.BuildingInfoBuyPanel;
+using JetBrains.Annotations;
 using UnityEngine;
-public class BuildingController 
+
+namespace Building
 {
-    private readonly AllBuildingsDatabase _allBuildingsDatabase;
-    private readonly DayCounterController _dayCounterController;
-    private readonly List<IBuildingIncome> _buildingIncomes = new List<IBuildingIncome>();
-    private readonly BuildingUIInfoBuyView _buildingUIInfoBuyView;
-    private readonly BuidingsStorageHandler _buidingsStorageHandler;
-
-    public event Action OnBuyBuilding;
-
-    public BuildingController(
-        AllBuildingsDatabase allBuildingsDatabase, 
-        DayCounterController dayCounterController,
-        BuildingUIInfoBuyView buildingUIView,
-        BuidingsStorageHandler buidingsStorageHandler)
+    public class BuildingController
     {
-        _allBuildingsDatabase = allBuildingsDatabase;
-        _dayCounterController = dayCounterController;
-        _buildingUIInfoBuyView = buildingUIView;
-        _buidingsStorageHandler = buidingsStorageHandler;
-    }
-
-    public void Awake()
-    {
-        _dayCounterController.OnUpdateDay += NextDay;
-        _buidingsStorageHandler.Awake();
-        GetBuildings();
-        foreach (var building in _allBuildingsDatabase.Buildings.Values)
+        private readonly AllBuildingsDatabase _allBuildingsDatabase;
+        private readonly DayCounterController _dayCounterController;
+        private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
+        private readonly HouseBuildingView _houseBuildingView;
+        
+        private List<IBuilding> _buildings = new List<IBuilding>();
+        public BuildingController(
+            DayCounterController dayCounterController,
+            BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter,
+            HouseBuildingView houseBuildingView)
         {
-            building.Clear();
+            _dayCounterController = dayCounterController;
+            _buildingInfoBuyPanelPresenter = buildingInfoBuyPanelPresenter;
+            _houseBuildingView = houseBuildingView;
         }
-    }
 
-    private void GetBuildings()
-    {
-        foreach (var building in _allBuildingsDatabase.Buildings.Values)
+        public void Awake()
         {
-            _buildingIncomes.Add(building);
+            _dayCounterController.OnUpdateDay += NextDay; 
+            _buildingInfoBuyPanelPresenter.OnBuyBuilding += SetActiveHouse;
         }
-    }
 
-    private void NextDay()
-    {
-        /*   foreach (var building in _buildingIncomes)
-           {
-               building.Income();
-           }
-           */
-        Debug.Log("Count " + _buidingsStorageHandler.HouseBuildings.Count);
-        foreach (var building in _buidingsStorageHandler.HouseBuildings)
+        private void SetActiveHouse()
         {
-            building.Income();
+            if (_buildingInfoBuyPanelPresenter == null)
+                return;
+            var build = _buildingInfoBuyPanelPresenter.CurrentBuild;
+            build.SetActive(true);
+            _buildings.Add(build);
+        }
+        //  private void GetBuildings()
+        //  {
+        //    foreach (var building in _allBuildingsDatabase.Buildings.Values)
+        //    {
+        //   _buildingIncomes.Add(building);
+        //     }
+        // }
+
+        private void NextDay()
+        {
         }
     }
 }

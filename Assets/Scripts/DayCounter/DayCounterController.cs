@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class DayCounterController
+public class DayCounterController : IUpdatable
 {
     private float _timer;
     private readonly DayCounterView _dayCounterView;
@@ -20,12 +20,13 @@ public class DayCounterController
     }
 
     public void Update(float deltaTime)
-    {
+    { 
+        _dayCounterView.DayText.text = "Day: " + ++_dayCounterDataBase.Day;
         if (_timer > _dayCounterDataBase.HoursCountIsEndedDay)
         {
             _timer = 0f;
             _dayCounterView.DayText.text = "Day: " + ++_dayCounterDataBase.Day;
-            OnUpdateDay?.Invoke();
+         //   OnUpdateDay?.Invoke();
         }
         else _timer += deltaTime;
     }

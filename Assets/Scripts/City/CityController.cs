@@ -1,4 +1,6 @@
 ﻿using System;
+using Building;
+using Building.UI.BuildingInfoBuyPanel;
 using UnityEngine;
 public class CityController 
 {
@@ -24,7 +26,7 @@ public class CityController
     {
         CalculateIncomeResources();
         RefreshResourcesToView();
-        Debug.Log("Gold " + _cityDatabase.Gold);
+   //     Debug.Log("Gold " + _cityDatabase.Gold);
     }
 
     private float _peopleReproduce;
@@ -40,7 +42,7 @@ public class CityController
             _cityDatabase.People += newPeople;
         }
 
-        Debug.Log(_peopleReproduce);
+       // Debug.Log(_peopleReproduce);
 
         _cityDatabase.Food += 50f - _cityDatabase.People - _cityDatabase.Warrior;
         _cityDatabase.Gold += 50f /* _cityDatabase.People */- _cityDatabase.Warrior;

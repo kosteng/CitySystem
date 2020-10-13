@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c540ba5c930ba3469020cbbc546f6ff, type: 3}
   m_Name: HouseBuildingDatabase
   m_EditorClassIdentifier: 
-  CityDatabase: {fileID: 11400000, guid: e25bf3dd33180af4d942db8d5a383589, type: 2}
   Name: House
-  IsBuy: 0
-  _goldIncome: 10
-  _goldCost: 100
-  _woodCost: 1
+  GoldIncome: 10
+  GoldCost: 100
+  WoodCost: 10
+  _cityDatabase: {fileID: 11400000, guid: e25bf3dd33180af4d942db8d5a383589, type: 2}

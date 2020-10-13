@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Architecture;
+using UnityEngine;
 
 public class ProjectInstaller : MonoBehaviour
 {

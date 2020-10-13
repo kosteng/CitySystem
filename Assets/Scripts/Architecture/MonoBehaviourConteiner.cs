@@ -1,22 +1,31 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Building;
+using Building.BuildingsData;
+using Building.UI.BuildingInfoBuyPanel;
+using UnityEngine;
+using UnityEngine.Serialization;
 
-public class MonoBehaviourConteiner : MonoBehaviour
+
+namespace Architecture
 {
-    // prefabs
-    public DayCounterView DayCounterView;
-    public CityView CityView;
-    public BuildingView SawMill;
-    public BuildingView Mine;
-    public BuildingView House;
-    public BuildingUIInfoBuyView BuildingUIView;
-    public BottomPanelView BottomPanalView;
+    public class MonoBehaviourConteiner : MonoBehaviour
+    {
+        // prefabs
+        public DayCounterView DayCounterView;
+        public CityView CityView;
 
-    //Factories
+        public HouseBuildingView HouseBuildingView;
+        public BuildingUIInfoBuyView BuildingUIView;
+        public BottomPanelView BottomPanelView;
+        public List<GameObject> AllBuildingsView;
 
+        //Factories
+        public BuildingFactory BuildingFactory;
 
-    // Databases
-    public DayCountDatabase DayCounterDataBase;
-    public CityDatabase CityDatabase;
-    public AllBuildingsDatabase AllBuildingsDatabase;
+        // Databases
+        public DayCountDatabase DayCounterDataBase;
+        public CityDatabase CityDatabase;
+        public AllBuildingsDatabase AllBuildingsDatabase;
 
+    }
 }
