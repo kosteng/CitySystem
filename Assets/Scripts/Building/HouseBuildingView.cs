@@ -58,5 +58,10 @@ namespace Building
                 return true;
             else return false;
         }
+
+        public void Create()
+        {
+            Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+        }
     }
 }

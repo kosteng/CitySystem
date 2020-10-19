@@ -1,17 +1,22 @@
 ﻿using System;
+using Building;
+using UnityEngine;
+using Zenject;
 
-public class DayCounterController : IUpdatable
+public class DayCounterController : IUpdatable, ITickable, IInitializable
 {
     private float _timer;
     private readonly DayCounterView _dayCounterView;
     private readonly DayCountDatabase _dayCounterDataBase;
+    private readonly HouseBuildingView _house;
 
     public event Action OnUpdateDay;
 
-    public DayCounterController (DayCountDatabase dayCounterDataBase, DayCounterView dayCounterView)
+    public DayCounterController (DayCountDatabase dayCounterDataBase, DayCounterView dayCounterView, HouseBuildingView house)
     {
         _dayCounterDataBase = dayCounterDataBase;
         _dayCounterView = dayCounterView;
+        _house = house;
     }
 
     public void Awake()
@@ -29,5 +34,15 @@ public class DayCounterController : IUpdatable
          //   OnUpdateDay?.Invoke();
         }
         else _timer += deltaTime;
+    }
+
+    public void Tick()
+    {
+        Debug.Log(++_dayCounterDataBase.Day);
+    }
+
+    public void Initialize()
+    {
+        _house.Create();
     }
 }

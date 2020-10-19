@@ -14,16 +14,17 @@ namespace Architecture
         private readonly BuildinsStorage _buildinsStorage;
 
 
+
         public ProjectInfrastructure(MonoBehaviourConteiner monoBehaviourConteiner)
         {
             _monoBehaviourConteiner = monoBehaviourConteiner;
             _buildinsStorage = new BuildinsStorage(_monoBehaviourConteiner.HouseBuildingView);
             _bottomPanalPresenter = new BottomPanelPresenter(_monoBehaviourConteiner.BottomPanelView);
 
-            _dayCounterController = new DayCounterController(
-                _monoBehaviourConteiner.DayCounterDataBase,
-                _monoBehaviourConteiner.DayCounterView);
-
+          //  _dayCounterController = new DayCounterController(
+        //        _monoBehaviourConteiner.DayCounterDataBase,
+         //       _monoBehaviourConteiner.DayCounterView);
+//
 
             _buildingInfoBuyPanelPresenter = new BuildingInfoBuyPanelPresenter(
                 _monoBehaviourConteiner.BuildingUIView,

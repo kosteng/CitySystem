@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4051195649230875293}
   - component: {fileID: 4051195649230875294}
   - component: {fileID: 4051195649230875295}
+  - component: {fileID: 993352569259737195}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -99,6 +100,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &993352569259737195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4051195649230875232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc706361b724d8647bbf355db60ba275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _DayCounterView: {fileID: 118143972738839991}
+  _BottomPanelView: {fileID: 3602537312771902967, guid: 15286ede484de884f9ceed9606a1b5c9,
+    type: 3}
+  _CityView: {fileID: 118143972738839988}
 --- !u!1001 &6785959496245718663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,3 +241,27 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6785959496245718663}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &118143972738839991 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6885767866467588912, guid: 3866b346a0ca5314aae05ea23fd8edea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6785959496245718663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c17f384babebf348b70fa1217e1f40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &118143972738839988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6885767866467588915, guid: 3866b346a0ca5314aae05ea23fd8edea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6785959496245718663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add8d8b13d0d5db40951540aadc93a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

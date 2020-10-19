@@ -16,3 +16,4 @@ MonoBehaviour:
     type: 3}
   _dayCounterDataBase: {fileID: 11400000, guid: 531abb0f20e500f42a631c3b20561103,
     type: 2}
+  _house: {fileID: 5345401236523761911, guid: 7e1785aa12fedc74c902f70b03f42c56, type: 3}
