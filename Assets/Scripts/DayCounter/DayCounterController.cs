@@ -38,7 +38,8 @@ public class DayCounterController : IUpdatable, ITickable, IInitializable
 
     public void Tick()
     {
-        Debug.Log(++_dayCounterDataBase.Day);
+
+        _dayCounterView.DayText.text = "" + ++_dayCounterDataBase.Day;
     }
 
     public void Initialize()
