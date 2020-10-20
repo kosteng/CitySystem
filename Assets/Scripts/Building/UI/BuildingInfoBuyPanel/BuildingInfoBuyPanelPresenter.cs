@@ -9,7 +9,6 @@ namespace Building.UI.BuildingInfoBuyPanel
     {
         private readonly BuildingUIInfoBuyView _buildingUIInfoBuyView;
         private readonly BottomPanelPresenter _bottomPanelPresenter;
-        private readonly BuildinsStorage _allBuildingsView;
         private readonly BuildingFactory _buildingFactory;
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
 
@@ -21,13 +20,11 @@ namespace Building.UI.BuildingInfoBuyPanel
 
         public BuildingInfoBuyPanelPresenter(BuildingUIInfoBuyView buildingUIInfoBuyView,
             BottomPanelPresenter bottomPanelPresenter,
-            BuildinsStorage allBuildingsView,
             BuildingFactory buildingFactory,
             AllBuildingsDatabase allBuildingsDatabase)
         {
             _buildingUIInfoBuyView = buildingUIInfoBuyView;
             _bottomPanelPresenter = bottomPanelPresenter;
-            _allBuildingsView = allBuildingsView;
             _buildingFactory = buildingFactory;
             _allBuildingsDatabase = allBuildingsDatabase;
         }

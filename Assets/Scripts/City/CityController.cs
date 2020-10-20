@@ -2,7 +2,9 @@
 using Building;
 using Building.UI.BuildingInfoBuyPanel;
 using UnityEngine;
-public class CityController 
+using Zenject;
+
+public class CityController : IInitializable
 {
     private readonly CityDatabase _cityDatabase;
     private readonly CityView _cityView;
@@ -18,7 +20,7 @@ public class CityController
     }
     public void Awake()
     {
-        _cityDatabase.Clear();
+
     }
 
 
@@ -60,5 +62,10 @@ public class CityController
         _cityView.Stone.text = "Stone: " + _cityDatabase.Stone;
         _cityView.Iron.text = "Iron: " + _cityDatabase.Iron;
         _cityView.Warrior.text = "Warrior: " + _cityDatabase.Warrior;
+    }
+
+    public void Initialize()
+    {
+        _cityDatabase.Clear();
     }
 }

@@ -4,10 +4,11 @@ using Building.BuildingsData;
 using Building.UI.BuildingInfoBuyPanel;
 using JetBrains.Annotations;
 using UnityEngine;
+using Zenject;
 
 namespace Building
 {
-    public class BuildingController
+    public class BuildingController : IInitializable
     {
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
         private readonly DayCounterController _dayCounterController;
@@ -49,6 +50,12 @@ namespace Building
 
         private void NextDay()
         {
+        }
+
+        public void Initialize()
+        {
+            _dayCounterController.OnUpdateDay += NextDay; 
+            _buildingInfoBuyPanelPresenter.OnBuyBuilding += SetActiveHouse;
         }
     }
 }
