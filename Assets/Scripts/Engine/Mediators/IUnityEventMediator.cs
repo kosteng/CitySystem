@@ -7,5 +7,7 @@
         void Update(float deltaTime);
         void LateUpdate(float deltaTime);
         void FixedUpdate(float deltaTime);
+
+        void Awake();
     }
 }

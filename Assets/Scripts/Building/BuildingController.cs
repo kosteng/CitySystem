@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Building.BuildingsData;
 using Building.UI.BuildingInfoBuyPanel;
+using DayChangeSystem.Controllers;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -28,7 +29,7 @@ namespace Building
 
         public void Awake()
         {
-            _dayCounterController.OnUpdateDay += NextDay; 
+            _dayCounterController.OnDayChanged += NextDayChanged; 
             _buildingInfoBuyPanelPresenter.OnBuyBuilding += SetActiveHouse;
         }
 
@@ -48,13 +49,13 @@ namespace Building
         //     }
         // }
 
-        private void NextDay()
+        private void NextDayChanged()
         {
         }
 
         public void Initialize()
         {
-            _dayCounterController.OnUpdateDay += NextDay; 
+            _dayCounterController.OnDayChanged += NextDayChanged; 
             _buildingInfoBuyPanelPresenter.OnBuyBuilding += SetActiveHouse;
         }
     }

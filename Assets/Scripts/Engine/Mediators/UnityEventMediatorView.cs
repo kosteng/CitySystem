@@ -13,7 +13,12 @@ namespace Engine.Mediators
         {
             _unityEventMediator = unityEventMediator;
         }
-        
+
+        private void Awake()
+        {
+            _unityEventMediator?.Awake();
+        }
+
         private void Update()
         {
             _unityEventMediator?.Update(Time.deltaTime);

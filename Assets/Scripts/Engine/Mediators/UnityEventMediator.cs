@@ -12,7 +12,7 @@ namespace Engine.Mediators
         private readonly List<IAlwaysUpdatable> _alwaysUpdatables;
         private readonly List<ILateUpdatable> _lateUpdatables;
         private readonly List<IFixedUpdatable> _fixedUpdatables;
-
+        private readonly List<IAwake> _awakes;
 
         public bool IsActive { get; set; } = true;
 
@@ -23,18 +23,24 @@ namespace Engine.Mediators
             List<ILateUpdatable> lateUpdatables,
             [Inject(Optional = true, Source = InjectSources.Local)]
             List<IFixedUpdatable> fixedUpdatables,
-            List<IAlwaysUpdatable> alwaysUpdatables)
+            List<IAlwaysUpdatable> alwaysUpdatables,
+            List<IAwake> awakes)
         {
             _updatables = updatables;
             _lateUpdatables = lateUpdatables;
             _fixedUpdatables = fixedUpdatables;
             _alwaysUpdatables = alwaysUpdatables;
-
+            _awakes = awakes;
 
             var unityEventMediatorView = new GameObject("UnityEventMediator").AddComponent<UnityEventMediatorView>();
             unityEventMediatorView.Init(this);
         }
 
+        public void Awake()
+        {
+            foreach (var item in _awakes)
+                item.Awake();
+        }
         public void Update(float deltaTime)
         {
             foreach (var item in _updatables)

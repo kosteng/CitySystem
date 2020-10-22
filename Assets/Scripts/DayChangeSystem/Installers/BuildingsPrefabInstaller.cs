@@ -1,5 +1,6 @@
 ﻿using Building;
 using Building.BuildingsData;
+using DayChangeSystem.Databases;
 using UnityEngine;
 using Zenject;
 
@@ -7,7 +8,7 @@ using Zenject;
 public class BuildingsPrefabInstaller : ScriptableObjectInstaller
 {
    [SerializeField] private DayCounterView _dayCounterView;
-   [SerializeField] private DayCountDatabase _dayCounterDataBase;
+   [SerializeField] private DaySettingsDatabase _dayCounterDataBase;
    [SerializeField] private HouseBuildingView _house;
    [SerializeField] private CityDatabase _cityDatabase;
    [SerializeField] private AllBuildingsDatabase _allBuildingsDatabase;

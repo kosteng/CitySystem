@@ -1,6 +1,7 @@
 ﻿using System;
 using Building;
 using Building.UI.BuildingInfoBuyPanel;
+using DayChangeSystem.Controllers;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +16,7 @@ public class CityController : IInitializable
     {
         _cityDatabase = cityDatabase;
         _cityView = cityView;
-        dayCounterController.OnUpdateDay += NextDay;
+        dayCounterController.OnDayChanged += NextDayChanged;
         buildingInfoBuyPanelPresenter.OnBuyBuilding += RefreshResourcesToView;
     }
     public void Awake()
@@ -24,7 +25,7 @@ public class CityController : IInitializable
     }
 
 
-    private void NextDay()
+    private void NextDayChanged()
     {
         CalculateIncomeResources();
         RefreshResourcesToView();
