@@ -7,7 +7,7 @@ using UnityEngine.PlayerLoop;
 
 namespace DayChangeSystem.Controllers
 {
-    public class DayCounterController : IAwake, IDisposable 
+    public class DayCounterController : IDisposable 
     {
         private readonly DayCounterView _dayCounterView;
         private readonly DaySettingsDatabase _daySettingsDatabase;
@@ -25,19 +25,18 @@ namespace DayChangeSystem.Controllers
             _dayCounterView = dayCounterView;
             _dayModel = dayModel;
             _hourController = hourController;
-        }
-    
-        public void Awake()
-        {
-            _dayCounterView.DayText.text = "Day: " + _dayModel.Days;
+            
             _hourController.OnHourChanged += TryDayChange;
+            _dayCounterView.DayText.text = "Day: " + _dayModel.Days;
         }
+
 
         private void TryDayChange()
         {
             if(_dayModel.Hours <= _daySettingsDatabase.DayLength)
                 return;
             _dayModel.Days++;
+            _dayModel.Hours = 0;
             OnDayChanged?.Invoke();
             RefreshView();
         }

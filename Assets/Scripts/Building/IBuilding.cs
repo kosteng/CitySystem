@@ -10,6 +10,5 @@
         void SetData();
         bool TryBuyBuilding();
         string ShowCost();
-        
     }
 }

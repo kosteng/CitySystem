@@ -19,16 +19,13 @@ namespace Engine.Mediators
 
         public void Update(float deltaTime)
         {
-            Debug.Log(_timer);
-            if (_timer >= _daySettingsDatabase.HourLength)
+            if (_timer > _daySettingsDatabase.HourLength)
             {
                 _timer = 0f;
-                _dayModel.Hours++;
+                ++_dayModel.Hours;
                 OnHourChanged?.Invoke();
             }
-            else _timer += Time.deltaTime + 1;
+            else _timer += deltaTime;
         }
-
-
     }
 }

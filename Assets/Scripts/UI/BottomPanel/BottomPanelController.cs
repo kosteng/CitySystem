@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class BottomPanelPresenter
+public class BottomPanelPresenter : IDisposable
 {
     private readonly BottomPanelView _bottomPanalView;
     public event Action OnShowBuildingUIInfoBuyView;
@@ -8,15 +8,16 @@ public class BottomPanelPresenter
     public BottomPanelPresenter(BottomPanelView bottomPanalView)
     {
         _bottomPanalView = bottomPanalView;
-    }
-
-    public void Awake()
-    {
         _bottomPanalView.OnClickBuildingsButton += Show;
     }
 
     public void Show()
     {
         OnShowBuildingUIInfoBuyView?.Invoke();
+    }
+
+    public void Dispose()
+    {
+        _bottomPanalView.OnClickBuildingsButton -= Show;
     }
 }

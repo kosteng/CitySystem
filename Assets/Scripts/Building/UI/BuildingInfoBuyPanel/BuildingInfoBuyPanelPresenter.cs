@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Building.UI.BuildingInfoBuyPanel
 {
-    public class BuildingInfoBuyPanelPresenter
+    public class BuildingInfoBuyPanelPresenter : IDisposable
     {
         private readonly BuildingUIInfoBuyView _buildingUIInfoBuyView;
         private readonly BottomPanelPresenter _bottomPanelPresenter;
@@ -27,9 +27,10 @@ namespace Building.UI.BuildingInfoBuyPanel
             _bottomPanelPresenter = bottomPanelPresenter;
             _buildingFactory = buildingFactory;
             _allBuildingsDatabase = allBuildingsDatabase;
+            Subscribe();
         }
 
-        public void Awake()
+        public void Subscribe()
         {
             _bottomPanelPresenter.OnShowBuildingUIInfoBuyView += Show;
             _buildingUIInfoBuyView.OnBuildingClickButton += ShowBuildingData;
@@ -76,6 +77,14 @@ namespace Building.UI.BuildingInfoBuyPanel
             _currentBuild.PayBuilding();
             _currentBuild.SetData();
             OnBuyBuilding?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            _bottomPanelPresenter.OnShowBuildingUIInfoBuyView -= Show;
+            _buildingUIInfoBuyView.OnBuildingClickButton -= ShowBuildingData;
+            _buildingUIInfoBuyView.OnCloseInfoPanelBuildingClickButton -= CloseInfoBuyPanel;
+            _buildingUIInfoBuyView.OnBuyBuildingClickButton -= BuyBuilding;
         }
     }
 }

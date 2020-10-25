@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1b628566f3390247a88c9e490f55723, type: 3}
-  m_Name: DayCountDatabase
+  m_Name: DaySettingsDatabase
   m_EditorClassIdentifier: 
-  Day: 1
-  HoursCountIsEndedDay: 20
+  DayLength: 1
+  HourLength: 24
