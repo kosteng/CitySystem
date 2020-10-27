@@ -6,6 +6,7 @@ namespace DayChangeSystem.Models
     {
         private int _days;
         private int _hours;
+        private int _years;
 
         public int Days
         {
@@ -17,6 +18,12 @@ namespace DayChangeSystem.Models
         {
             get => _hours;
             set => _hours = value;
+        }
+
+        public int Years
+        {
+            get => _years; 
+            set => _years = value;
         }
     }
 }

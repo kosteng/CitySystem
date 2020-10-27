@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b628566f3390247a88c9e490f55723, type: 3}
   m_Name: DaySettingsDatabase
   m_EditorClassIdentifier: 
-  DayLength: 1
-  HourLength: 24
+  _dayLength: 1
+  _hourLength: 4
+  _daysInSeason: 3

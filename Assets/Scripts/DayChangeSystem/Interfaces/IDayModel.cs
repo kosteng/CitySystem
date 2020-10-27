@@ -4,5 +4,6 @@
     {
         int Days { get; set; }
         int Hours { get; set; }
+        int Years { get; set; }
     }
 }
