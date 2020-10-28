@@ -1,53 +1,26 @@
 ﻿using DayChangeSystem.Databases;
 using UnityEngine;
 
-public class SunView : MonoBehaviour
+
+namespace DayChangeSystem.Views
 {
-    [Range(0, 1)]
-    public float TimeOfDay;
-    public DaySettingsDatabase DaySettingsDatabase;
-    public AnimationCurve SunCurve;
-    public AnimationCurve MoonCurve;
-    public AnimationCurve SkyboxCurve;
-
-    public Material DaySkybox;
-    public Material NightSkybox;
-
-    public ParticleSystem Stars;
-
-    public Light Sun;
-    public Light Moon;
-
-    private float sunIntensity;
-    private float moonIntensity;
-
-    private void Start()
+    public class SunView : MonoBehaviour
     {
-        sunIntensity = Sun.intensity;
-        moonIntensity = Moon.intensity;
-    }
+        [SerializeField] private Light _sun;
+        private float _timeOfDay;
+        
+        public void ChangeDayOfNight(DaySettingsDatabase daySettingsDatabase)
+        {
+            int day = daySettingsDatabase.DayLength * daySettingsDatabase.HourLength;
+            _timeOfDay += Time.deltaTime / day;
+            if (_timeOfDay >= 1) _timeOfDay = 0;
 
-    private void Update()
-    {
-        int day = DaySettingsDatabase.DayLength * DaySettingsDatabase.HourLength;
-        TimeOfDay += Time.deltaTime / day;
-        if (TimeOfDay >= day) TimeOfDay = 0;
-      //  gameObject.transform.Rotate(Vector3.right * day * Time.deltaTime);
-        // Настройки освещения (skybox и основное солнце)
-      //  RenderSettings.skybox.Lerp(NightSkybox, DaySkybox, SkyboxCurve.Evaluate(TimeOfDay));
-        //RenderSettings.sun = SkyboxCurve.Evaluate(TimeOfDay) > 0.1f ? Sun : Moon;
-      //  DynamicGI.UpdateEnvironment();
+            _sun.transform.localRotation = Quaternion.Euler(_timeOfDay * 360, 180, 0);
+        }
 
-        // Прозрачность звёзд
-        var mainModule = Stars.main;
-        //mainModule.startColor = new Color(1, 1, 1, 1 - SkyboxCurve.Evaluate(TimeOfDay));
-
-        // Поворот луны и солнца
-          Sun.transform.localRotation = Quaternion.Euler(TimeOfDay * 360, 180, 0);
-        //Moon.transform.localRotation = Quaternion.Euler(TimeOfDay * 360f + 180f, 180, 0);
-
-        // Интенсивность свечения луны и солнца
-      //  Sun.intensity = sunIntensity * SunCurve.Evaluate(TimeOfDay);
-      //  Moon.intensity = moonIntensity * MoonCurve.Evaluate(TimeOfDay);
+        public SunView Create()
+        {
+            return Instantiate(this);
+        }
     }
 }

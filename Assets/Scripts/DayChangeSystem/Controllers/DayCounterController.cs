@@ -1,18 +1,20 @@
 ﻿using System;
 using DayChangeSystem.Databases;
 using DayChangeSystem.Interfaces;
+using DayChangeSystem.Views;
 using Engine.Mediators;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+
 
 namespace DayChangeSystem.Controllers
 {
-    public class DayCounterController : IDisposable 
+    public class DayCounterController : IDisposable, IUpdatable 
     {
         private readonly DayCounterView _dayCounterView;
         private readonly DaySettingsDatabase _daySettingsDatabase;
         private readonly HourController _hourController;
         private readonly IDayModel _dayModel;
+        private readonly SunView _sunView;
         private ESeasonsType _currentSeason;
         private int _seasonsCounter;
         public event Action OnDayChanged;
@@ -22,13 +24,14 @@ namespace DayChangeSystem.Controllers
         public DayCounterController (DaySettingsDatabase daySettingsDatabase, 
             DayCounterView dayCounterView, 
             IDayModel dayModel,
-            HourController hourController)
+            HourController hourController,
+            SunView sunView)
         {
             _daySettingsDatabase = daySettingsDatabase;
             _dayCounterView = dayCounterView;
             _dayModel = dayModel;
             _hourController = hourController;
-
+            _sunView = MonoBehaviour.Instantiate(sunView);
             Start();
         }
 
@@ -81,6 +84,11 @@ namespace DayChangeSystem.Controllers
         public void Dispose()
         {
             _hourController.OnHourChanged -= TryDayChange;
+        }
+
+        public void Update(float deltaTime)
+        {
+            _sunView.ChangeDayOfNight(_daySettingsDatabase);
         }
     }
 }
