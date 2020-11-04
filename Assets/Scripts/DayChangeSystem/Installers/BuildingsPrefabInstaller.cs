@@ -1,5 +1,4 @@
-﻿using Building;
-using Building.BuildingsData;
+﻿
 using DayChangeSystem.Databases;
 using DayChangeSystem.Views;
 using UnityEngine;
@@ -18,6 +17,7 @@ namespace DayChangeSystem.Installers
       [SerializeField] private HouseBuildingDatabase _houseBuildingDatabase;
       [SerializeField] private SunView _sun;
       [SerializeField] private GameObject _moon;
+      [SerializeField] private Building _building;
       public override void InstallBindings()
       {
          Container.BindInstance(_house);
@@ -27,6 +27,7 @@ namespace DayChangeSystem.Installers
          Container.BindInstance(_houseBuildingDatabase);
          Container.BindInstance(_sun);
          Container.BindInstance(_moon);
+         Container.BindInstance(_building);
       }
    }
 }

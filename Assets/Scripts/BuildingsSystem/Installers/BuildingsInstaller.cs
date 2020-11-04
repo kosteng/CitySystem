@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Building;
-using Building.UI.BuildingInfoBuyPanel;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class BuildingsInstaller : MonoInstaller

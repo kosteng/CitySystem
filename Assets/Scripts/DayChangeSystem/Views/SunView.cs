@@ -13,14 +13,9 @@ namespace DayChangeSystem.Views
         {
             int day = daySettingsDatabase.DayLength * daySettingsDatabase.HourLength;
             _timeOfDay += Time.deltaTime / day;
-            if (_timeOfDay >= 1) _timeOfDay = 0;
+          //  if (_timeOfDay >= 360) _timeOfDay = 0;
 
             _sun.transform.localRotation = Quaternion.Euler(_timeOfDay * 360, 180, 0);
-        }
-
-        public SunView Create()
-        {
-            return Instantiate(this);
         }
     }
 }

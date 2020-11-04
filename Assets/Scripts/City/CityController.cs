@@ -1,8 +1,5 @@
 ﻿using System;
-using Building;
-using Building.UI.BuildingInfoBuyPanel;
 using DayChangeSystem.Controllers;
-using UnityEngine;
 using Zenject;
 
 public class CityController : IInitializable

@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-namespace Building.BuildingsData
-{
     [CreateAssetMenu(menuName = "DatabasesSO/HouseBuilding")]
     public class HouseBuildingDatabase : ScriptableObject
     {
@@ -22,4 +20,4 @@ namespace Building.BuildingsData
             else return false;
         }
     }
-}
+
