@@ -17,7 +17,6 @@ namespace UI.BottomPanel
         private void Show()
         {
             OnShowBuildingUIInfoBuyView?.Invoke();
-            Debug.Log("BottomPresenter");
         }
 
         public void Dispose()

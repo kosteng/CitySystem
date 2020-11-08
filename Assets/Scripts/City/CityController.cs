@@ -1,4 +1,5 @@
 ﻿using System;
+using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using DayChangeSystem.Controllers;
 using Zenject;
 

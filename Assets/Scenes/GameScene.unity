@@ -187,6 +187,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &282997133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2531081940755856250, guid: c4a482d7051ea1d44ab88d83f723c06b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1221062859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ca869b10b844a4a8ff76b9757d3839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &355182073 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 118143972738839988, guid: e102ed759887ed144b4c1f12984f8049,
@@ -457,8 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0b879fa51ce7e4a8fa12285e35e6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingBuyPanel: {fileID: 2531081940755856250, guid: c4a482d7051ea1d44ab88d83f723c06b,
-    type: 3}
+  _buildingBuyPanel: {fileID: 282997133}
   _bottomPanelView: {fileID: 2030227759}
   _buildingFactory: {fileID: 767331375}
 --- !u!114 &899398278
