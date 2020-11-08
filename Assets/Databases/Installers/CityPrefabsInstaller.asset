@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b628566f3390247a88c9e490f55723, type: 3}
-  m_Name: DaySettingsDatabase
+  m_Script: {fileID: 11500000, guid: e54352af7bd900b47ad3d17045ce7c12, type: 3}
+  m_Name: CityPrefabsInstaller
   m_EditorClassIdentifier: 
-  _dayLength: 24
-  _hourLength: 60
-  _daysInSeason: 3
+  _cityDatabase: {fileID: 11400000, guid: e25bf3dd33180af4d942db8d5a383589, type: 2}

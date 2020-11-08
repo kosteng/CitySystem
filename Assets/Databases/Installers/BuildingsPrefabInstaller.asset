@@ -24,3 +24,5 @@ MonoBehaviour:
     type: 2}
   _sun: {fileID: 8015526622467811742, guid: bd40a8a7238a14741b4d8125d189a4fc, type: 3}
   _moon: {fileID: 5110370504633707208, guid: 219e3c28b9934b648b63d1a4432cd5e5, type: 3}
+  _building: {fileID: 3555870508130771772, guid: ada2b6dc5cf85854abb29df09e3c0de5,
+    type: 3}

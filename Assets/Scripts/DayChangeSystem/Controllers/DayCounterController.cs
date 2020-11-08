@@ -4,17 +4,19 @@ using DayChangeSystem.Interfaces;
 using DayChangeSystem.Views;
 using Engine.Mediators;
 using UnityEngine;
+using Zenject;
 
 
 namespace DayChangeSystem.Controllers
 {
-    public class DayCounterController : IDisposable, IUpdatable 
+    public class DayCounterController : IDisposable, IUpdatable, IInitializable 
     {
         private readonly DayCounterView _dayCounterView;
         private readonly DaySettingsDatabase _daySettingsDatabase;
         private readonly HourController _hourController;
         private readonly IDayModel _dayModel;
-        private readonly SunView _sunView;
+        private SunView _sunView;
+        private readonly SunPrefabFactory _sunFactory;
         private ESeasonsType _currentSeason;
         private int _seasonsCounter;
         public event Action OnDayChanged;
@@ -25,25 +27,26 @@ namespace DayChangeSystem.Controllers
             DayCounterView dayCounterView, 
             IDayModel dayModel,
             HourController hourController,
-            SunView sunView)
+            SunView sunView,
+            SunPrefabFactory sunFactory)
         {
             _daySettingsDatabase = daySettingsDatabase;
             _dayCounterView = dayCounterView;
             _dayModel = dayModel;
             _hourController = hourController;
-            _sunView = MonoBehaviour.Instantiate(sunView);
-            Start();
+            _sunFactory = sunFactory;
+            _sunView = sunView;
         }
-
-        private void Start()
+        
+        public void Initialize()
         {
+            _sunView = _sunFactory.Create(_sunView);
             _hourController.OnHourChanged += TryDayChange;
             _dayCounterView.DayText.text = "Day: " + _dayModel.Days;
             _seasonsCounter = 1;
             _currentSeason = (ESeasonsType) _seasonsCounter;
             _dayCounterView.SeasonText.text = _currentSeason.ToString();
         }
-
 
         private void TryDayChange()
         {
@@ -55,6 +58,7 @@ namespace DayChangeSystem.Controllers
             TryChangeSeason();
             RefreshView();
         }
+        
         private bool _isReadyChangeSeason = false;
         private void TryChangeSeason()
         {
@@ -91,4 +95,6 @@ namespace DayChangeSystem.Controllers
             _sunView.ChangeDayOfNight(_daySettingsDatabase);
         }
     }
+
+
 }
