@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BottomPanelView : MonoBehaviour
 {
-    [SerializeField] private Button _buildings;
-    public event Action OnClickBuildingsButton;
-
-    public void OnBuildingsClick()
+    [SerializeField] private Button _buildingsButton;
+    
+    public void Subscribe(Action onOpen)
     {
-        OnClickBuildingsButton?.Invoke();
+        _buildingsButton.onClick.AddListener(onOpen.Invoke);
+    }
+    
+    public void Unsubscribe()
+    {
+        _buildingsButton.onClick.RemoveAllListeners();
     }
 }

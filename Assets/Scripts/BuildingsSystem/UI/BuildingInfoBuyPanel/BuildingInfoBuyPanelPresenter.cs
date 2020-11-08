@@ -1,9 +1,11 @@
 ﻿using System;
+using BuildingsSystem.UI.BuildingInfoBuyPanel;
+using UI.BottomPanel;
 using UnityEngine;
 
 public class BuildingInfoBuyPanelPresenter : IDisposable
 {
-    private readonly BuildingUIInfoBuyView _buildingUIInfoBuyView;
+    private readonly BuildingBuyPanel _view;
     private readonly BottomPanelPresenter _bottomPanelPresenter;
     private readonly BuildingFactory _buildingFactory;
     private readonly AllBuildingsDatabase _allBuildingsDatabase;
@@ -14,12 +16,12 @@ public class BuildingInfoBuyPanelPresenter : IDisposable
 
     public event Action OnBuyBuilding;
 
-    public BuildingInfoBuyPanelPresenter(BuildingUIInfoBuyView buildingUIInfoBuyView,
+    public BuildingInfoBuyPanelPresenter(BuildingBuyPanel view,
         BottomPanelPresenter bottomPanelPresenter,
         BuildingFactory buildingFactory,
         AllBuildingsDatabase allBuildingsDatabase)
     {
-        _buildingUIInfoBuyView = buildingUIInfoBuyView;
+        _view = view;
         _bottomPanelPresenter = bottomPanelPresenter;
         _buildingFactory = buildingFactory;
         _allBuildingsDatabase = allBuildingsDatabase;
@@ -29,28 +31,29 @@ public class BuildingInfoBuyPanelPresenter : IDisposable
     public void Subscribe()
     {
         _bottomPanelPresenter.OnShowBuildingUIInfoBuyView += Show;
-        _buildingUIInfoBuyView.OnBuildingClickButton += ShowBuildingData;
-        _buildingUIInfoBuyView.OnCloseInfoPanelBuildingClickButton += CloseInfoBuyPanel;
-        _buildingUIInfoBuyView.OnBuyBuildingClickButton += BuyBuilding;
-        _buildingUIInfoBuyView.gameObject.SetActive(false);
+        _view.OnBuildingClickButton += ShowBuildingData;
+        _view.OnCloseInfoPanelBuildingClickButton += CloseInfoBuyView;
+        _view.OnBuyBuildingClickButton += BuyBuilding;
+        _view.gameObject.SetActive(false);
     }
 
     private void Show()
     {
-        _buildingUIInfoBuyView.gameObject.SetActive(!_buildingUIInfoBuyView.gameObject.activeSelf);
+        Debug.Log("Buybutton");
+        _view.gameObject.SetActive(!_view.gameObject.activeSelf);
     }
 
-    private void CloseInfoBuyPanel()
+    private void CloseInfoBuyView()
     {
-        _buildingUIInfoBuyView.gameObject.SetActive(false);
+        _view.gameObject.SetActive(false);
     }
 
     private void ShowBuildingData(EBuildingType buildingType)
     {
         if (buildingType == EBuildingType.House)
         {
-            _buildingUIInfoBuyView.SetCostTextInfoPanel(_allBuildingsDatabase.HouseBuildingDatabase.ShowCost());
-            _buildingUIInfoBuyView.SetNameTextInfoPanel(_allBuildingsDatabase.HouseBuildingDatabase.Name);
+            _view.SetCostTextInfoPanel(_allBuildingsDatabase.HouseBuildingDatabase.ShowCost());
+            _view.SetNameTextInfoPanel(_allBuildingsDatabase.HouseBuildingDatabase.Name);
         }
     }
 
@@ -78,8 +81,8 @@ public class BuildingInfoBuyPanelPresenter : IDisposable
     public void Dispose()
     {
         _bottomPanelPresenter.OnShowBuildingUIInfoBuyView -= Show;
-        _buildingUIInfoBuyView.OnBuildingClickButton -= ShowBuildingData;
-        _buildingUIInfoBuyView.OnCloseInfoPanelBuildingClickButton -= CloseInfoBuyPanel;
-        _buildingUIInfoBuyView.OnBuyBuildingClickButton -= BuyBuilding;
+        _view.OnBuildingClickButton -= ShowBuildingData;
+        _view.OnCloseInfoPanelBuildingClickButton -= CloseInfoBuyView;
+        _view.OnBuyBuildingClickButton -= BuyBuilding;
     }
 }

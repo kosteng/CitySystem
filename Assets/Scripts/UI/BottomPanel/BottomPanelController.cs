@@ -1,23 +1,28 @@
 ﻿using System;
+using UnityEngine;
 
-public class BottomPanelPresenter : IDisposable
+namespace UI.BottomPanel
 {
-    private readonly BottomPanelView _bottomPanalView;
-    public event Action OnShowBuildingUIInfoBuyView;
-
-    public BottomPanelPresenter(BottomPanelView bottomPanalView)
+    public class BottomPanelPresenter : IDisposable
     {
-        _bottomPanalView = bottomPanalView;
-        _bottomPanalView.OnClickBuildingsButton += Show;
-    }
+        private readonly BottomPanelView _view;
+        public event Action OnShowBuildingUIInfoBuyView;
 
-    public void Show()
-    {
-        OnShowBuildingUIInfoBuyView?.Invoke();
-    }
+        public BottomPanelPresenter(BottomPanelView view)
+        {
+            _view = view;
+            _view.Subscribe(Show);
+        }
 
-    public void Dispose()
-    {
-        _bottomPanalView.OnClickBuildingsButton -= Show;
+        private void Show()
+        {
+            OnShowBuildingUIInfoBuyView?.Invoke();
+            Debug.Log("BottomPresenter");
+        }
+
+        public void Dispose()
+        {
+            _view.Unsubscribe();
+        }
     }
 }
