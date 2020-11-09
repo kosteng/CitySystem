@@ -3,13 +3,14 @@ using DayChangeSystem.Databases;
 using DayChangeSystem.Interfaces;
 using DayChangeSystem.Views;
 using Engine.Mediators;
+using Engine.UI;
 using UnityEngine;
 using Zenject;
 
 
 namespace DayChangeSystem.Controllers
 {
-    public class DayCounterController : IDisposable, IUpdatable, IInitializable 
+    public class DayCounterController : IDisposable, IUpdatable, IInitializable, IAttachableUi 
     {
         private readonly DayCounterView _dayCounterView;
         private readonly DaySettingsDatabase _daySettingsDatabase;
@@ -93,6 +94,11 @@ namespace DayChangeSystem.Controllers
         public void Update(float deltaTime)
         {
             _sunView.ChangeDayOfNight(_daySettingsDatabase);
+        }
+
+        public void Attach(Transform parent)
+        {
+            _dayCounterView.Attach(parent);
         }
     }
 

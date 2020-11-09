@@ -8,15 +8,15 @@ namespace DayChangeSystem.Installers
 {
     public class DaySystemInstaller : MonoInstaller
     {
-        [SerializeField] private DayCounterView _dayCounterView;
+
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<DayCounterController>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<HourController>().AsSingle();
-            Container.BindInterfacesTo<DayModel>().AsSingle();
-            Container.BindInterfacesAndSelfTo<SunPrefabFactory>().AsSingle();
-            Container.BindInstance(_dayCounterView);
+       //  //    Container.BindInterfacesAndSelfTo<DayCounterController>().AsSingle().NonLazy();
+       //      Container.BindInterfacesAndSelfTo<HourController>().AsSingle();
+       //      Container.BindInterfacesTo<DayModel>().AsSingle();
+       //      Container.BindInterfacesAndSelfTo<SunPrefabFactory>().AsSingle();
+       // //     Container.BindInstance(_dayCounterView);
         }
     }
 }

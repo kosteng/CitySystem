@@ -1,15 +1,20 @@
 ﻿using System;
 using BuildingsSystem.UI.BuildingInfoBuyPanel;
+using City;
 using DayChangeSystem.Controllers;
+using Engine.UI;
+using UnityEngine;
 using Zenject;
 
-public class CityController : IInitializable
+public class CityController : IInitializable, IAttachableUi, IDisposable
 {
     private readonly CityDatabase _cityDatabase;
     private readonly CityView _cityView;
 
-    public CityController (CityDatabase cityDatabase, CityView cityView, 
-        DayCounterController dayCounterController, BuildingController buildingController, 
+    public CityController (CityDatabase cityDatabase, 
+        CityView cityView, 
+        DayCounterController dayCounterController,
+        BuildingController buildingController, 
         BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter)
     {
         _cityDatabase = cityDatabase;
@@ -17,11 +22,6 @@ public class CityController : IInitializable
         dayCounterController.OnDayChanged += NextDayChanged;
         buildingInfoBuyPanelPresenter.OnBuyBuilding += RefreshResourcesToView;
     }
-    public void Awake()
-    {
-
-    }
-
 
     private void NextDayChanged()
     {
@@ -66,5 +66,15 @@ public class CityController : IInitializable
     public void Initialize()
     {
         _cityDatabase.Clear();
+    }
+
+    public void Attach(Transform parent)
+    {
+        _cityView.Attach(parent);
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
     }
 }

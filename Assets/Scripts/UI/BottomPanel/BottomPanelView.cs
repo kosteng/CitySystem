@@ -1,10 +1,11 @@
 ﻿using System;
+using Engine.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.BottomPanel
 {
-    public class BottomPanelView : MonoBehaviour
+    public class BottomPanelView : APanel
     {
         [SerializeField] private Button _buildingsButton;
     

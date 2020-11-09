@@ -1,10 +1,11 @@
 ﻿using System;
+using Engine.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 {
-    public class BuildingBuyPanel : MonoBehaviour
+    public class BuildingBuyPanelView : APanel
     {
         [SerializeField] private Button _houseBuildingButton;
         [SerializeField] private Button _sawMillBuildingButton;

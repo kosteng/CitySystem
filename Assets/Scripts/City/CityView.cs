@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using Engine.UI;
 using UnityEngine.UI;
 
-public class CityView : MonoBehaviour
+public class CityView : APanel
 {
     public Text People;
     public Text Gold;

@@ -1,9 +1,11 @@
 ﻿using System;
+using Engine.UI;
 using UnityEngine;
+using Zenject;
 
 namespace UI.BottomPanel
 {
-    public class BottomPanelPresenter : IDisposable
+    public class BottomPanelPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BottomPanelView _view;
         public event Action OnShowBuildingUIInfoBuyView;
@@ -11,7 +13,6 @@ namespace UI.BottomPanel
         public BottomPanelPresenter(BottomPanelView view)
         {
             _view = view;
-            _view.Subscribe(Show);
         }
 
         private void Show()
@@ -22,6 +23,16 @@ namespace UI.BottomPanel
         public void Dispose()
         {
             _view.Unsubscribe();
+        }
+
+        public void Attach(Transform parent)
+        {
+            _view.Attach(parent);
+        }
+
+        public void Initialize()
+        {
+            _view.Subscribe(Show);
         }
     }
 }

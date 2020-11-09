@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc2d4644646600489db8487dcf25e30, type: 3}
+  m_Name: UIPrefabsInstaller
+  m_EditorClassIdentifier: 
+  _canvasView: {fileID: 3702184945147060621, guid: 5721b1486c3091d44b0c1c99e6dff372,
+    type: 3}
+  _bottomPanelView: {fileID: 3602537312771902967, guid: 15286ede484de884f9ceed9606a1b5c9,
+    type: 3}
+  _buildingBuyPanelView: {fileID: 2531081940755856250, guid: c4a482d7051ea1d44ab88d83f723c06b,
+    type: 3}
+  _cityView: {fileID: 6885767866467588915, guid: 3866b346a0ca5314aae05ea23fd8edea,
+    type: 3}
+  _dayCounterView: {fileID: 6885767866467588912, guid: 3866b346a0ca5314aae05ea23fd8edea,
+    type: 3}

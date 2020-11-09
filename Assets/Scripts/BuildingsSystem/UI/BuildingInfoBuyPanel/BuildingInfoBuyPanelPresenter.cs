@@ -1,14 +1,15 @@
 ﻿using System;
+using Engine.UI;
 using UI.BottomPanel;
 using UnityEngine;
+using Zenject;
 
 namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 {
-    public class BuildingInfoBuyPanelPresenter : IDisposable
+    public class BuildingInfoBuyPanelPresenter : IDisposable, IAttachableUi, IInitializable
     {
-        private readonly BuildingBuyPanel _view;
+        private readonly BuildingBuyPanelView _view;
         private readonly BottomPanelPresenter _bottomPanelPresenter;
-        private readonly BuildingFactory _buildingFactory;
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
 
         private IBuilding _currentBuild;
@@ -17,16 +18,14 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         public event Action OnBuyBuilding;
 
-        public BuildingInfoBuyPanelPresenter(BuildingBuyPanel view,
+        public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
             BottomPanelPresenter bottomPanelPresenter,
-            BuildingFactory buildingFactory,
             AllBuildingsDatabase allBuildingsDatabase)
         {
             _view = view;
             _bottomPanelPresenter = bottomPanelPresenter;
-            _buildingFactory = buildingFactory;
             _allBuildingsDatabase = allBuildingsDatabase;
-            Subscribe();
+
         }
 
         public void Subscribe()
@@ -38,6 +37,16 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.gameObject.SetActive(false);
         }
 
+        public void Attach(Transform parent)
+        {
+            _view.Attach(parent);
+        }
+
+        public void Initialize()
+        {
+            Subscribe();
+        }
+        
         private void Show()
         {
             _view.gameObject.SetActive(!_view.gameObject.activeSelf);
@@ -72,7 +81,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
                 return;
             }
 
-            _currentBuild = _buildingFactory.Create();
+          //  _currentBuild = _buildingFactory.Create();
             _currentBuild.PayBuilding();
             _currentBuild.SetData();
             OnBuyBuilding?.Invoke();
