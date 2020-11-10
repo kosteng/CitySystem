@@ -8,7 +8,6 @@ public class CityInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-     //   Container.BindInterfacesAndSelfTo<CityController>().AsSingle().NonLazy();
-       // Container.BindInstance(_cityView);
+        Container.BindInterfacesAndSelfTo<CityController>().AsSingle().NonLazy();
     }
 }

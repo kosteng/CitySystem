@@ -9,8 +9,8 @@ namespace BuildingsSystem.Installers
    //     [SerializeField] private BuildingFactory _buildingFactory;
         public override void InstallBindings()
         {
-            // Container.BindInterfacesAndSelfTo<BuildingController>().AsSingle().NonLazy();
-     //       Container.BindInterfacesAndSelfTo<BuildingInfoBuyPanelPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildingInfoBuyPanelPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildingController>().AsSingle().NonLazy();
         }
     }
 }
