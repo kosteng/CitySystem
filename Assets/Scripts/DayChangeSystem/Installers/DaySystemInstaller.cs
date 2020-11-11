@@ -14,9 +14,10 @@ namespace DayChangeSystem.Installers
         {
             Container.BindInterfacesAndSelfTo<DayCounterController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<HourController>().AsSingle();
-
+            Container.BindInterfacesAndSelfTo<DayCounterPresenter>().AsSingle();
             Container.BindInterfacesTo<DayModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<SunPrefabFactory>().AsSingle();
+
         }
     }
 }

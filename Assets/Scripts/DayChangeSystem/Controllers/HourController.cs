@@ -1,9 +1,9 @@
 ﻿using System;
 using DayChangeSystem.Databases;
 using DayChangeSystem.Interfaces;
-using UnityEngine;
+using Engine.Mediators;
 
-namespace Engine.Mediators
+namespace DayChangeSystem.Controllers
 {
     public class HourController : IUpdatable
     {
@@ -29,3 +29,4 @@ namespace Engine.Mediators
         }
     }
 }
+

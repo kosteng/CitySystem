@@ -20,5 +20,5 @@ MonoBehaviour:
     type: 3}
   _cityView: {fileID: 6885767866467588915, guid: 3866b346a0ca5314aae05ea23fd8edea,
     type: 3}
-  _dayCounterView: {fileID: 6885767866467588912, guid: 3866b346a0ca5314aae05ea23fd8edea,
+  _dayCounterView: {fileID: 9175873092472292639, guid: 51fe0fb56e5184c429b2b5124ca234ac,
     type: 3}

@@ -7,9 +7,7 @@ namespace Engine.UI
         public void Attach(Transform parent)
         {
             var rectTransform = (RectTransform) transform;
-            rectTransform.SetParent(parent);
-           // rectTransform.anchoredPosition = Vector2.zero;
-           // rectTransform.sizeDelta = Vector2.zero;
+            rectTransform.SetParent(parent, false);
         }
     }
 }

@@ -3,17 +3,16 @@ using DayChangeSystem.Databases;
 using DayChangeSystem.Interfaces;
 using DayChangeSystem.Views;
 using Engine.Mediators;
-using Engine.UI;
-using UnityEngine;
 using Zenject;
 
 
 namespace DayChangeSystem.Controllers
 {
-    public class DayCounterController : IDisposable, IUpdatable, IInitializable, IAttachableUi 
+    public class DayCounterController : IDisposable, IUpdatable, IInitializable 
     {
-        private readonly DayCounterView _dayCounterView;
+
         private readonly DaySettingsDatabase _daySettingsDatabase;
+        private readonly DayCounterPresenter _dayCounterPresenter;
         private readonly HourController _hourController;
         private readonly IDayModel _dayModel;
         private SunView _sunView;
@@ -24,15 +23,16 @@ namespace DayChangeSystem.Controllers
 
         public ESeasonsType CurrentSeason => _currentSeason;
 
-        public DayCounterController (DaySettingsDatabase daySettingsDatabase, 
-            DayCounterView dayCounterView, 
+        public DayCounterController (DaySettingsDatabase daySettingsDatabase,
+            DayCounterPresenter dayCounterPresenter,
             IDayModel dayModel,
             HourController hourController,
             SunView sunView,
             SunPrefabFactory sunFactory)
         {
             _daySettingsDatabase = daySettingsDatabase;
-            _dayCounterView = dayCounterView;
+            _dayCounterPresenter = dayCounterPresenter;
+
             _dayModel = dayModel;
             _hourController = hourController;
             _sunFactory = sunFactory;
@@ -43,10 +43,10 @@ namespace DayChangeSystem.Controllers
         {
             _sunView = _sunFactory.Create(_sunView);
             _hourController.OnHourChanged += TryDayChange;
-            _dayCounterView.DayText.text = "Day: " + _dayModel.Days;
+            _dayCounterPresenter.SetDay($"Day: {_dayModel.Days}");
             _seasonsCounter = 1;
             _currentSeason = (ESeasonsType) _seasonsCounter;
-            _dayCounterView.SeasonText.text = _currentSeason.ToString();
+            _dayCounterPresenter.SetSeason(_currentSeason.ToString());
         }
 
         private void TryDayChange()
@@ -82,8 +82,8 @@ namespace DayChangeSystem.Controllers
 
         private void RefreshView()
         {
-            _dayCounterView.DayText.text = "Day: " + _dayModel.Days;
-            _dayCounterView.SeasonText.text = _currentSeason.ToString();
+            _dayCounterPresenter.SetDay($"Day: {_dayModel.Days}");
+            _dayCounterPresenter.SetSeason(_currentSeason.ToString());
         }
 
         public void Dispose()
@@ -95,12 +95,5 @@ namespace DayChangeSystem.Controllers
         {
             _sunView.ChangeDayOfNight(_daySettingsDatabase);
         }
-
-        public void Attach(Transform parent)
-        {
-            _dayCounterView.Attach(parent);
-        }
     }
-
-
 }
