@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HouseBuildingDatabase: {fileID: 11400000, guid: 3e1571d59fb5ecc4ba6f997906c0618d,
     type: 2}
+  _buildingDatabases:
+  - _buildingType: 0
+    _name: 
+    _view: {fileID: 6358157565260033028, guid: 7e1785aa12fedc74c902f70b03f42c56, type: 3}
+  - _buildingType: 1
+    _name: 
+    _view: {fileID: 6358157565260033028, guid: 7e1785aa12fedc74c902f70b03f42c56, type: 3}
