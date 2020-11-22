@@ -9,8 +9,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
     public class BuildingInfoBuyPanelPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BuildingBuyPanelView _view;
-        private readonly BottomPanelPresenter _bottomPanelPresenter;
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
+        private readonly BuildingButtonBuilder _buildingButtonBuilder;
 
         private IBuilding _currentBuild;
 
@@ -19,18 +19,16 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public event Action OnBuyBuilding;
 
         public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
-            BottomPanelPresenter bottomPanelPresenter,
-            AllBuildingsDatabase allBuildingsDatabase)
+            AllBuildingsDatabase allBuildingsDatabase,
+            BuildingButtonBuilder buildingButtonBuilder)
         {
             _view = view;
-            _bottomPanelPresenter = bottomPanelPresenter;
             _allBuildingsDatabase = allBuildingsDatabase;
-
+            _buildingButtonBuilder = buildingButtonBuilder;
         }
 
         public void Subscribe()
         {
-            _bottomPanelPresenter.OnShowBuildingUIInfoBuyView += Show;
             _view.OnBuildingClickButton += ShowBuildingData;
             _view.OnCloseInfoPanelBuildingClickButton += CloseInfoBuyView;
             _view.OnBuyBuildingClickButton += BuyBuilding;
@@ -45,9 +43,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public void Initialize()
         {
             Subscribe();
+            _buildingButtonBuilder.Create(_view.BuildingButtonsPanel);
         }
         
-        private void Show()
+        public void Show()
         {
             _view.gameObject.SetActive(!_view.gameObject.activeSelf);
         }
@@ -89,7 +88,6 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         public void Dispose()
         {
-            _bottomPanelPresenter.OnShowBuildingUIInfoBuyView -= Show;
             _view.OnBuildingClickButton -= ShowBuildingData;
             _view.OnCloseInfoPanelBuildingClickButton -= CloseInfoBuyView;
             _view.OnBuyBuildingClickButton -= BuyBuilding;

@@ -12,17 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66d2826b543ff049b637e88099a7933, type: 3}
   m_Name: BuildingsPrefabInstaller
   m_EditorClassIdentifier: 
-  _dayCounterView: {fileID: 6885767866467588912, guid: 3866b346a0ca5314aae05ea23fd8edea,
-    type: 3}
-  _dayCounterDataBase: {fileID: 11400000, guid: 531abb0f20e500f42a631c3b20561103,
-    type: 2}
   _house: {fileID: 5345401236523761911, guid: 7e1785aa12fedc74c902f70b03f42c56, type: 3}
-  _cityDatabase: {fileID: 11400000, guid: e25bf3dd33180af4d942db8d5a383589, type: 2}
   _allBuildingsDatabase: {fileID: 11400000, guid: cc083557591440749aa4ed37350d1ab3,
     type: 2}
   _houseBuildingDatabase: {fileID: 11400000, guid: 3e1571d59fb5ecc4ba6f997906c0618d,
     type: 2}
-  _sun: {fileID: 8015526622467811742, guid: bd40a8a7238a14741b4d8125d189a4fc, type: 3}
-  _moon: {fileID: 5110370504633707208, guid: 219e3c28b9934b648b63d1a4432cd5e5, type: 3}
   _building: {fileID: 3555870508130771772, guid: ada2b6dc5cf85854abb29df09e3c0de5,
+    type: 3}
+  _buildingButtonInPanel: {fileID: 6642649174855697843, guid: 013bd6e6be0b1bb449b3bc80db72f7a5,
+    type: 3}
+  _buildingButtonView: {fileID: 5530731649096065916, guid: 013bd6e6be0b1bb449b3bc80db72f7a5,
     type: 3}

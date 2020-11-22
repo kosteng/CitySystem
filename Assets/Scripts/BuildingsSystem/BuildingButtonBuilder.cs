@@ -5,17 +5,21 @@ using UnityEngine;
 public class BuildingButtonBuilder 
 {
    private readonly AllBuildingsDatabase _allBuildingsDatabase;
+   private readonly BuildingButtonView _buttonView;
 
-   public BuildingButtonBuilder(AllBuildingsDatabase allBuildingsDatabase)
+   public BuildingButtonBuilder(AllBuildingsDatabase allBuildingsDatabase, BuildingButtonView buttonView)
    {
       _allBuildingsDatabase = allBuildingsDatabase;
+      _buttonView = buttonView;
    }
 
-   public void Create()
+   public void Create(Transform parent)
    {
-      foreach (var button in _allBuildingsDatabase.BuildingDatabases)
+      foreach (var button in _allBuildingsDatabase.BuildingsDatabase)
       {
-         // сделаю вид что я написал этот код
+         var buildingButton = MonoBehaviour.Instantiate(_buttonView);
+         buildingButton.Attach(parent);
+         buildingButton.SetName(button.BuildingType.ToString());
       }
    }
 }

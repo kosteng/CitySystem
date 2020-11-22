@@ -14,8 +14,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         [SerializeField] private Button _closeInfoPanelButton;
         [SerializeField] private Text _nameBuildingText;
         [SerializeField] private Text _costBuildingText;
-
+        [SerializeField] private Transform _buildingButtonsPanel;
         private EBuildingType _currentType;
+
+        public Transform BuildingButtonsPanel => _buildingButtonsPanel;
 
         public delegate void BuildingTypeHandler(EBuildingType type);
 

@@ -11,6 +11,7 @@ namespace BuildingsSystem.Installers
         {
             Container.BindInterfacesAndSelfTo<BuildingInfoBuyPanelPresenter>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BuildingButtonBuilder>().AsSingle();
         }
     }
 }

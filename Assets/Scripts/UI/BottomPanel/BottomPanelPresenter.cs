@@ -1,4 +1,5 @@
 ﻿using System;
+using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using Engine.UI;
 using UnityEngine;
 using Zenject;
@@ -8,16 +9,17 @@ namespace UI.BottomPanel
     public class BottomPanelPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BottomPanelView _view;
-        public event Action OnShowBuildingUIInfoBuyView;
+        private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
 
-        public BottomPanelPresenter(BottomPanelView view)
+        public BottomPanelPresenter(BottomPanelView view, BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter)
         {
             _view = view;
+            _buildingInfoBuyPanelPresenter = buildingInfoBuyPanelPresenter;
         }
 
         private void Show()
         {
-            OnShowBuildingUIInfoBuyView?.Invoke();
+            _buildingInfoBuyPanelPresenter.Show();
         }
 
         public void Dispose()

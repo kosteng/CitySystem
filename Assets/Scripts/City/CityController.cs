@@ -75,6 +75,6 @@ public class CityController : IInitializable, IAttachableUi, IDisposable
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+
     }
 }
