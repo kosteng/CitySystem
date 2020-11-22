@@ -13,13 +13,17 @@ public class BuildingButtonBuilder
       _buttonView = buttonView;
    }
 
-   public void Create(Transform parent)
+   public List<BuildingButtonView> Create(Transform parent)
    {
+      List<BuildingButtonView> List = new List<BuildingButtonView>();
       foreach (var button in _allBuildingsDatabase.BuildingsDatabase)
       {
          var buildingButton = MonoBehaviour.Instantiate(_buttonView);
          buildingButton.Attach(parent);
          buildingButton.SetName(button.BuildingType.ToString());
+         buildingButton.SetBuildingType(button.BuildingType);
+         List.Add(buildingButton);
       }
+      return List;
    }
 }

@@ -17,7 +17,7 @@
         {
             if (_cityDatabase.Gold > GoldCost && _cityDatabase.Wood > WoodCost)
                 return true;
-            else return false;
+            return false;
         }
     }
 

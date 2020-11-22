@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Engine.UI;
 using UI.BottomPanel;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly BuildingBuyPanelView _view;
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
         private readonly BuildingButtonBuilder _buildingButtonBuilder;
-
+        private List<BuildingButtonView> _buttonsList;
         private IBuilding _currentBuild;
 
         public IBuilding CurrentBuild => _currentBuild;
@@ -43,7 +44,12 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public void Initialize()
         {
             Subscribe();
-            _buildingButtonBuilder.Create(_view.BuildingButtonsPanel);
+            _buttonsList = _buildingButtonBuilder.Create(_view.BuildingButtonsPanel);
+            foreach (var buttons in _buttonsList)
+            {
+                buttons.Subscribe();
+                buttons.OnBuildingClickButton += ShowBuildingData;
+            }
         }
         
         public void Show()
@@ -61,7 +67,19 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             if (buildingType == EBuildingType.House)
             {
                 _view.SetCostTextInfoPanel(_allBuildingsDatabase.HouseBuildingDatabase.ShowCost());
-                _view.SetNameTextInfoPanel(_allBuildingsDatabase.HouseBuildingDatabase.Name);
+                _view.SetNameTextInfoPanel(buildingType.ToString());
+            }
+
+            if (buildingType == EBuildingType.Mine)
+            {
+                _view.SetCostTextInfoPanel("0");
+                _view.SetNameTextInfoPanel(buildingType.ToString());
+            }
+
+            if (buildingType == EBuildingType.SawMill)
+            {
+                _view.SetCostTextInfoPanel("0");
+                _view.SetNameTextInfoPanel(buildingType.ToString());
             }
         }
 
@@ -91,6 +109,12 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.OnBuildingClickButton -= ShowBuildingData;
             _view.OnCloseInfoPanelBuildingClickButton -= CloseInfoBuyView;
             _view.OnBuyBuildingClickButton -= BuyBuilding;
+            
+            foreach (var buttons in _buttonsList)
+            {
+                buttons.Unsubscribe();
+                buttons.OnBuildingClickButton -= ShowBuildingData;
+            }
         }
     }
 }

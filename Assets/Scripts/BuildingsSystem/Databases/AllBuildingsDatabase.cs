@@ -7,16 +7,16 @@ using UnityEngine;
     public class AllBuildingsDatabase : ScriptableObject
     {
         public HouseBuildingDatabase HouseBuildingDatabase;
-        [SerializeField] private List<ABuildingDatabase> _buildingsDatabase;
-        public List<ABuildingDatabase> BuildingsDatabase => _buildingsDatabase;
+        [SerializeField] private List<BuildingDatabase> _buildingsDatabase;
+        public List<BuildingDatabase> BuildingsDatabase => _buildingsDatabase;
     }
 
 [Serializable]
-public class ABuildingDatabase
+public class BuildingDatabase
 {
   [SerializeField] private EBuildingType _buildingType;
   [SerializeField] private string _name;
-  [SerializeField] private ABuildingView _view;
+  [SerializeField] private BuildingView _view;
 
   public EBuildingType BuildingType => _buildingType;
 }

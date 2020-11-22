@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HouseBuildingView : ABuildingView, IBuilding
+public class HouseBuildingView : BuildingView, IBuilding
 {
     [SerializeField] private HouseBuildingDatabase _buildingDatabase;
     private float _goldIncome;
