@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "DatabasesSO/CityDatabase")]
 public class CityDatabase : ScriptableObject
 {
+    [SerializeField] private ResourcesesModel _model;
     public float People;
     public float Gold;
     public float Food;
@@ -10,7 +12,6 @@ public class CityDatabase : ScriptableObject
     public float Stone;
     public float Iron;
     public float Warrior;
-
     public void Clear()
     {
         People = 10;
@@ -22,3 +23,5 @@ public class CityDatabase : ScriptableObject
         Warrior = 0;
     }
 }
+
+

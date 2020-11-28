@@ -72,13 +72,13 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
             if (buildingType == EBuildingType.Mine)
             {
-                _view.SetCostTextInfoPanel("0");
+                _view.SetCostTextInfoPanel(_allBuildingsDatabase.BuildingsDatabase[1].ShowCost());
                 _view.SetNameTextInfoPanel(buildingType.ToString());
             }
 
             if (buildingType == EBuildingType.SawMill)
             {
-                _view.SetCostTextInfoPanel("0");
+                _view.SetCostTextInfoPanel(_allBuildingsDatabase.BuildingsDatabase[2].ShowCost());
                 _view.SetNameTextInfoPanel(buildingType.ToString());
             }
         }

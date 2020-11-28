@@ -4,6 +4,22 @@ using UnityEngine.UI;
 
 public class DayCounterView : APanel
 {
-    public Text DayText;
-    public Text SeasonText;
+    [SerializeField] private Text _dayText;
+    [SerializeField] private Text _seasonText;
+    [SerializeField] private Text _hourText;
+
+    public void SetHour(string value)
+    {
+        _hourText.text = value;
+    }
+
+    public void SetDay(string value)
+    {
+        _dayText.text = value;
+    }
+
+    public void SetSeason(string value)
+    {
+        _seasonText.text = value;
+    }
 }

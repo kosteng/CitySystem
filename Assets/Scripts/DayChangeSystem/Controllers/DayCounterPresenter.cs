@@ -14,14 +14,18 @@ namespace DayChangeSystem.Controllers
 
       public void SetDay(string value)
       {
-         _view.DayText.text = value;
+         _view.SetDay(value);
       }
 
       public void SetSeason(string value)
       {
-         _view.SeasonText.text = value;
+         _view.SetSeason(value); 
       }
-   
+
+      public void SetHour(string value)
+      {
+         _view.SetHour(value);
+      }
       public void Attach(Transform parent)
       {
          _view.Attach(parent);

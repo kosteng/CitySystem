@@ -17,6 +17,11 @@ public class BuildingDatabase
   [SerializeField] private EBuildingType _buildingType;
   [SerializeField] private string _name;
   [SerializeField] private BuildingView _view;
+  [SerializeField] private ResourcesesModel _resourceses;
 
+  public string ShowCost()
+  {
+      return _resourceses.GetType().ToString();
+  }
   public EBuildingType BuildingType => _buildingType;
 }

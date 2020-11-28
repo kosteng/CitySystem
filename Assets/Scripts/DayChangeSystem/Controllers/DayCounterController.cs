@@ -3,6 +3,7 @@ using DayChangeSystem.Databases;
 using DayChangeSystem.Interfaces;
 using DayChangeSystem.Views;
 using Engine.Mediators;
+using UnityEngine;
 using Zenject;
 
 
@@ -43,16 +44,20 @@ namespace DayChangeSystem.Controllers
         {
             _sunView = _sunFactory.Create(_sunView);
             _hourController.OnHourChanged += TryDayChange;
-            _dayCounterPresenter.SetDay($"Day: {_dayModel.Days}");
             _seasonsCounter = 1;
             _currentSeason = (ESeasonsType) _seasonsCounter;
-            _dayCounterPresenter.SetSeason(_currentSeason.ToString());
+
+            RefreshView();
         }
 
         private void TryDayChange()
         {
-            if(_dayModel.Hours < _daySettingsDatabase.DayLength)
+            if (_dayModel.Hours < _daySettingsDatabase.DayLength)
+            {
+                RefreshView();
                 return;
+            }
+
             _dayModel.Days++;
             _dayModel.Hours = 0;
             OnDayChanged?.Invoke();
@@ -84,6 +89,8 @@ namespace DayChangeSystem.Controllers
         {
             _dayCounterPresenter.SetDay($"Day: {_dayModel.Days}");
             _dayCounterPresenter.SetSeason(_currentSeason.ToString());
+            _dayCounterPresenter.SetHour($"Hour: {_dayModel.Hours}");
+            Debug.Log(_dayModel.Hours);
         }
 
         public void Dispose()
