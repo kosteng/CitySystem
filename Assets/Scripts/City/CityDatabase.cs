@@ -14,13 +14,13 @@ public class CityDatabase : ScriptableObject
     public float Warrior;
     public void Clear()
     {
-        People = 10;
-        Gold = 0;
-        Food = 100;
-        Wood = 0;
-        Stone = 0;
-        Iron = 0;
-        Warrior = 0;
+        People = 1000;
+        Gold = 1000;
+        Food = 1000;
+        Wood = 1000;
+        Stone = 1000;
+        Iron = 1000;
+        Warrior = 1000;
     }
 }
 

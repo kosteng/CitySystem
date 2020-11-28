@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public abstract class BuildingView : MonoBehaviour
+public abstract class ABuildingView : MonoBehaviour
 {
     [SerializeField] protected CityDatabase CityDatabase;
     //  protected abstract bool TryBuyBuilding();

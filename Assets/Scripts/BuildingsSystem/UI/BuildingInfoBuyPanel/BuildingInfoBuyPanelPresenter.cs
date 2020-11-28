@@ -31,9 +31,9 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public void Subscribe()
         {
             _view.OnBuildingClickButton += ShowBuildingData;
-            _view.OnCloseInfoPanelBuildingClickButton += CloseInfoBuyView;
             _view.OnBuyBuildingClickButton += BuyBuilding;
             _view.gameObject.SetActive(false);
+            _view.Subscribe(CloseInfoBuyView,CloseInfoBuyView);
         }
 
         public void Attach(Transform parent)
@@ -66,31 +66,31 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         {
             if (buildingType == EBuildingType.House)
             {
-                _view.SetCostTextInfoPanel(_allBuildingsDatabase.HouseBuildingDatabase.ShowCost());
-                _view.SetNameTextInfoPanel(buildingType.ToString());
+                _view.SetCost(_allBuildingsDatabase.BuildingsDatabase[0].ShowCost());
+                _view.SetName(buildingType.ToString());
             }
 
             if (buildingType == EBuildingType.Mine)
             {
-                _view.SetCostTextInfoPanel(_allBuildingsDatabase.BuildingsDatabase[1].ShowCost());
-                _view.SetNameTextInfoPanel(buildingType.ToString());
+                _view.SetCost(_allBuildingsDatabase.BuildingsDatabase[1].ShowCost());
+                _view.SetName(buildingType.ToString());
             }
 
             if (buildingType == EBuildingType.SawMill)
             {
-                _view.SetCostTextInfoPanel(_allBuildingsDatabase.BuildingsDatabase[2].ShowCost());
-                _view.SetNameTextInfoPanel(buildingType.ToString());
+                _view.SetCost(_allBuildingsDatabase.BuildingsDatabase[2].ShowCost());
+                _view.SetName(buildingType.ToString());
             }
         }
 
 // TODO придумать способ проверки и оплаты до создания объекта
         private void BuyBuilding(EBuildingType buildingType)
         {
-            if (!_allBuildingsDatabase.HouseBuildingDatabase.TryBuyBuilding())
-            {
-                Debug.Log("Не хватает ресурсов");
-                return;
-            }
+            // if (!_allBuildingsDatabase.HouseBuildingDatabase.TryBuyBuilding())
+            // {
+            //     Debug.Log("Не хватает ресурсов");
+            //     return;
+            // }
 
             if (_currentBuild.IsBuy && _currentBuild != null)
             {
@@ -106,10 +106,9 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         public void Dispose()
         {
+            _view.Unsubscribe();
             _view.OnBuildingClickButton -= ShowBuildingData;
-            _view.OnCloseInfoPanelBuildingClickButton -= CloseInfoBuyView;
-            _view.OnBuyBuildingClickButton -= BuyBuilding;
-            
+
             foreach (var buttons in _buttonsList)
             {
                 buttons.Unsubscribe();

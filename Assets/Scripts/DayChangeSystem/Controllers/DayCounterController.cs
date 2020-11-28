@@ -15,9 +15,10 @@ namespace DayChangeSystem.Controllers
         private readonly DaySettingsDatabase _daySettingsDatabase;
         private readonly DayCounterPresenter _dayCounterPresenter;
         private readonly HourController _hourController;
+        private readonly SunPrefabFactory _sunFactory;
         private readonly IDayModel _dayModel;
         private SunView _sunView;
-        private readonly SunPrefabFactory _sunFactory;
+
         private ESeasonsType _currentSeason;
         private int _seasonsCounter;
         public event Action OnDayChanged;

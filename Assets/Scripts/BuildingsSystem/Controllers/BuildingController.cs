@@ -8,18 +8,18 @@ public class BuildingController : IInitializable
     private readonly AllBuildingsDatabase _allBuildingsDatabase;
     private readonly DayCounterController _dayCounterController;
     private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
-    private readonly HouseBuildingView _houseBuildingView;
+    private readonly HouseABuildingView _houseABuildingView;
 
     private List<IBuilding> _buildings = new List<IBuilding>();
 
     public BuildingController(
         DayCounterController dayCounterController,
         BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter,
-        HouseBuildingView houseBuildingView)
+        HouseABuildingView houseABuildingView)
     {
         _dayCounterController = dayCounterController;
         _buildingInfoBuyPanelPresenter = buildingInfoBuyPanelPresenter;
-        _houseBuildingView = houseBuildingView;
+        _houseABuildingView = houseABuildingView;
     }
 
     public void Awake()

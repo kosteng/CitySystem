@@ -11,6 +11,7 @@ namespace DayChangeSystem.Controllers
         private readonly DaySettingsDatabase _daySettingsDatabase;
         private readonly IDayModel _dayModel;
         public event Action OnHourChanged;
+        
         public HourController(DaySettingsDatabase daySettingsDatabase, IDayModel dayModel)
         {
             _daySettingsDatabase = daySettingsDatabase;

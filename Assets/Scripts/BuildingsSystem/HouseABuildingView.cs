@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class HouseBuildingView : BuildingView, IBuilding
+public class HouseABuildingView : ABuildingView, IBuilding
 {
-    [SerializeField] private HouseBuildingDatabase _buildingDatabase;
+
     private float _goldIncome;
     private float _goldCost;
     private float _woodCost;
@@ -38,11 +38,16 @@ public class HouseBuildingView : BuildingView, IBuilding
 
     public void SetData()
     {
-        _goldIncome = _buildingDatabase.GoldIncome;
-        _goldCost = _buildingDatabase.GoldCost;
-        _woodCost = _buildingDatabase.WoodCost;
-        _name = _buildingDatabase.Name;
+        throw new System.NotImplementedException();
     }
+
+    // public void SetData()
+    // {
+    //     _goldIncome = _buildingDatabase.GoldIncome;
+    //     _goldCost = _buildingDatabase.GoldCost;
+    //     _woodCost = _buildingDatabase.WoodCost;
+    //     _name = _buildingDatabase.Name;
+    // }
 
     public string ShowCost()
     {
