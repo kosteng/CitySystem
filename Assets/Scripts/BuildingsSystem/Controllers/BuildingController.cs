@@ -33,8 +33,8 @@ public class BuildingController : IInitializable
         if (_buildingInfoBuyPanelPresenter == null)
             return;
         var build = _buildingInfoBuyPanelPresenter.CurrentBuild;
-        build.SetActive(true);
-        _buildings.Add(build);
+    //    build.SetActive(true);
+     //   _buildings.Add(build);
     }
     //  private void GetBuildings()
     //  {

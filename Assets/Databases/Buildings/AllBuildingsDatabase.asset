@@ -12,15 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7676a25028faf4a9ec40a3482cafd0, type: 3}
   m_Name: AllBuildingsDatabase
   m_EditorClassIdentifier: 
-  HouseBuildingDatabase: {fileID: 11400000, guid: 3e1571d59fb5ecc4ba6f997906c0618d,
-    type: 2}
   _buildingsDatabase:
   - _buildingType: 0
     _name: 
-    _view: {fileID: 0}
+    _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
+    _resourceses:
+      People: 0
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
+      Iron: 0
+      Warrior: 0
   - _buildingType: 1
     _name: 
-    _view: {fileID: 0}
+    _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
+    _resourceses:
+      People: 0
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
+      Iron: 0
+      Warrior: 0
   - _buildingType: 2
     _name: 
-    _view: {fileID: 0}
+    _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
+    _resourceses:
+      People: 0
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
+      Iron: 0
+      Warrior: 0

@@ -91,7 +91,6 @@ namespace DayChangeSystem.Controllers
             _dayCounterPresenter.SetDay($"Day: {_dayModel.Days}");
             _dayCounterPresenter.SetSeason(_currentSeason.ToString());
             _dayCounterPresenter.SetHour($"Hour: {_dayModel.Hours}");
-            Debug.Log(_dayModel.Hours);
         }
 
         public void Dispose()
