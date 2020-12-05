@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Engine.UI;
-using UI.BottomPanel;
 using UnityEngine;
 using Zenject;
 
@@ -70,13 +69,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void ShowBuildingData(EBuildingType buildingType)
         {
-            foreach (var building in _allBuildingsDatabase.BuildingsDatabase) //TODO реализовать через linq
+            foreach (var building in _allBuildingsDatabase.BuildingsDatabase.Where(building => building.BuildingType == buildingType))
             {
-                if (building.BuildingType == buildingType)
-                {
-                    _currentBuilding = building;
-                    break;
-                }
+                _currentBuilding = building;
+                break;
             }
 
             _view.SetCost(_currentBuilding.ShowCost());

@@ -2,8 +2,8 @@
 
 public class Pool<T>
 {
-    private IFactory<T> _factory;
-    public Queue<T> PoolQueue = new Queue<T>();
+    private readonly IFactory<T> _factory;
+    private readonly Queue<T> PoolQueue = new Queue<T>();
 
     public Pool(IFactory<T> factory)
     {
@@ -12,9 +12,7 @@ public class Pool<T>
 
     public T GetObject()
     {
-        if (PoolQueue.Count > 0)
-            return PoolQueue.Dequeue();
-        return _factory.Create();
+        return PoolQueue.Count > 0 ? PoolQueue.Dequeue() : _factory.Create();
     }
 
     public void Back(T gameObject)

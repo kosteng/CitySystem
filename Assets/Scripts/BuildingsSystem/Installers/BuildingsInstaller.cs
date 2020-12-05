@@ -10,9 +10,11 @@ namespace BuildingsSystem.Installers
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<BuildingInfoBuyPanelPresenter>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BuildingController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BuildingController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingButtonBuilder>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingsStacker>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildingFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<Pool<ABuildingView>>().AsSingle();
         }
     }
 }
