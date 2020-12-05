@@ -15,11 +15,17 @@ public class ABuildingView : MonoBehaviour
     {
         if (available)
         {
-            MainRenderer.material.color = Color.green;
+            foreach (var material in MainRenderer.materials)
+            {
+                material.color = Color.green;
+            }
         }
         else
         {
-            MainRenderer.material.color = Color.red;
+            foreach (var material in MainRenderer.materials)
+            {
+                material.color = Color.red;
+            }
         }
     }
 
@@ -43,7 +49,10 @@ public class ABuildingView : MonoBehaviour
 
     public void SetNormal()
     {
-        MainRenderer.material.color = Color.white;
+        foreach (var material in MainRenderer.materials)
+        {
+            material.color = Color.white;
+        }
     }
 
     private void OnDrawGizmos()
