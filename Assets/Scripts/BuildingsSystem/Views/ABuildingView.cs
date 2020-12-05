@@ -1,10 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-    //TODO вернуть абстрактность классу
+//TODO вернуть абстрактность классу
 public class ABuildingView : MonoBehaviour
 {
     [SerializeField] protected CityDatabase CityDatabase;
+
     //  protected abstract bool TryBuyBuilding();
     public Renderer MainRenderer;
     public bool IsPlaceFree { get; private set; } = true;
@@ -22,29 +23,22 @@ public class ABuildingView : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        throw new NotImplementedException();
+        if (other.gameObject.CompareTag("Building"))
+            IsPlaceFree = false;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerExit(Collider other)
     {
-        Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!" + other);
         if (other.gameObject.CompareTag("Building"))
-        {
-            IsPlaceFree = false;
-            Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!" + other);
-        }
+            IsPlaceFree = true;
     }
 
     private void OnTriggerEnter(Collider other)
-    {          
-        Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!" + other);
+    {
         if (other.gameObject.CompareTag("Building"))
-        {
             IsPlaceFree = false;
-            Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!" + other);
-        }
     }
 
     public void SetNormal()

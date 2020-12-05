@@ -21,20 +21,16 @@ public class BuildingsStacker : IUpdatable, IInitializable
 
     public void Update(float deltaTime)
     {
-        if (_flyingBuilding != null)
+        if (_flyingBuilding == null) return;
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (!Physics.Raycast(ray, out var hit)) return;
+        _flyingBuilding.transform.position = new Vector3(hit.point.x, 0f, hit.point.z);
+
+
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                _flyingBuilding.transform.position = new Vector3(hit.point.x, 0f, hit.point.z);
-
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    PlaceFlyingBuilding(_flyingBuilding.IsPlaceFree);
-                }
-            }
+            PlaceFlyingBuilding(_flyingBuilding.IsPlaceFree);
         }
     }
 
