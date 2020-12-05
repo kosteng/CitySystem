@@ -23,7 +23,7 @@ public class BuildingsStacker : IUpdatable, IInitializable
     {
         if (_flyingBuilding != null)
         {
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
@@ -32,14 +32,14 @@ public class BuildingsStacker : IUpdatable, IInitializable
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    PlaceFlyingBuilding(hit.point.x, hit.point.z, _flyingBuilding.IsPlaceFree);
+                    PlaceFlyingBuilding(_flyingBuilding.IsPlaceFree);
                 }
             }
         }
     }
 
 
-    private void PlaceFlyingBuilding(float placeX, float placeY, bool isPlaceFree)
+    private void PlaceFlyingBuilding(bool isPlaceFree)
     {
         if (!isPlaceFree)
         {

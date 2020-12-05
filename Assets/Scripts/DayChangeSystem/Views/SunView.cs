@@ -15,7 +15,7 @@ namespace DayChangeSystem.Views
             _timeOfDay += Time.deltaTime / day;
           //  if (_timeOfDay >= 360) _timeOfDay = 0;
 
-            _sun.transform.localRotation = Quaternion.Euler(_timeOfDay * 360, 180, 0);
+            _sun.transform.localRotation = Quaternion.Euler(70f, 180, 0);
         }
     }
 }
