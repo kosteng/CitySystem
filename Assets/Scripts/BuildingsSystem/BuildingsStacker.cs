@@ -1,12 +1,14 @@
-﻿using Engine.Mediators;
+﻿using System;
+using Engine.Mediators;
 using UnityEngine;
 
 public class BuildingsStacker : IUpdatable
 {
     private ABuildingView _flyingBuilding;
-
+    public Action IsBuildingMontage;
     public void StartPlacingBuilding(ABuildingView buildingPrefab)
     {
+
         if (_flyingBuilding != null)
         {
             //TODO возвращать в пул
@@ -36,6 +38,7 @@ public class BuildingsStacker : IUpdatable
         if (!isPlaceFree)
             return;
         
+        IsBuildingMontage?.Invoke();
         _flyingBuilding.SetNormal();
         _flyingBuilding = null;
     }

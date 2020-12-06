@@ -65,7 +65,7 @@ public class CityController : IInitializable, IAttachableUi, IDisposable
 
     public void Initialize()
     {
-        _cityDatabase.Clear();
+//        _cityDatabase.Clear();
     }
 
     public void Attach(Transform parent)

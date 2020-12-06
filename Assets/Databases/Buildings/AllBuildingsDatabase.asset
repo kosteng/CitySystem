@@ -18,10 +18,10 @@ MonoBehaviour:
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
     _resourceses:
       People: 0
-      Gold: 0
+      Gold: 5
       Food: 0
-      Wood: 0
-      Stone: 0
+      Wood: 10
+      Stone: 10
       Iron: 0
       Warrior: 0
   - _buildingType: 1
@@ -29,10 +29,10 @@ MonoBehaviour:
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
     _resourceses:
       People: 0
-      Gold: 0
+      Gold: 40
       Food: 0
-      Wood: 0
-      Stone: 0
+      Wood: 10
+      Stone: 45
       Iron: 0
       Warrior: 0
   - _buildingType: 2
@@ -40,9 +40,9 @@ MonoBehaviour:
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
     _resourceses:
       People: 0
-      Gold: 0
+      Gold: 40
       Food: 0
-      Wood: 0
-      Stone: 0
+      Wood: 20
+      Stone: 10
       Iron: 0
       Warrior: 0

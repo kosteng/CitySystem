@@ -17,8 +17,10 @@ public class BuildingDatabase
   [SerializeField] private string _name;
   [SerializeField] private ABuildingView _view;
   [SerializeField] private ResourcesesModel _resourceses;
-  
-//TODO выводить только не нулевые ресурсы
+
+  public ResourcesesModel Resourceses => _resourceses;
+
+  //TODO выводить только не нулевые ресурсы
   public string ShowCost()
   {
       return $"Cost: Gold: {_resourceses.Gold} Wood: {_resourceses.Wood} Stone: {_resourceses.Stone}";

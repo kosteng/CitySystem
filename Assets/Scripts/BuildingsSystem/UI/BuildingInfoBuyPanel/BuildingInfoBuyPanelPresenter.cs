@@ -13,6 +13,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
         private readonly BuildingButtonBuilder _buildingButtonBuilder;
         private readonly BuildingsStacker _buildingsStacker;
+        private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
+        private readonly CityDatabase _cityDatabase;
 
         private List<BuildingButtonView> _buttonsList;
 
@@ -25,20 +27,32 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
             AllBuildingsDatabase allBuildingsDatabase,
             BuildingButtonBuilder buildingButtonBuilder,
-            BuildingsStacker buildingsStacker)
+            BuildingsStacker buildingsStacker,
+            PurchaseBuildingsHandler purchaseBuildingsHandler,
+            CityDatabase cityDatabase)
         {
             _view = view;
             _allBuildingsDatabase = allBuildingsDatabase;
             _buildingButtonBuilder = buildingButtonBuilder;
             _buildingsStacker = buildingsStacker;
+            _purchaseBuildingsHandler = purchaseBuildingsHandler;
+            _cityDatabase = cityDatabase;
         }
-
-        public void Subscribe()
+        //TODO рефакторинг зиз
+        private void Subscribe()
         {
             _view.OnBuildingClickButton += ShowBuildingData;
             _view.OnBuyBuildingClickButton += BuyBuilding;
-            _view.gameObject.SetActive(false);
             _view.Subscribe(CloseInfoBuyView, CloseInfoBuyView);
+            _buildingsStacker.IsBuildingMontage += PurchaseBuilding;
+            
+            foreach (var buttons in _buttonsList)
+            {
+                buttons.Subscribe();
+                buttons.OnBuildingClickButton += ShowBuildingData;
+            }
+            
+            _view.gameObject.SetActive(false);
         }
 
         public void Attach(Transform parent)
@@ -48,13 +62,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         public void Initialize()
         {
-            Subscribe();
             _buttonsList = _buildingButtonBuilder.Create(_view.BuildingButtonsPanel);
-            foreach (var buttons in _buttonsList)
-            {
-                buttons.Subscribe();
-                buttons.OnBuildingClickButton += ShowBuildingData;
-            }
+            Subscribe();
         }
 
         public void Show()
@@ -69,7 +78,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void ShowBuildingData(EBuildingType buildingType)
         {
-            foreach (var building in _allBuildingsDatabase.BuildingsDatabase.Where(building => building.BuildingType == buildingType))
+            foreach (var building in _allBuildingsDatabase.BuildingsDatabase.Where(building =>
+                building.BuildingType == buildingType))
             {
                 _currentBuilding = building;
                 break;
@@ -78,37 +88,29 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.SetCost(_currentBuilding.ShowCost());
             _view.SetName(buildingType.ToString());
         }
-
-// TODO придумать способ проверки и оплаты до создания объекта
+        
         private void BuyBuilding(EBuildingType buildingType)
         {
             if (_currentBuilding == null)
                 return;
-           var build = MonoBehaviour.Instantiate(_currentBuilding.View);
+            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.Resourceses)) 
+                return;
+
+            var build = MonoBehaviour.Instantiate(_currentBuilding.View);
             _buildingsStacker.StartPlacingBuilding(build);
-            // // if (!_allBuildingsDatabase.HouseBuildingDatabase.TryBuyBuilding())
-            // // {
-            // //     Debug.Log("Не хватает ресурсов");
-            // //     return;
-            // // }
-            //
-            // if (_currentBuild.IsBuy && _currentBuild != null)
-            // {
-            //     Debug.Log("Куплено уже");
-            //     return;
-            // }
-            //
-            // //  _currentBuild = _buildingFactory.Create();
-            // _currentBuild.PayBuilding();
-            // _currentBuild.SetData();
-            // OnBuyBuilding?.Invoke();
         }
 
+        private void PurchaseBuilding()
+        {
+            _purchaseBuildingsHandler.PurchaseBuilding(_cityDatabase.Model, _currentBuilding.Resourceses);
+        }
+        
         public void Dispose()
         {
             _view.Unsubscribe();
             _view.OnBuildingClickButton -= ShowBuildingData;
-
+            _view.OnBuyBuildingClickButton -= BuyBuilding;
+            _buildingsStacker.IsBuildingMontage -= PurchaseBuilding;
             foreach (var buttons in _buttonsList)
             {
                 buttons.Unsubscribe();

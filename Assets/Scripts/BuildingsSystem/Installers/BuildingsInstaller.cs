@@ -15,6 +15,7 @@ namespace BuildingsSystem.Installers
             Container.BindInterfacesAndSelfTo<BuildingsStacker>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingFactory>().AsSingle();
             Container.BindInterfacesAndSelfTo<Pool<ABuildingView>>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PurchaseBuildingsHandler>().AsSingle();
         }
     }
 }
