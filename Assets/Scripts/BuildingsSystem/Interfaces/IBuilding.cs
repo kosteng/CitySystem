@@ -1,11 +1,7 @@
 ﻿public interface IBuilding
 {
-    string Name { get; }
-    bool IsBuy { get; }
-    void SetActive(bool value);
+    ABuildingView BuildingView { get; }
+    ResourcesesModel Resourceses { get; }
+
     void Income();
-    void PayBuilding();
-    void SetData();
-    bool TryBuyBuilding();
-    string ShowCost();
 }

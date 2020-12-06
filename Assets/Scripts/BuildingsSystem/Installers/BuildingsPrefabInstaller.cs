@@ -7,17 +7,13 @@ namespace BuildingsSystem.Installers
     [CreateAssetMenu(menuName = "DatabasesSO/BuildingsPrefabInstaller")]
     public class BuildingsPrefabInstaller : ScriptableObjectInstaller
     {
-        [SerializeField] private HouseABuildingView houseA;
         [SerializeField] private AllBuildingsDatabase _allBuildingsDatabase;
-        [SerializeField] private Building _building;
         [SerializeField] private Button _buildingButtonInPanel;
         [SerializeField] private BuildingButtonView _buildingButtonView;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(houseA);
             Container.BindInstance(_allBuildingsDatabase);
-            Container.BindInstance(_building);
             Container.BindInstance(_buildingButtonInPanel);
             Container.BindInstance(_buildingButtonView);
         }

@@ -15,10 +15,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly BuildingsStacker _buildingsStacker;
         private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
         private readonly CityDatabase _cityDatabase;
-
+        public List<IBuilding> Buildings = new List<IBuilding>();
         private List<BuildingButtonView> _buttonsList;
 
-        //private IBuilding _currentBuild;
+
         private BuildingDatabase _currentBuilding;
         public BuildingDatabase CurrentBuild => _currentBuilding;
 
@@ -38,6 +38,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _purchaseBuildingsHandler = purchaseBuildingsHandler;
             _cityDatabase = cityDatabase;
         }
+
         //TODO рефакторинг зиз
         private void Subscribe()
         {
@@ -45,13 +46,13 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.OnBuyBuildingClickButton += BuyBuilding;
             _view.Subscribe(CloseInfoBuyView, CloseInfoBuyView);
             _buildingsStacker.IsBuildingMontage += PurchaseBuilding;
-            
+
             foreach (var buttons in _buttonsList)
             {
                 buttons.Subscribe();
                 buttons.OnBuildingClickButton += ShowBuildingData;
             }
-            
+
             _view.gameObject.SetActive(false);
         }
 
@@ -69,6 +70,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public void Show()
         {
             _view.gameObject.SetActive(!_view.gameObject.activeSelf);
+            _currentBuilding = null;
         }
 
         private void CloseInfoBuyView()
@@ -88,12 +90,12 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.SetCost(_currentBuilding.ShowCost());
             _view.SetName(buildingType.ToString());
         }
-        
+
         private void BuyBuilding(EBuildingType buildingType)
         {
             if (_currentBuilding == null)
                 return;
-            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.Resourceses)) 
+            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResourceses))
                 return;
 
             var build = MonoBehaviour.Instantiate(_currentBuilding.View);
@@ -102,9 +104,11 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void PurchaseBuilding()
         {
-            _purchaseBuildingsHandler.PurchaseBuilding(_cityDatabase.Model, _currentBuilding.Resourceses);
+            _purchaseBuildingsHandler.PurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResourceses);
+            BuildingModel build = new BuildingModel(_currentBuilding.View,_currentBuilding.IncomeResourceses, _cityDatabase);
+            Buildings.Add(build);
         }
-        
+
         public void Dispose()
         {
             _view.Unsubscribe();

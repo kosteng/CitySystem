@@ -4,13 +4,9 @@ using UnityEngine;
 //TODO вернуть абстрактность классу
 public class ABuildingView : MonoBehaviour
 {
-    [SerializeField] protected CityDatabase CityDatabase;
-
-    //  protected abstract bool TryBuyBuilding();
-    public Renderer MainRenderer;
+    [SerializeField] private Renderer MainRenderer;
+    [SerializeField] private Vector2Int Size = Vector2Int.one;
     public bool IsPlaceFree { get; private set; } = true;
-    public Vector2Int Size = Vector2Int.one;
-
     public void SetTransparent(bool available)
     {
         if (available)
