@@ -16,17 +16,17 @@ public class BuildingDatabase
   [SerializeField] private EBuildingType _buildingType;
   [SerializeField] private string _name;
   [SerializeField] private ABuildingView _view;
-  [SerializeField] private ResourcesesModel _costResourceses;
-  [SerializeField] private ResourcesesModel _incomeResourceses;
+  [SerializeField] private ResourcesModel costResources;
+  [SerializeField] private ResourcesModel incomeResources;
 
-  public ResourcesesModel CostResourceses => _costResourceses;
+  public ResourcesModel CostResources => costResources;
 
-  public ResourcesesModel IncomeResourceses => _incomeResourceses;
+  public ResourcesModel IncomeResources => incomeResources;
 
   //TODO выводить только не нулевые ресурсы
   public string ShowCost()
   {
-      return $"Cost: Gold: {_costResourceses.Gold} Wood: {_costResourceses.Wood} Stone: {_costResourceses.Stone}";
+      return $"Cost: Gold: {costResources.Gold} Wood: {costResources.Wood} Stone: {costResources.Stone}";
   }
   public EBuildingType BuildingType => _buildingType;
 

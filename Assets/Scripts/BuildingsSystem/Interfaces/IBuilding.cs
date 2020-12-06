@@ -1,7 +1,8 @@
 ﻿public interface IBuilding
 {
     ABuildingView BuildingView { get; }
-    ResourcesesModel Resourceses { get; }
-
+    ResourcesModel Resources { get; }
+    EBuildingType BuildingType { get; }
     void Income();
+    void Expense();
 }

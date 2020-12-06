@@ -2,14 +2,14 @@
 
 public class PurchaseBuildingsHandler
 {
-    public bool TryPurchaseBuilding(ResourcesesModel purchaser, ResourcesesModel cost)
+    public bool TryPurchaseBuilding(ResourcesModel purchaser, ResourcesModel cost)
     {
         return purchaser.Gold >= cost.Gold
                && purchaser.Wood >= cost.Wood
                && purchaser.Stone >= cost.Stone;
     }
 
-    public void PurchaseBuilding(ResourcesesModel purchaser, ResourcesesModel cost)
+    public void PurchaseBuilding(ResourcesModel purchaser, ResourcesModel cost)
     {
         purchaser.Gold -= cost.Gold;
         purchaser.Wood -= cost.Wood;

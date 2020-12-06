@@ -15,11 +15,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly BuildingsStacker _buildingsStacker;
         private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
         private readonly CityDatabase _cityDatabase;
-        public List<IBuilding> Buildings = new List<IBuilding>();
         private List<BuildingButtonView> _buttonsList;
-
-
         private BuildingDatabase _currentBuilding;
+        
+        public List<IBuilding> Buildings = new List<IBuilding>();
         public BuildingDatabase CurrentBuild => _currentBuilding;
 
         public event Action OnBuyBuilding;
@@ -95,7 +94,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         {
             if (_currentBuilding == null)
                 return;
-            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResourceses))
+            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResources))
                 return;
 
             var build = MonoBehaviour.Instantiate(_currentBuilding.View);
@@ -104,9 +103,33 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void PurchaseBuilding()
         {
-            _purchaseBuildingsHandler.PurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResourceses);
-            BuildingModel build = new BuildingModel(_currentBuilding.View,_currentBuilding.IncomeResourceses, _cityDatabase);
-            Buildings.Add(build);
+            _purchaseBuildingsHandler.PurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResources);
+            Create();
+            OnBuyBuilding?.Invoke();
+        }
+
+        private void Create()
+        {
+            switch (_currentBuilding.BuildingType)
+            {
+                case EBuildingType.House:
+                    Buildings.Add(new HouseBuildingModel(_currentBuilding.View, _currentBuilding.IncomeResources,
+                        _cityDatabase));
+                    break;
+
+                case EBuildingType.SawMill:
+                    Buildings.Add(new SawBuildingModel(_currentBuilding.View, _currentBuilding.IncomeResources,
+                        _cityDatabase));
+                    break;
+                
+                case EBuildingType.Mine:
+                    Buildings.Add(new MineBuildingModel(_currentBuilding.View, _currentBuilding.IncomeResources,
+                        _cityDatabase));
+                    break;
+                
+                default: Debug.LogError($"Unkwown type {_currentBuilding.BuildingType}");
+                    break;
+            }
         }
 
         public void Dispose()
@@ -115,6 +138,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.OnBuildingClickButton -= ShowBuildingData;
             _view.OnBuyBuildingClickButton -= BuyBuilding;
             _buildingsStacker.IsBuildingMontage -= PurchaseBuilding;
+
             foreach (var buttons in _buttonsList)
             {
                 buttons.Unsubscribe();

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
-public class ResourcesesModel
+public class ResourcesModel
 {
     public float People;
     public float Gold;

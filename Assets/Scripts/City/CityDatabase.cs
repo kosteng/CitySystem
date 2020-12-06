@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "DatabasesSO/CityDatabase")]
 public class CityDatabase : ScriptableObject
 {
-    public ResourcesesModel Model;
+    public ResourcesModel Model;
     public float People;
     public float Gold;
     public float Food;
