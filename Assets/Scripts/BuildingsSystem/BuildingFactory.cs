@@ -1,10 +1,12 @@
 ﻿
+using UnityEngine;
+
 public interface IBuildingFactory
 {
     IBuilding Create(ABuildingView montageBuilding, BuildingDatabase currentBuilding, CityDatabase cityDatabase);
+    ABuildingView Create(ABuildingView montageBuilding);
 }
 
-// TO DO переписать этого монстра!!! сделать отдельный класс с префабами и координатами построек
 public class BuildingFactory : IBuildingFactory
 {
     public IBuilding Create(ABuildingView montageBuilding, BuildingDatabase currentBuilding, CityDatabase cityDatabase)
@@ -22,8 +24,11 @@ public class BuildingFactory : IBuildingFactory
 
             default: return null;
             //new NullReferenceException($"Unkwown type {_currentBuilding.BuildingType}");Debug.LogError($"Unkwown type {_currentBuilding.BuildingType}");
- 
         }
     }
 
+    public ABuildingView Create(ABuildingView montageBuilding)
+    {
+        return MonoBehaviour.Instantiate(montageBuilding);
+    }
 }

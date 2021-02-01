@@ -14,14 +14,9 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         [SerializeField] private Transform _buildingButtonsPanel;
        
         private EBuildingType _currentType;
-
         public Transform BuildingButtonsPanel => _buildingButtonsPanel;
-
         public delegate void BuildingTypeHandler(EBuildingType type);
-
-        public event BuildingTypeHandler OnBuildingClickButton;
         public event BuildingTypeHandler OnBuyBuildingClickButton;
-
 
         public void Subscribe(Action onBuyButton, Action onCloseButton)
         {

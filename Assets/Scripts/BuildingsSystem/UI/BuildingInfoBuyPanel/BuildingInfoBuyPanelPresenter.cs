@@ -18,11 +18,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
         private readonly CityDatabase _cityDatabase;
         private readonly IBuildingFactory _buildingFactory;
+        private readonly BuildingController _buildingController;
         private List<BuildingButtonView> _buttonsList;
+
         private BuildingDatabase _currentBuilding;
-        
-        public List<IBuilding> Buildings = new List<IBuilding>(); //todo этот лист всех зданий скорее всего нужно перенести в контроллер
-        public BuildingDatabase CurrentBuild => _currentBuilding;
         public event Action OnBuyBuilding;
 
         public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
@@ -31,7 +30,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             BuildingsStacker buildingsStacker,
             PurchaseBuildingsHandler purchaseBuildingsHandler,
             CityDatabase cityDatabase,
-            IBuildingFactory buildingFactory)
+            IBuildingFactory buildingFactory,
+            BuildingController buildingController)
         {
             _view = view;
             _allBuildingsDatabase = allBuildingsDatabase;
@@ -40,32 +40,28 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _purchaseBuildingsHandler = purchaseBuildingsHandler;
             _cityDatabase = cityDatabase;
             _buildingFactory = buildingFactory;
+            _buildingController = buildingController;
         }
-                
+
         public void Initialize()
         {
             _buttonsList = _buildingButtonBuilder.Create(_view.BuildingButtonsPanel);
             Subscribe();
         }
-        
+
         private void CloseInfoBuyView()
         {
             _view.gameObject.SetActive(false);
         }
-        
+
         public void Attach(Transform parent)
         {
             _view.Attach(parent);
         }
 
-        public void Onckic(ABuildingView buildingView)
-        {
-            Debug.Log("Delegate " + buildingView.name);
-        }
         //TODO рефакторинг зиз
         private void Subscribe()
         {
-            _view.OnBuildingClickButton += ShowBuildingData;
             _view.OnBuyBuildingClickButton += BuyBuilding;
             _view.Subscribe(CloseInfoBuyView, CloseInfoBuyView);
             _buildingsStacker.OnBuildingMontage += PurchaseBuilding;
@@ -75,6 +71,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
                 buttons.Subscribe();
                 buttons.OnBuildingClickButton += ShowBuildingData;
             }
+
             _view.gameObject.SetActive(false);
         }
 
@@ -96,7 +93,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.SetCost(_currentBuilding.ShowCost());
             _view.SetName(buildingType.ToString());
         }
-        
+
         private void BuyBuilding(EBuildingType buildingType)
         {
             if (_currentBuilding == null)
@@ -104,28 +101,20 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResources))
                 return;
 
-           var buildingObject = MonoBehaviour.Instantiate(_currentBuilding.View);
+            var buildingObject = _buildingFactory.Create(_currentBuilding.View);
             _buildingsStacker.StartPlacingBuilding(buildingObject);
         }
 
         private void PurchaseBuilding(ABuildingView montageBuilding)
         {
             _purchaseBuildingsHandler.PurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResources);
-            AddBuildings(_buildingFactory.Create(montageBuilding, _currentBuilding, _cityDatabase));
+           _buildingController.AddBuildings(_buildingFactory.Create(montageBuilding, _currentBuilding, _cityDatabase));
             OnBuyBuilding?.Invoke();
-        }
-
-        private void AddBuildings(IBuilding building)
-        {
-            building.Subscribe();
-            building.OnBuildingClickHandler += Onckic;
-            Buildings.Add(building);
         }
 
         public void Dispose()
         {
             _view.Unsubscribe();
-            _view.OnBuildingClickButton -= ShowBuildingData;
             _view.OnBuyBuildingClickButton -= BuyBuilding;
             _buildingsStacker.OnBuildingMontage -= PurchaseBuilding;
 
