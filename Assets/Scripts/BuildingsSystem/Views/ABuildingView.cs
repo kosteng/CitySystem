@@ -6,7 +6,10 @@ public class ABuildingView : MonoBehaviour
 {
     [SerializeField] private Renderer MainRenderer;
     [SerializeField] private Vector2Int Size = Vector2Int.one;
+    public Action OnBuildingClick;
+
     public bool IsPlaceFree { get; private set; } = true;
+
     public void SetTransparent(bool available)
     {
         if (available)
@@ -23,6 +26,11 @@ public class ABuildingView : MonoBehaviour
                 material.color = Color.red;
             }
         }
+    }
+
+    public void OnMouseDown()
+    {
+        OnBuildingClick.Invoke();
     }
 
     private void OnTriggerStay(Collider other)

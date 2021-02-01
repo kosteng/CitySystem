@@ -15,15 +15,15 @@ public class BuildingButtonBuilder
 
    public List<BuildingButtonView> Create(Transform parent)
    {
-      List<BuildingButtonView> List = new List<BuildingButtonView>();
+      List<BuildingButtonView> list = new List<BuildingButtonView>();
       foreach (var button in _allBuildingsDatabase.BuildingsDatabase)
       {
          var buildingButton = MonoBehaviour.Instantiate(_buttonView);
          buildingButton.Attach(parent);
          buildingButton.SetName(button.BuildingType.ToString());
          buildingButton.SetBuildingType(button.BuildingType);
-         List.Add(buildingButton);
+         list.Add(buildingButton);
       }
-      return List;
+      return list;
    }
 }

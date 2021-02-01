@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Engine.UI;
 using UnityEngine;
 using Zenject;
@@ -38,6 +40,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _cityDatabase = cityDatabase;
         }
 
+        public void Onckic(ABuildingView buildingView)
+        {
+            Debug.Log("Delegate " + buildingView.name);
+        }
         //TODO рефакторинг зиз
         private void Subscribe()
         {
@@ -52,6 +58,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
                 buttons.OnBuildingClickButton += ShowBuildingData;
             }
 
+            foreach (var building in Buildings)
+            {
+                building.OnBuildingClickHandler += Onckic;
+            }
             _view.gameObject.SetActive(false);
         }
 
@@ -70,6 +80,21 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         {
             _view.gameObject.SetActive(!_view.gameObject.activeSelf);
             _currentBuilding = null;
+            // List<string> list = new List<string>();
+            // Assembly t = typeof(BuildingController).GetTypeInfo().Assembly;
+            // foreach (var a in t.ExportedTypes)
+            // {
+            //     var count = 0;
+            //     foreach (var word in a.ToString().ToCharArray())
+            //     {
+            //         if (char.IsUpper(word))
+            //             count++;
+            //         if (count > 3)
+            //             list.Add(a.ToString());
+            //     }
+            //     File.WriteAllLines("e:/list.txt", list);
+            // }
+
         }
 
         private void CloseInfoBuyView()
@@ -143,6 +168,11 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             {
                 buttons.Unsubscribe();
                 buttons.OnBuildingClickButton -= ShowBuildingData;
+            }
+            
+            foreach (var building in Buildings)
+            {
+                building.OnBuildingClickHandler -= Onckic;
             }
         }
     }

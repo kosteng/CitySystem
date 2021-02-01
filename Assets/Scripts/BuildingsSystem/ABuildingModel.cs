@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public abstract class ABuildingModel : IBuilding
+
+public class ABuildingModel : IBuilding, IDisposable 
 {
     private readonly CityDatabase _cityDatabase;
     private readonly ABuildingView _view;
     private readonly ResourcesModel _resourcesModel;
     private EBuildingType _buildingType;
-
+    public event BuildingClickHandler OnBuildingClickHandler;
     public virtual ABuildingView BuildingView => _view;
     public virtual ResourcesModel Resources => _resourcesModel;
     public virtual EBuildingType BuildingType => _buildingType;
@@ -17,7 +17,9 @@ public abstract class ABuildingModel : IBuilding
     {
         _cityDatabase = cityDatabase;
         _view = view;
-        _resourcesModel = resourcesModel;
+        _resourcesModel = resourcesModel;        
+        _view.OnBuildingClick += BuildingClickButton;
+
     }
 
     public virtual void Income()
@@ -27,6 +29,26 @@ public abstract class ABuildingModel : IBuilding
     public virtual void Expense()
     {
     }
+
+
+    public void Initialize()
+    {
+        Debug.Log("Name" +_view.name);
+    }
+
+    private void Fff()
+    {
+        Debug.Log(1);
+    }
+    private void BuildingClickButton()
+    {
+        OnBuildingClickHandler?.Invoke(_view);
+    }
+
+    public void Dispose()
+    {
+        _view.OnBuildingClick -= BuildingClickButton;
+    }
 }
 
 public class HouseBuildingModel : ABuildingModel
@@ -34,6 +56,11 @@ public class HouseBuildingModel : ABuildingModel
     public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase) : base(view,
         resourcesModel, cityDatabase)
     {
+    }
+
+    public void Initialize()
+    {
+        Debug.Log("Create");
     }
 
     public override void Income()
