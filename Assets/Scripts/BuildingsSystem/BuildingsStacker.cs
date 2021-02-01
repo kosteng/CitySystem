@@ -5,7 +5,7 @@ using UnityEngine;
 public class BuildingsStacker : IUpdatable
 {
     private ABuildingView _flyingBuilding;
-    public Action IsBuildingMontage;
+    public Action OnBuildingMontage; // todo возможно стоит делегатом передавать созданный объект для ABuildingModel
     public void StartPlacingBuilding(ABuildingView buildingPrefab)
     {
 
@@ -38,7 +38,7 @@ public class BuildingsStacker : IUpdatable
         if (!isPlaceFree)
             return;
         
-        IsBuildingMontage?.Invoke();
+        OnBuildingMontage?.Invoke();
         _flyingBuilding.SetNormal();
         _flyingBuilding = null;
     }

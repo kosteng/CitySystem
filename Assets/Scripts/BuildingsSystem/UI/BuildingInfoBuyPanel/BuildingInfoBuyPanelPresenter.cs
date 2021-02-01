@@ -20,7 +20,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private List<BuildingButtonView> _buttonsList;
         private BuildingDatabase _currentBuilding;
         
-        public List<IBuilding> Buildings = new List<IBuilding>();
+        public List<IBuilding> Buildings = new List<IBuilding>(); //todo этот лист всех зданий скорее всего нужно перенести в контроллер
         public BuildingDatabase CurrentBuild => _currentBuilding;
 
         public event Action OnBuyBuilding;
@@ -50,17 +50,12 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.OnBuildingClickButton += ShowBuildingData;
             _view.OnBuyBuildingClickButton += BuyBuilding;
             _view.Subscribe(CloseInfoBuyView, CloseInfoBuyView);
-            _buildingsStacker.IsBuildingMontage += PurchaseBuilding;
+            _buildingsStacker.OnBuildingMontage += PurchaseBuilding;
 
             foreach (var buttons in _buttonsList)
             {
                 buttons.Subscribe();
                 buttons.OnBuildingClickButton += ShowBuildingData;
-            }
-
-            foreach (var building in Buildings)
-            {
-                building.OnBuildingClickHandler += Onckic;
             }
             _view.gameObject.SetActive(false);
         }
@@ -115,6 +110,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.SetName(buildingType.ToString());
         }
 
+        private ABuildingView _build;
         private void BuyBuilding(EBuildingType buildingType)
         {
             if (_currentBuilding == null)
@@ -122,8 +118,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResources))
                 return;
 
-            var build = MonoBehaviour.Instantiate(_currentBuilding.View);
-            _buildingsStacker.StartPlacingBuilding(build);
+            _build = MonoBehaviour.Instantiate(_currentBuilding.View);
+            _buildingsStacker.StartPlacingBuilding(_build);
         }
 
         private void PurchaseBuilding()
@@ -135,23 +131,33 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void Create()
         {
+            var building =  new ABuildingModel(null, null, null);
             switch (_currentBuilding.BuildingType)
             {
                 case EBuildingType.House:
-                    Buildings.Add(new HouseBuildingModel(_currentBuilding.View, _currentBuilding.IncomeResources,
-                        _cityDatabase));
+                    building = new HouseBuildingModel(_build, _currentBuilding.IncomeResources,
+                        _cityDatabase);
+                    building.Subscribe();
+                    building.OnBuildingClickHandler += Onckic;
+                    Buildings.Add(building);
                     break;
 
                 case EBuildingType.SawMill:
-                    Buildings.Add(new SawBuildingModel(_currentBuilding.View, _currentBuilding.IncomeResources,
-                        _cityDatabase));
+                    building = new SawBuildingModel(_build, _currentBuilding.IncomeResources,
+                        _cityDatabase);
+                    building.Subscribe();
+                    building.OnBuildingClickHandler += Onckic;
+                    Buildings.Add(building);
                     break;
-                
+
                 case EBuildingType.Mine:
-                    Buildings.Add(new MineBuildingModel(_currentBuilding.View, _currentBuilding.IncomeResources,
-                        _cityDatabase));
+                    building = new MineBuildingModel(_build, _currentBuilding.IncomeResources,
+                        _cityDatabase);
+                    building.Subscribe();
+                    building.OnBuildingClickHandler += Onckic;
+                    Buildings.Add(building);
                     break;
-                
+
                 default: Debug.LogError($"Unkwown type {_currentBuilding.BuildingType}");
                     break;
             }
@@ -162,17 +168,12 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.Unsubscribe();
             _view.OnBuildingClickButton -= ShowBuildingData;
             _view.OnBuyBuildingClickButton -= BuyBuilding;
-            _buildingsStacker.IsBuildingMontage -= PurchaseBuilding;
+            _buildingsStacker.OnBuildingMontage -= PurchaseBuilding;
 
             foreach (var buttons in _buttonsList)
             {
                 buttons.Unsubscribe();
                 buttons.OnBuildingClickButton -= ShowBuildingData;
-            }
-            
-            foreach (var building in Buildings)
-            {
-                building.OnBuildingClickHandler -= Onckic;
             }
         }
     }

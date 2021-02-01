@@ -30,7 +30,7 @@ public class ABuildingView : MonoBehaviour
 
     public void OnMouseDown()
     {
-        OnBuildingClick.Invoke();
+        OnBuildingClick?.Invoke();
     }
 
     private void OnTriggerStay(Collider other)

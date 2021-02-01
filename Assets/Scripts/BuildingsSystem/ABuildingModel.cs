@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-
 public class ABuildingModel : IBuilding, IDisposable 
 {
     private readonly CityDatabase _cityDatabase;
@@ -9,6 +8,7 @@ public class ABuildingModel : IBuilding, IDisposable
     private readonly ResourcesModel _resourcesModel;
     private EBuildingType _buildingType;
     public event BuildingClickHandler OnBuildingClickHandler;
+
     public virtual ABuildingView BuildingView => _view;
     public virtual ResourcesModel Resources => _resourcesModel;
     public virtual EBuildingType BuildingType => _buildingType;
@@ -16,12 +16,16 @@ public class ABuildingModel : IBuilding, IDisposable
     public ABuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase)
     {
         _cityDatabase = cityDatabase;
-        _view = view;
-        _resourcesModel = resourcesModel;        
-        _view.OnBuildingClick += BuildingClickButton;
+        _view = view;        
 
+        _resourcesModel = resourcesModel;
     }
-
+    
+    public void Subscribe()
+    {
+        _view.OnBuildingClick += BuildingClickButton;
+    }
+    
     public virtual void Income()
     {
     }
@@ -29,17 +33,7 @@ public class ABuildingModel : IBuilding, IDisposable
     public virtual void Expense()
     {
     }
-
-
-    public void Initialize()
-    {
-        Debug.Log("Name" +_view.name);
-    }
-
-    private void Fff()
-    {
-        Debug.Log(1);
-    }
+    
     private void BuildingClickButton()
     {
         OnBuildingClickHandler?.Invoke(_view);
@@ -57,12 +51,7 @@ public class HouseBuildingModel : ABuildingModel
         resourcesModel, cityDatabase)
     {
     }
-
-    public void Initialize()
-    {
-        Debug.Log("Create");
-    }
-
+    
     public override void Income()
     {
         Debug.Log("House");
