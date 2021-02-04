@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UI.BottomPanel;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -10,7 +11,7 @@ namespace BuildingsSystem.Installers
         [SerializeField] private AllBuildingsDatabase _allBuildingsDatabase;
         [SerializeField] private Button _buildingButtonInPanel;
         [SerializeField] private BuildingButtonView _buildingButtonView;
-
+ 
         public override void InstallBindings()
         {
             Container.BindInstance(_allBuildingsDatabase);

@@ -13,6 +13,7 @@ namespace Engine.UI.Installers
         [SerializeField] private BuildingBuyPanelView _buildingBuyPanelView;
         [SerializeField] private CityView _cityView;
         [SerializeField] private DayCounterView _dayCounterView;
+        [SerializeField] private BuildingWindowInfoView _buildingWindowInfoView;
 
         public override void InstallBindings()
         {
@@ -21,6 +22,7 @@ namespace Engine.UI.Installers
             Container.Bind<BuildingBuyPanelView>().FromComponentInNewPrefab(_buildingBuyPanelView).AsSingle();
             Container.Bind<CityView>().FromComponentInNewPrefab(_cityView).AsSingle();
             Container.Bind<DayCounterView>().FromComponentInNewPrefab(_dayCounterView).AsSingle();
+            Container.Bind<BuildingWindowInfoView>().FromComponentInNewPrefab(_buildingWindowInfoView).AsSingle();
         }
     }
 }

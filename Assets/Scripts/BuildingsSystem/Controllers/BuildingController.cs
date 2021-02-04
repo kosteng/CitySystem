@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using DayChangeSystem.Controllers;
-using UnityEngine;
+using UI.BottomPanel;
 using Zenject;
 
 public class BuildingController : IInitializable, IDisposable
@@ -10,15 +9,18 @@ public class BuildingController : IInitializable, IDisposable
     private readonly AllBuildingsDatabase _allBuildingsDatabase;
     private readonly DayCounterController _dayCounterController;
     private readonly HourController _hourController;
+    private readonly BuildingWindowInfoPresenter _buildingWindowInfoPresenter;
 
     private List<IBuilding> _buildings = new List<IBuilding>();
 
     public BuildingController(
         DayCounterController dayCounterController,
-        HourController hourController)
+        HourController hourController,
+        BuildingWindowInfoPresenter buildingWindowInfoPresenter)
     {
         _dayCounterController = dayCounterController;
         _hourController = hourController;
+        _buildingWindowInfoPresenter = buildingWindowInfoPresenter;
     }
 
     private void NextDayChanged()
@@ -40,7 +42,7 @@ public class BuildingController : IInitializable, IDisposable
 
     private void OpenBuildingWindow(ABuildingView buildingView)
     {
-        Debug.Log("Delegate");
+        _buildingWindowInfoPresenter.Show(buildingView);
     }
 
     private void NextHour()

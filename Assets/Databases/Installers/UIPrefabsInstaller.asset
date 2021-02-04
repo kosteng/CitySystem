@@ -22,3 +22,5 @@ MonoBehaviour:
     type: 3}
   _dayCounterView: {fileID: 9175873092472292639, guid: 51fe0fb56e5184c429b2b5124ca234ac,
     type: 3}
+  _buildingWindowInfoView: {fileID: 6347630093621401535, guid: 14bec2a3c2e0e14468f0e5fcd40a8a82,
+    type: 3}

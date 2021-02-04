@@ -1,34 +1,36 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-public interface IBuildingFactory
+namespace BuildingsSystem
 {
-    IBuilding Create(ABuildingView montageBuilding, BuildingDatabase currentBuilding, CityDatabase cityDatabase);
-    ABuildingView Create(ABuildingView montageBuilding);
-}
-
-public class BuildingFactory : IBuildingFactory
-{
-    public IBuilding Create(ABuildingView montageBuilding, BuildingDatabase currentBuilding, CityDatabase cityDatabase)
+    public interface IBuildingFactory
     {
-        switch (currentBuilding.BuildingType)
-        {
-            case EBuildingType.House:
-            return new HouseBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
-
-            case EBuildingType.SawMill:
-             return new SawBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
-
-            case EBuildingType.Mine:
-            return new MineBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
-
-            default: return null;
-            //new NullReferenceException($"Unkwown type {_currentBuilding.BuildingType}");Debug.LogError($"Unkwown type {_currentBuilding.BuildingType}");
-        }
+        IBuilding Create(ABuildingView montageBuilding, BuildingDatabase currentBuilding, CityDatabase cityDatabase);
+        ABuildingView Create(ABuildingView montageBuilding);
     }
 
-    public ABuildingView Create(ABuildingView montageBuilding)
+    public class BuildingFactory : IBuildingFactory
     {
-        return MonoBehaviour.Instantiate(montageBuilding);
+        public IBuilding Create(ABuildingView montageBuilding, BuildingDatabase currentBuilding, CityDatabase cityDatabase)
+        {
+            switch (currentBuilding.BuildingType)
+            {
+                case EBuildingType.House:
+                    return new HouseBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
+
+                case EBuildingType.SawMill:
+                    return new SawBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
+
+                case EBuildingType.Mine:
+                    return new MineBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
+
+                default: return null;
+                //new NullReferenceException($"Unkwown type {_currentBuilding.BuildingType}");Debug.LogError($"Unkwown type {_currentBuilding.BuildingType}");
+            }
+        }
+
+        public ABuildingView Create(ABuildingView montageBuilding)
+        {
+            return MonoBehaviour.Instantiate(montageBuilding);
+        }
     }
 }
