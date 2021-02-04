@@ -1,4 +1,4 @@
-﻿public delegate void BuildingClickHandler(ABuildingView building);
+﻿public delegate void BuildingClickHandler(ABuildingModel building); //todo скорее всего нужно переделать
 public interface IBuilding
 {
     void Subscribe();

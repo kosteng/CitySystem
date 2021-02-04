@@ -15,13 +15,13 @@ namespace BuildingsSystem
             switch (currentBuilding.BuildingType)
             {
                 case EBuildingType.House:
-                    return new HouseBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
+                    return new HouseBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase, EBuildingType.House);
 
                 case EBuildingType.SawMill:
-                    return new SawBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
+                    return new SawBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase, EBuildingType.SawMill);
 
                 case EBuildingType.Mine:
-                    return new MineBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase);
+                    return new MineBuildingModel(montageBuilding, currentBuilding.IncomeResources, cityDatabase, EBuildingType.Mine);
 
                 default: return null;
                 //new NullReferenceException($"Unkwown type {_currentBuilding.BuildingType}");Debug.LogError($"Unkwown type {_currentBuilding.BuildingType}");

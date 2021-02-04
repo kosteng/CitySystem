@@ -4,65 +4,68 @@ using DayChangeSystem.Controllers;
 using UI.BottomPanel;
 using Zenject;
 
-public class BuildingController : IInitializable, IDisposable
+namespace BuildingsSystem.Controllers
 {
-    private readonly AllBuildingsDatabase _allBuildingsDatabase;
-    private readonly DayCounterController _dayCounterController;
-    private readonly HourController _hourController;
-    private readonly BuildingWindowInfoPresenter _buildingWindowInfoPresenter;
-
-    private List<IBuilding> _buildings = new List<IBuilding>();
-
-    public BuildingController(
-        DayCounterController dayCounterController,
-        HourController hourController,
-        BuildingWindowInfoPresenter buildingWindowInfoPresenter)
+    public class BuildingController : IInitializable, IDisposable
     {
-        _dayCounterController = dayCounterController;
-        _hourController = hourController;
-        _buildingWindowInfoPresenter = buildingWindowInfoPresenter;
-    }
+        private readonly AllBuildingsDatabase _allBuildingsDatabase;
+        private readonly DayCounterController _dayCounterController;
+        private readonly HourController _hourController;
+        private readonly BuildingWindowInfoPresenter _buildingWindowInfoPresenter;
 
-    private void NextDayChanged()
-    {
-    }
+        private List<IBuilding> _buildings = new List<IBuilding>();
 
-    public void AddBuildings(IBuilding building)
-    {
-        building.Subscribe();
-        building.OnBuildingClickHandler += OpenBuildingWindow;
-        _buildings.Add(building);
-    }
+        public BuildingController(
+            DayCounterController dayCounterController,
+            HourController hourController,
+            BuildingWindowInfoPresenter buildingWindowInfoPresenter)
+        {
+            _dayCounterController = dayCounterController;
+            _hourController = hourController;
+            _buildingWindowInfoPresenter = buildingWindowInfoPresenter;
+        }
+
+        private void NextDayChanged()
+        {
+        }
+
+        public void AddBuildings(IBuilding building)
+        {
+            building.Subscribe();
+            building.OnBuildingClickHandler += OpenBuildingWindow;
+            _buildings.Add(building);
+        }
 
 // заглушка на отписку, добавил метод чтобы не забыть
-    private void DestroyBuilding(IBuilding building)
-    {
-        building.OnBuildingClickHandler -= OpenBuildingWindow;
-    }
-
-    private void OpenBuildingWindow(ABuildingView buildingView)
-    {
-        _buildingWindowInfoPresenter.Show(buildingView);
-    }
-
-    private void NextHour()
-    {
-        foreach (var building in _buildings)
+        private void DestroyBuilding(IBuilding building)
         {
-            building.Income();
-            building.Expense();
+            building.OnBuildingClickHandler -= OpenBuildingWindow;
         }
-    }
 
-    public void Initialize()
-    {
-        _dayCounterController.OnDayChanged += NextDayChanged;
-        _hourController.OnHourChanged += NextHour;
-    }
+        private void OpenBuildingWindow(ABuildingModel buildingView)
+        {
+            _buildingWindowInfoPresenter.Show(buildingView);
+        }
 
-    public void Dispose()
-    {
-        _dayCounterController.OnDayChanged -= NextDayChanged;
-        _hourController.OnHourChanged -= NextHour;
+        private void NextHour()
+        {
+            foreach (var building in _buildings)
+            {
+                building.Income();
+                building.Expense();
+            }
+        }
+
+        public void Initialize()
+        {
+            _dayCounterController.OnDayChanged += NextDayChanged;
+            _hourController.OnHourChanged += NextHour;
+        }
+
+        public void Dispose()
+        {
+            _dayCounterController.OnDayChanged -= NextDayChanged;
+            _hourController.OnHourChanged -= NextHour;
+        }
     }
 }

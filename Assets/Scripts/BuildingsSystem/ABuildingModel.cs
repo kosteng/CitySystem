@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ABuildingModel : IBuilding, IDisposable 
+public class ABuildingModel : IBuilding, IDisposable
 {
     private readonly CityDatabase _cityDatabase;
     private readonly ABuildingView _view;
@@ -13,19 +13,20 @@ public class ABuildingModel : IBuilding, IDisposable
     public virtual ResourcesModel Resources => _resourcesModel;
     public virtual EBuildingType BuildingType => _buildingType;
 
-    public ABuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase)
+    public ABuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+        EBuildingType buildingType)
     {
         _cityDatabase = cityDatabase;
-        _view = view;        
-
+        _view = view;
+        _buildingType = buildingType;
         _resourcesModel = resourcesModel;
     }
-    
+
     public void Subscribe()
     {
         _view.OnBuildingClick += BuildingClickButton;
     }
-    
+
     public virtual void Income()
     {
     }
@@ -33,10 +34,10 @@ public class ABuildingModel : IBuilding, IDisposable
     public virtual void Expense()
     {
     }
-    
+
     private void BuildingClickButton()
     {
-        OnBuildingClickHandler?.Invoke(_view);
+        OnBuildingClickHandler?.Invoke(this);
     }
 
     public void Dispose()
@@ -47,11 +48,11 @@ public class ABuildingModel : IBuilding, IDisposable
 
 public class HouseBuildingModel : ABuildingModel
 {
-    public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase) : base(view,
-        resourcesModel, cityDatabase)
+    public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+        EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
     {
     }
-    
+
     public override void Income()
     {
         Debug.Log("House");
@@ -60,10 +61,9 @@ public class HouseBuildingModel : ABuildingModel
 
 public class SawBuildingModel : ABuildingModel
 {
-    public SawBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase) : base(view,
-        resourcesModel, cityDatabase)
+    public SawBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+        EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
     {
-
     }
 
     public override void Income()
@@ -74,8 +74,8 @@ public class SawBuildingModel : ABuildingModel
 
 public class MineBuildingModel : ABuildingModel
 {
-    public MineBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase) : base(view,
-        resourcesModel, cityDatabase)
+    public MineBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+        EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
     {
     }
 

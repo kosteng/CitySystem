@@ -1,5 +1,4 @@
 ﻿using System;
-using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using Engine.UI;
 using UnityEngine;
 using Zenject;
@@ -16,9 +15,10 @@ namespace UI.BottomPanel
             _view = view;
         }
 
-        public void Show(ABuildingView buildingView)
+        public void Show(ABuildingModel buildingModel)
         {
             _view.gameObject.SetActive(true);
+            _view.SetName(buildingModel.BuildingType.ToString());
         }
         private void Subscribe()
         {

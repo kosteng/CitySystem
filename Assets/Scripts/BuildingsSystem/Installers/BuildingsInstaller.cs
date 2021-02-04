@@ -1,4 +1,5 @@
-﻿using BuildingsSystem.UI.BuildingInfoBuyPanel;
+﻿using BuildingsSystem.Controllers;
+using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using UI.BottomPanel;
 using UnityEngine;
 using Zenject;
