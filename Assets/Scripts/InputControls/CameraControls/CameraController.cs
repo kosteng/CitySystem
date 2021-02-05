@@ -1,25 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Engine.Mediators;
+﻿using Engine.Mediators;
 using UnityEngine;
 using Zenject;
 
-public class CameraController : IUpdatable, IInitializable 
+namespace InputControls.CameraControls
 {
-    private CameraView _cameraView;
-
-    public CameraController(CameraView cameraView)
+    public class CameraController : IUpdatable, IInitializable, ILateUpdatable 
     {
-        _cameraView = cameraView;
-    }
+        private CameraView _cameraView;
+        // public Transform Target
+        // {
+        //     set { _cameraView.Target = value; }
+        // }
+        public CameraController(CameraView cameraView)
+        {
+            _cameraView = cameraView;
+        }
 
-    public void Update(float deltaTime)
-    {
-        _cameraView.Move();
-    }
+        public void Update(float deltaTime)
+        {
+            _cameraView.Move();
+        }
 
-    public void Initialize()
-    {
-        _cameraView = MonoBehaviour.Instantiate(_cameraView);
+        public void Initialize()
+        {
+            _cameraView = MonoBehaviour.Instantiate(_cameraView);
+        }
+
+        public void LateUpdate(float deltaTime)
+        {
+           // _cameraView.LateRefresh();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using InputControls.CameraControls;
+using Zenject;
 
 public class InputInstaller : MonoInstaller
 {
