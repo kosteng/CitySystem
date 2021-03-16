@@ -44,10 +44,6 @@ public class CameraView : MonoBehaviour
             _rotation -= SpeedScroll;
             transform.rotation = Quaternion.Euler(0f, _rotation, 0f);
         }
-    
-        {
-            
-        }
     }
 }
 

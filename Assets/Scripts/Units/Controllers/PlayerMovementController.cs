@@ -16,10 +16,33 @@ namespace Units.Controllers
             if (_unitView == null)
                 _unitView = MonoBehaviour.Instantiate(unitView);
         }
-        
+
         public void Update(float deltaTime)
         {
-            _unitView.Refresh(_mainCamera);
+            PlayerMove(_mainCamera);
+        }
+
+        private void PlayerMove(Camera camera)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                var ray = camera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out var hit, 100f, _unitView.MovementMask))
+                {
+                    _unitView.MoveToPoint(hit.point);
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100f))
+                {
+                }
+            }
         }
 
         public void Initialize()
