@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ContentModelUserStore">
     <attachedFolders>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@3.4.7</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@3.3.5</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.collab-proxy@1.2.16</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ext.nunit@1.0.0</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.multiplayer-hlapi@1.0.6</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.6</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.test-framework@1.1.14</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.timeline@1.2.6</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.xr.legacyinputhelpers@2.1.4</Path>
-      <Path>$USER_HOME$/AppData/Local/Unity/cache/packages/packages.unity.com/nuget.mono-cecil@0.1.6-preview</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@3.4.7</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@3.3.5</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.collab-proxy@1.2.16</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ext.nunit@1.0.0</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.multiplayer-hlapi@1.0.6</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.6</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.test-framework@1.1.14</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.timeline@1.2.6</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.xr.legacyinputhelpers@2.1.4</Path>
+      <Path>../../../Users/Константин/AppData/Local/Unity/cache/packages/packages.unity.com/nuget.mono-cecil@0.1.6-preview</Path>
     </attachedFolders>
     <explicitIncludes>
       <Path>Library/PackageCache/com.unity.ads@3.5.2</Path>

@@ -23,7 +23,7 @@ namespace InputControls.CameraControls
 
         public void Initialize()
         {
-            _cameraView = MonoBehaviour.Instantiate(_cameraView);
+            _cameraView = MonoBehaviour.Instantiate(_cameraView, new Vector3(0f,10f,-17f), Quaternion.identity);
         }
 
         public void LateUpdate(float deltaTime)

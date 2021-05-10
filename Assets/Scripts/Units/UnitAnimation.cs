@@ -1,25 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class UnitAnimation : MonoBehaviour 
+public class UnitAnimation : MonoBehaviour
 {
-
     [SerializeField] Animator _animator;
     [SerializeField] NavMeshAgent _agent;
     private static readonly int Moving = Animator.StringToHash("Moving");
 
-    void FixedUpdate ()
+    private void FixedUpdate()
     {
         _animator.SetBool(Moving, _agent.hasPath);
     }
 
     //Placeholder functions for Animation events
-    void Hit() {
+    void Hit()
+    {
     }
 
-    void FootR() {
+    void FootR()
+    {
     }
 
-    void FootL() {
+    void FootL()
+    {
     }
 }

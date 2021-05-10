@@ -10,6 +10,8 @@ namespace Units.Controllers
         private readonly UnitView _unitView;
         private Camera _mainCamera;
 
+        public Transform UnitViewTransform => _unitView.transform;
+
         public PlayerMovementController(UnitView unitView)
         {
             //todo нужна фабрика
@@ -17,6 +19,11 @@ namespace Units.Controllers
                 _unitView = MonoBehaviour.Instantiate(unitView);
         }
 
+        public void StopUnit()
+        {
+            _unitView.NavMeshAgent.Stop(); 
+        }
+        
         public void Update(float deltaTime)
         {
             PlayerMove(_mainCamera);
@@ -41,6 +48,7 @@ namespace Units.Controllers
 
                 if (Physics.Raycast(ray, out hit, 100f))
                 {
+ 
                 }
             }
         }

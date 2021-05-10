@@ -8,7 +8,7 @@ namespace Units.Views
     {
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private LayerMask _movementMask;
-
+        public NavMeshAgent NavMeshAgent => _agent;
         public LayerMask MovementMask => _movementMask;
 
         public void MoveToPoint(Vector3 point) 

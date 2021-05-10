@@ -9,28 +9,28 @@ public class CameraView : MonoBehaviour
     private float _height = Screen.height;
     private float _rotation;
     private const float SpeedScroll = 10f;
-    
+    private const float RangeScroll = 150f;
         //TODO по возможности переписать это дерьмо, также добавить ограничения на зум
     public void Move()
     {
         var mouseWheel = Input.GetAxis("Mouse ScrollWheel");
-        
+
         if (mouseWheel > 0)
             transform.Translate(0, -100f * Time.deltaTime, 0);
         
         if (mouseWheel < 0)
             transform.Translate(0, 100f * Time.deltaTime, 0);
     
-        if (Input.mousePosition.x > _width || Input.GetKeyDown(KeyCode.D))
+        if (Input.mousePosition.x > _width && Input.mousePosition.x < _width + RangeScroll || Input.GetKeyDown(KeyCode.D))
             transform.Translate(SpeedScroll * Time.deltaTime, 0, 0);
     
-        if (Input.mousePosition.x < 0 || Input.GetKeyDown(KeyCode.A))
+        if (Input.mousePosition.x < 0 && Input.mousePosition.x > -RangeScroll  || Input.GetKeyDown(KeyCode.A))
             transform.Translate(-SpeedScroll * Time.deltaTime, 0, 0);
     
-        if (Input.mousePosition.y > _height || Input.GetKeyDown(KeyCode.W))
+        if (Input.mousePosition.y > _height && Input.mousePosition.y < _height + RangeScroll || Input.GetKeyDown(KeyCode.W))
             transform.Translate(0, 0, SpeedScroll * Time.deltaTime);
     
-        if (Input.mousePosition.y < 0 || Input.GetKeyDown(KeyCode.S))
+        if (Input.mousePosition.y < 0 && Input.mousePosition.y > -RangeScroll || Input.GetKeyDown(KeyCode.S))
             transform.Translate(0, 0, -SpeedScroll * Time.deltaTime);
     
         if (Input.GetKeyDown(KeyCode.Q))
