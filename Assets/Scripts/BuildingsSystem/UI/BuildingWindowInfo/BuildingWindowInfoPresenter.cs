@@ -1,6 +1,7 @@
 ﻿using System;
 using Engine.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace UI.BottomPanel
@@ -17,6 +18,8 @@ namespace UI.BottomPanel
 
         public void Show(ABuildingModel buildingModel)
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+              return;
             _view.gameObject.SetActive(true);
             _view.SetName(buildingModel.BuildingType.ToString());
         }

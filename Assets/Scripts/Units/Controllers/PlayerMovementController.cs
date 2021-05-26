@@ -1,6 +1,7 @@
 ﻿using Engine.Mediators;
 using Units.Views;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Units.Controllers
@@ -35,7 +36,7 @@ namespace Units.Controllers
             {
                 var ray = camera.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out var hit, 100f, _unitView.MovementMask))
+                if (Physics.Raycast(ray, out var hit, 100f) && !EventSystem.current.IsPointerOverGameObject())//, _unitView.MovementMask))
                 {
                     _unitView.MoveToPoint(hit.point);
                 }
