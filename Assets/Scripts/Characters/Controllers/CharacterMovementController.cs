@@ -1,4 +1,5 @@
-﻿using Engine.Mediators;
+﻿using Characters;
+using Engine.Mediators;
 using Units.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,7 +11,7 @@ namespace Units.Controllers
     {
         private readonly CharacterView _characterView;
         private Camera _mainCamera;
-
+        private ECharacterState _characterState;
         public Transform UnitViewTransform => _characterView.transform;
 
         public CharacterMovementController(CharacterView characterView)
@@ -36,8 +37,9 @@ namespace Units.Controllers
             {
                 var ray = camera.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out var hit, 100f) && !EventSystem.current.IsPointerOverGameObject())//, _unitView.MovementMask))
+                if (Physics.Raycast(ray, out var hit, 100f) && !EventSystem.current.IsPointerOverGameObject())
                 {
+                    Debug.Log(hit.transform.gameObject.name);
                     _characterView.MoveToPoint(hit.point);
                 }
             }

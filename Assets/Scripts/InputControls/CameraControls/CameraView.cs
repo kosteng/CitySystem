@@ -44,6 +44,10 @@ public class CameraView : MonoBehaviour
             _rotation -= SpeedScroll;
             transform.rotation = Quaternion.Euler(0f, _rotation, 0f);
         }
+
+        var transformPosition = transform.position;
+        transformPosition.x = Mathf.Clamp(transformPosition.x, -100f, 100f);
+        transformPosition.z = Mathf.Clamp(transformPosition.z, -100f, 100f);
     }
 }
 
