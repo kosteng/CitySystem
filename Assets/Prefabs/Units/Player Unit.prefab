@@ -1928,6 +1928,7 @@ MonoBehaviour:
   _movementMask:
     serializedVersion: 2
     m_Bits: 512
+  _animator: {fileID: 7802727406133382370}
 --- !u!65 &5497591154568455488
 BoxCollider:
   m_ObjectHideFlags: 0

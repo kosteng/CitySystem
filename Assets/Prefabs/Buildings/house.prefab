@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3217888949758806657}
   - component: {fileID: 4565577936559055303}
   - component: {fileID: 8495039427277111877}
+  - component: {fileID: 4725164448760118853}
   m_Layer: 0
   m_Name: house
   m_TagString: Untagged
@@ -97,6 +98,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04642508, y: 0.07135199, z: 0.05868269}
   m_Center: {x: 0.000053740107, y: 0.010055817, z: 0.02882951}
+--- !u!208 &4725164448760118853
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343556866733584870}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.023000002, y: 0.036000002, z: 0.029000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.010000001, z: 0.029000001}
+  m_TimeToStationary: 0.5
 --- !u!1 &8693307966694839102
 GameObject:
   m_ObjectHideFlags: 0

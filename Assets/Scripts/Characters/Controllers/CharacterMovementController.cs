@@ -6,23 +6,23 @@ using Zenject;
 
 namespace Units.Controllers
 {
-    public class PlayerMovementController : IUpdatable, IInitializable
+    public class CharacterMovementController : IUpdatable, IInitializable
     {
-        private readonly UnitView _unitView;
+        private readonly CharacterView _characterView;
         private Camera _mainCamera;
 
-        public Transform UnitViewTransform => _unitView.transform;
+        public Transform UnitViewTransform => _characterView.transform;
 
-        public PlayerMovementController(UnitView unitView)
+        public CharacterMovementController(CharacterView characterView)
         {
             //todo нужна фабрика
-            if (_unitView == null)
-                _unitView = MonoBehaviour.Instantiate(unitView);
+            if (_characterView == null)
+                _characterView = MonoBehaviour.Instantiate(characterView);
         }
 
         public void StopUnit()
         {
-            _unitView.NavMeshAgent.Stop(); 
+            _characterView.NavMeshAgent.Stop(); 
         }
         
         public void Update(float deltaTime)
@@ -38,7 +38,7 @@ namespace Units.Controllers
 
                 if (Physics.Raycast(ray, out var hit, 100f) && !EventSystem.current.IsPointerOverGameObject())//, _unitView.MovementMask))
                 {
-                    _unitView.MoveToPoint(hit.point);
+                    _characterView.MoveToPoint(hit.point);
                 }
             }
 

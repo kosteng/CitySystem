@@ -4,13 +4,9 @@ using Zenject;
 
 namespace InputControls.CameraControls
 {
-    public class CameraController : IUpdatable, IInitializable, ILateUpdatable 
+    public class CameraController : IUpdatable, IInitializable
     {
         private CameraView _cameraView;
-        // public Transform Target
-        // {
-        //     set { _cameraView.Target = value; }
-        // }
         public CameraController(CameraView cameraView)
         {
             _cameraView = cameraView;
@@ -24,11 +20,6 @@ namespace InputControls.CameraControls
         public void Initialize()
         {
             _cameraView = MonoBehaviour.Instantiate(_cameraView, new Vector3(0f,10f,-17f), Quaternion.identity);
-        }
-
-        public void LateUpdate(float deltaTime)
-        {
-           // _cameraView.LateRefresh();
         }
     }
 }

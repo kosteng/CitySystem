@@ -3,11 +3,11 @@ using Zenject;
 
 namespace Units.Installers
 {
-    public class UnitInstaller : MonoInstaller
+    public class CharacterInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerMovementController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CharacterMovementController>().AsSingle();
         }
     }
 }

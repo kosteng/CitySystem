@@ -10,10 +10,10 @@ public class InteractableItemController : IInitializable, IUpdatable
     private readonly InteractableItemView _view;
     private InteractableItemModel _interactableItemModel;
     
-    public InteractableItemController(InteractableItemView view, PlayerMovementController playerMovementController)
+    public InteractableItemController(InteractableItemView view, CharacterMovementController characterMovementController)
     {
         _view = MonoBehaviour.Instantiate(view, new Vector3(3, 0, 5), Quaternion.identity);
-        _interactableItemModel = new InteractableItemModel(_view, playerMovementController);
+        _interactableItemModel = new InteractableItemModel(_view, characterMovementController);
     }
 
     public void Initialize()

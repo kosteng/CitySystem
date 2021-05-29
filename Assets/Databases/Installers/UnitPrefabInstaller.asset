@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8df0c249f769aa48af107f39d27e805, type: 3}
   m_Name: UnitPrefabInstaller
   m_EditorClassIdentifier: 
-  _player: {fileID: -8816571087135191073, guid: 746caaffd57137144a9781b10bf9c59d,
-    type: 3}
+  _player: {fileID: 1162531022978087650, guid: 54efbbe08a7c57b449488729a18a3b9c, type: 3}
