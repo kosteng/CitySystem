@@ -19,7 +19,7 @@ namespace InputControls.CameraControls
 
         public void Initialize()
         {
-            _cameraView = MonoBehaviour.Instantiate(_cameraView, new Vector3(0f,10f,-17f), Quaternion.identity);
+            _cameraView = Object.Instantiate(_cameraView, new Vector3(0f,10f,-17f), Quaternion.identity);
         }
     }
 }

@@ -38,20 +38,20 @@ public class CityController : IInitializable, IAttachableUi, IDisposable
 
     private void CalculateIncomeResources()
     {
-        _peopleReproduce += _cityDatabase.People * .01f;
-
-        if (_peopleReproduce > 1f)
-        {
-            var newPeople = (float)Math.Truncate(_peopleReproduce);
-            _peopleReproduce -= newPeople;
-            _cityDatabase.People += newPeople;
-        }
-
-        _cityDatabase.Food += 50f - _cityDatabase.People - _cityDatabase.Warrior;
-        _cityDatabase.Gold += 50f /* _cityDatabase.People */- _cityDatabase.Warrior;
-        _cityDatabase.Wood++;
-        _cityDatabase.Stone++;
-        _cityDatabase.Iron++;
+        // _peopleReproduce += _cityDatabase.Model.People * .01f;
+        //
+        // if (_peopleReproduce > 1f)
+        // {
+        //     var newPeople = (float)Math.Truncate(_peopleReproduce);
+        //     _peopleReproduce -= newPeople;
+        //     _cityDatabase.Model.People += newPeople;
+        // }
+        //
+        // _cityDatabase.Model.Food += 50f - _cityDatabase.Model.People - _cityDatabase.Model.Warrior;
+        // _cityDatabase.Model.Gold += 50f /* _cityDatabase.People */- _cityDatabase.Model.Warrior;
+        // _cityDatabase.Model.Wood++;
+        // _cityDatabase.Model.Stone++;
+        // _cityDatabase.Model.Iron++;
     }
 
     private void RefreshResourcesToView()

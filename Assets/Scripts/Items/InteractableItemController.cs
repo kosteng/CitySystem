@@ -7,13 +7,13 @@ using Zenject;
 
 public class InteractableItemController : IInitializable, IUpdatable
 {
-    private readonly InteractableItemView _view;
+    private readonly InteractableItemView _itemView;
     private InteractableItemModel _interactableItemModel;
     
-    public InteractableItemController(InteractableItemView view, CharacterMovementController characterMovementController)
+    public InteractableItemController(InteractableItemView itemView, CharacterMovementController characterMovementController)
     {
-        _view = MonoBehaviour.Instantiate(view, new Vector3(3, 0, 5), Quaternion.identity);
-        _interactableItemModel = new InteractableItemModel(_view, characterMovementController);
+        _itemView = MonoBehaviour.Instantiate(itemView, new Vector3(3, 0, 5), Quaternion.identity);
+        _interactableItemModel = new InteractableItemModel(_itemView, characterMovementController);
     }
 
     public void Initialize()
