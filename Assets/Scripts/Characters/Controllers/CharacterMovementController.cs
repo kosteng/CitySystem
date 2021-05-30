@@ -46,7 +46,6 @@ namespace Units.Controllers
             UpdateAnimation();
             SetMovementState();
             Extract();
-            Debug.Log(_characterCurrentState.ToString());
         }
 
         private void CheckTargetForMove(Camera camera)
@@ -93,14 +92,12 @@ namespace Units.Controllers
 
         private void CheckInteract()
         {
-            _characterCommand = _interactableItemTarget != null && Vector3.Distance(_characterView.transform.position, _interactableItemTarget.Transform.position) < _characterView.NavMeshAgent.stoppingDistance
+            _characterCommand = _interactableItemTarget != null &&
+                                Vector3.Distance(_characterView.transform.position, _interactableItemTarget.Transform.position) < 3f // todo вынести в конфиг
                 ? ECharacterCommand.Interact
                 : ECharacterCommand.None;
-            if (_characterCommand == ECharacterCommand.Interact)
-                Debug.Log(_characterCommand.ToString());
-
         }
-
+        //todo не забыть про убрать эту заглушку
         private void Extract()
         {
             if (_characterCommand == ECharacterCommand.Interact)

@@ -12,7 +12,7 @@ public class InteractableItemController : IInitializable, IUpdatable
     
     public InteractableItemController(InteractableItemView itemView, CharacterMovementController characterMovementController)
     {
-        _itemView = MonoBehaviour.Instantiate(itemView, new Vector3(3, 0, 5), Quaternion.identity);
+        _itemView = Object.Instantiate(itemView, new Vector3(3, 0, 5), Quaternion.identity);
         _interactableItemModel = new InteractableItemModel(_itemView, characterMovementController);
     }
 
