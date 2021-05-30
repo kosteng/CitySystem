@@ -40,8 +40,8 @@ namespace Units.Controllers
 
         public void Update(float deltaTime)
         {
-            CheckInteract();
             CheckTargetForMove(_mainCamera);
+            CheckInteract();
             CheckStopState();
             UpdateAnimation();
             SetMovementState();
@@ -93,12 +93,12 @@ namespace Units.Controllers
 
         private void CheckInteract()
         {
-            _characterCommand = _interactableItemTarget != null && _characterView.NavMeshAgent.remainingDistance < _characterView.NavMeshAgent.stoppingDistance
+            _characterCommand = _interactableItemTarget != null && Vector3.Distance(_characterView.transform.position, _interactableItemTarget.Transform.position) < _characterView.NavMeshAgent.stoppingDistance
                 ? ECharacterCommand.Interact
                 : ECharacterCommand.None;
+            if (_characterCommand == ECharacterCommand.Interact)
+                Debug.Log(_characterCommand.ToString());
 
-
-            Debug.Log(_characterCommand.ToString());
         }
 
         private void Extract()

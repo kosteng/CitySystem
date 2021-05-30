@@ -1,56 +1,74 @@
 ﻿using UnityEngine;
 
+
 public class CameraView : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    
-    
-    private float _width = Screen.width;
-    private float _height = Screen.height;
+
     private float _rotation;
-    private const float SpeedScroll = 10f;
-    private const float RangeScroll = 150f;
-        //TODO по возможности переписать это дерьмо, также добавить ограничения на зум
+    private float _rotationZoom;
+    private const float ROTATION_SPEED = 0.5f;
+    private const float SPEED_SCROLL = 10f;
+    private const float ZOOM_SCROLL = 100f;
+    private const float ZOOM_ROTATION = 0.5f;
+
+    //TODO по возможности переписать это дерьмо, также добавить ограничения на зум
     public void Move()
     {
-        var mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+        Zoom();
+        Position();
+        Rotation();
+    }
 
-        if (mouseWheel > 0)
-            transform.Translate(0, -100f * Time.deltaTime, 0);
+    private void Position()
+    {
+        if (Input.GetKey(KeyCode.D))
+            transform.position += Vector3.right * (SPEED_SCROLL * Time.deltaTime);
         
-        if (mouseWheel < 0)
-            transform.Translate(0, 100f * Time.deltaTime, 0);
-    
-        if (Input.mousePosition.x > _width && Input.mousePosition.x < _width + RangeScroll || Input.GetKeyDown(KeyCode.D))
-            transform.Translate(SpeedScroll * Time.deltaTime, 0, 0);
-    
-        if (Input.mousePosition.x < 0 && Input.mousePosition.x > -RangeScroll  || Input.GetKeyDown(KeyCode.A))
-            transform.Translate(-SpeedScroll * Time.deltaTime, 0, 0);
-    
-        if (Input.mousePosition.y > _height && Input.mousePosition.y < _height + RangeScroll || Input.GetKeyDown(KeyCode.W))
-            transform.Translate(0, 0, SpeedScroll * Time.deltaTime);
-    
-        if (Input.mousePosition.y < 0 && Input.mousePosition.y > -RangeScroll || Input.GetKeyDown(KeyCode.S))
-            transform.Translate(0, 0, -SpeedScroll * Time.deltaTime);
-    
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.A))
+            transform.position += Vector3.left * (SPEED_SCROLL * Time.deltaTime);
+        
+        if (Input.GetKey(KeyCode.W))
+            transform.position += Vector3.forward * (SPEED_SCROLL * Time.deltaTime);
+        
+        if (Input.GetKey(KeyCode.S))
+            transform.position += Vector3.back * (SPEED_SCROLL * Time.deltaTime);
+    }
+
+    private void Rotation()
+    {
+        if (Input.GetKey(KeyCode.Q))
         {
-            _rotation += SpeedScroll;
+            _rotation -= ROTATION_SPEED;
             transform.localRotation = Quaternion.Euler(0f, _rotation, 0f);
         }
-    
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKey(KeyCode.E))
         {
-            _rotation -= SpeedScroll;
+            _rotation += ROTATION_SPEED;
             transform.rotation = Quaternion.Euler(0f, _rotation, 0f);
         }
+    }
 
-        var transformPosition = transform.position;
-        transformPosition.x = Mathf.Clamp(transformPosition.x, -100f, 100f);
-        transformPosition.z = Mathf.Clamp(transformPosition.z, -100f, 100f);
+    private void Zoom()
+    {
+        float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+
+        if (mouseWheel > 0)
+        {
+            _rotationZoom -= ZOOM_ROTATION;
+            transform.Translate(0, -ZOOM_SCROLL * Time.deltaTime, 0);
+            transform.localRotation = Quaternion.Euler(_rotationZoom,0, 0);
+        }
+
+        if (mouseWheel < 0)
+        {
+            _rotationZoom += ZOOM_ROTATION;
+            transform.Translate(0, ZOOM_SCROLL * Time.deltaTime, ZOOM_ROTATION);
+            transform.localRotation = Quaternion.Euler(_rotationZoom, 0, 0);
+        }
     }
 }
-
 
 
 // //todo разобрать это
