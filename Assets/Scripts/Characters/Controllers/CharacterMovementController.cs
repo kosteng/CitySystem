@@ -1,15 +1,6 @@
 ﻿using Characters;
 using Engine.Mediators;
-using Units.Views;
 using UnityEngine;
-
-public enum ECharacterCommand
-{
-    None,
-    Interact,
-    Move
-}
-
 
 namespace Units.Controllers
 {
@@ -18,38 +9,41 @@ namespace Units.Controllers
         private readonly CityDatabase _cityDatabase;
         private readonly IInputClicker _inputClicker;
         private readonly ICharacterAnimationSwitcher _characterAnimationSwitcher;
-        private readonly CharacterView _characterView;
-        
+        private CharacterModel _characterModel; 
         private Vector3 _pointDestination;
         private IInteractableItem _interactableItemTarget;
-        
-        public Transform UnitViewTransform => _characterView.transform;
 
-        public CharacterMovementController(CharacterView characterView, 
-            CityDatabase cityDatabase, 
-            IInputClicker inputClicker, 
-            ICharacterAnimationSwitcher characterAnimationSwitcher)
+        public Transform UnitViewTransform => _characterModel.View.transform;
+
+        public CharacterMovementController(
+            CharactersDatabase charactersDatabase,
+            CityDatabase cityDatabase,
+            IInputClicker inputClicker,
+            ICharacterAnimationSwitcher characterAnimationSwitcher
+            )
         {
+           // _characterModel = charactersDatabase.CharacterModels[0];
             _cityDatabase = cityDatabase;
             _inputClicker = inputClicker;
             _characterAnimationSwitcher = characterAnimationSwitcher;
+            _characterModel = new CharacterModel();
+
             //todo нужна фабрика
-            if (_characterView == null)
-                _characterView = Object.Instantiate(characterView);
+            if (_characterModel.View == null)
+                _characterModel.View = Object.Instantiate(charactersDatabase.CharacterModels[0].View);
         }
 
         public void Update(float deltaTime)
         {
-            _characterView.IsMoving = _characterView.NavMeshAgent.remainingDistance > _characterView.NavMeshAgent.stoppingDistance;
+            _characterModel.IsMoving = _characterModel.View.NavMeshAgent.remainingDistance > _characterModel.View.NavMeshAgent.stoppingDistance;
             CheckInteract();
             CheckTargetForMove();
-            Debug.Log(_characterView.CharacterCommand.ToString());
-            Debug.Log(_characterView.IsMoving);
-          //  Debug.Log(_pointDestination);
-            //  Debug.Log("_isMoving " +_isMoving);
-            if (_characterView.IsMoving)
+            Debug.Log(_characterModel.CharacterCommand.ToString());
+ 
+            Debug.Log(_characterModel.IsMoving);
+            if (_characterModel.IsMoving)
                 CheckStopState();
-            _characterAnimationSwitcher.UpdateAnimation(_characterView);
+            _characterAnimationSwitcher.UpdateAnimation(_characterModel);
 
             SetMovementState();
             Extract();
@@ -63,24 +57,24 @@ namespace Units.Controllers
 
         private void SetMovementState()
         {
-            _characterView.CharacterCurrentState = _characterView.IsMoving ? ECharacterState.Move : ECharacterState.Idle;
+            _characterModel.CharacterCurrentState = _characterModel.IsMoving ? ECharacterState.Move : ECharacterState.Idle;
         }
 
         private void MoveToPoint(Vector3 point)
         {
-            _characterView.transform.LookAt(point);
+            _characterModel.View.transform.LookAt(point);
             _pointDestination = point;
-            _characterView.NavMeshAgent.SetDestination(_pointDestination);
+            _characterModel.View.NavMeshAgent.SetDestination(_pointDestination);
         }
 
         private void CheckStopState()
         {
-            _characterView.NavMeshAgent.isStopped = !_characterView.IsMoving;
+            _characterModel.View.NavMeshAgent.isStopped = !_characterModel.IsMoving;
         }
 
         private void CheckInteract()
         {
-            _characterView.CharacterCommand = _interactableItemTarget != null && _characterView.NavMeshAgent.remainingDistance < 1f
+            _characterModel.CharacterCommand = _interactableItemTarget != null && _characterModel.View.NavMeshAgent.remainingDistance < 1f
                 //  Vector3.Distance(_characterView.transform.position, _interactableItemTarget.Transform.position) < 3f // todo вынести в конфиг
                 ? ECharacterCommand.Interact
                 : ECharacterCommand.None;
@@ -89,9 +83,12 @@ namespace Units.Controllers
         //todo не забыть про убрать эту заглушку
         private void Extract()
         {
-            if (_characterView.CharacterCommand == ECharacterCommand.Interact)
+            if (_interactableItemTarget == null)
+                return;
+
+            if (_characterModel.CharacterCommand == ECharacterCommand.Interact)
             {
-                _characterView.transform.LookAt(_interactableItemTarget.Transform);
+                _characterModel.View.transform.LookAt(_interactableItemTarget.Transform);
                 _cityDatabase.Model.Wood += 1f;
             }
         }

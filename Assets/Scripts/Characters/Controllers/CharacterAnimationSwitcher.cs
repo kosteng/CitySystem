@@ -1,5 +1,6 @@
 ﻿using System;
 using Characters;
+using Units;
 using Units.Views;
 using UnityEngine;
 
@@ -8,10 +9,10 @@ public class CharacterAnimationSwitcher : ICharacterAnimationSwitcher
     private static readonly int _moving = Animator.StringToHash("Moving");
     private static readonly int _extract = Animator.StringToHash("Extracting");
     
-    public void UpdateAnimation(CharacterView character)
+    public void UpdateAnimation(CharacterModel character)
     {
-        character.Animator.SetBool(_moving, character.IsMoving);
-        character.Animator.SetBool(_extract, character.CharacterCommand == ECharacterCommand.Interact);
+        character.View.Animator.SetBool(_moving, character.IsMoving);
+        character.View.Animator.SetBool(_extract, character.CharacterCommand == ECharacterCommand.Interact);
         switch (character.CharacterCurrentState)
         {
             case ECharacterState.None:

@@ -1,8 +1,6 @@
-﻿using Characters;
-using Units.Views;
-
+﻿using Units;
 
 public interface ICharacterAnimationSwitcher
 {
-    void UpdateAnimation(CharacterView character);
+    void UpdateAnimation(CharacterModel character);
 }
