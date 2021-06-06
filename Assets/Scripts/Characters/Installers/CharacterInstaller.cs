@@ -8,6 +8,7 @@ namespace Units.Installers
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<CharacterMovementController>().AsSingle();
+            Container.BindInterfacesTo<CharacterAnimationSwitcher>().AsSingle();
         }
     }
 }

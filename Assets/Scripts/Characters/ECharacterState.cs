@@ -2,7 +2,8 @@
 {
     public enum ECharacterState 
     {
-        Walk,
+        None,
+        Move,
         Idle,
         Interact
     }
