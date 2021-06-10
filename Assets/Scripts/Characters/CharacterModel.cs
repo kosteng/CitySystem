@@ -11,5 +11,6 @@ namespace Units
         public bool IsMoving;
         public ECharacterState CharacterCurrentState = ECharacterState.Idle;
         public ECharacterCommand CharacterCommand = ECharacterCommand.None;
+        public IInteractableItem InteractableItemTarget;
     }
 }

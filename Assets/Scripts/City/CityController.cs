@@ -2,11 +2,13 @@
 using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using City;
 using DayChangeSystem.Controllers;
+using Engine.Mediators;
 using Engine.UI;
 using UnityEngine;
 using Zenject;
 
-public class CityController : IInitializable, IAttachableUi, IDisposable
+
+public class CityController : IInitializable, IAttachableUi, IDisposable, IUpdatable
 {
     private readonly CityDatabase _cityDatabase;
     private readonly CityView _cityView;
@@ -16,10 +18,12 @@ public class CityController : IInitializable, IAttachableUi, IDisposable
 
     private float _peopleReproduce;
     private float _people;
-    public CityController (CityDatabase cityDatabase, 
-        CityView cityView, 
+
+    public CityController(
+        CityDatabase cityDatabase,
+        CityView cityView,
         DayCounterController dayCounterController,
-        HourController hourController, 
+        HourController hourController,
         BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter)
     {
         _cityDatabase = cityDatabase;
@@ -31,27 +35,7 @@ public class CityController : IInitializable, IAttachableUi, IDisposable
 
     private void NextDayChanged()
     {
-        CalculateIncomeResources();
         RefreshResourcesToView();
-   //     Debug.Log("Gold " + _cityDatabase.Gold);
-    }
-
-    private void CalculateIncomeResources()
-    {
-        // _peopleReproduce += _cityDatabase.Model.People * .01f;
-        //
-        // if (_peopleReproduce > 1f)
-        // {
-        //     var newPeople = (float)Math.Truncate(_peopleReproduce);
-        //     _peopleReproduce -= newPeople;
-        //     _cityDatabase.Model.People += newPeople;
-        // }
-        //
-        // _cityDatabase.Model.Food += 50f - _cityDatabase.Model.People - _cityDatabase.Model.Warrior;
-        // _cityDatabase.Model.Gold += 50f /* _cityDatabase.People */- _cityDatabase.Model.Warrior;
-        // _cityDatabase.Model.Wood++;
-        // _cityDatabase.Model.Stone++;
-        // _cityDatabase.Model.Iron++;
     }
 
     private void RefreshResourcesToView()
@@ -71,7 +55,6 @@ public class CityController : IInitializable, IAttachableUi, IDisposable
         _dayCounterController.OnDayChanged += NextDayChanged;
         _buildingInfoBuyPanelPresenter.OnBuyBuilding += RefreshResourcesToView;
         _hourController.OnHourChanged += RefreshResourcesToView;
-//        _cityDatabase.Clear();
     }
 
     public void Attach(Transform parent)
@@ -84,5 +67,11 @@ public class CityController : IInitializable, IAttachableUi, IDisposable
         _dayCounterController.OnDayChanged -= NextDayChanged;
         _buildingInfoBuyPanelPresenter.OnBuyBuilding -= RefreshResourcesToView;
         _hourController.OnHourChanged -= RefreshResourcesToView;
+    }
+
+//todo убрать обновление каждый кадр после тестов
+    public void Update(float deltaTime)
+    {
+        RefreshResourcesToView();
     }
 }

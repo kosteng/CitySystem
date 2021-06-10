@@ -2,7 +2,10 @@
 
 public interface IInteractableItem
 {
+    bool IsExtracted { get; set; }
     Transform Transform { get; }
-    float RespawnTime { get; }
-    float LifeTime { get; }
+    float RespawnTime { get; set; }
+    float LifeTime { get; set; }
+    void Reset();
+    void CheckRespawnStatus();
 }

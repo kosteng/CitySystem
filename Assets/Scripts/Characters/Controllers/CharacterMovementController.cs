@@ -2,29 +2,28 @@
 using Engine.Mediators;
 using UnityEngine;
 
+
 namespace Units.Controllers
 {
     public class CharacterMovementController : IUpdatable
     {
-        private readonly CityDatabase _cityDatabase;
+
         private readonly IInputClicker _inputClicker;
         private readonly ICharacterAnimationSwitcher _characterAnimationSwitcher;
         private readonly ICharacterItemExtractor _characterItemExtractor;
-        private readonly CharacterModel _characterModel; 
+        private readonly CharacterModel _characterModel;
         private Vector3 _pointDestination;
-        private IInteractableItem _interactableItemTarget;
+
 
         public Transform UnitViewTransform => _characterModel.View.transform;
 
         public CharacterMovementController(
             CharactersDatabase charactersDatabase,
-            CityDatabase cityDatabase,
             IInputClicker inputClicker,
             ICharacterAnimationSwitcher characterAnimationSwitcher,
             ICharacterItemExtractor characterItemExtractor
-            )
+        )
         {
-            _cityDatabase = cityDatabase;
             _inputClicker = inputClicker;
             _characterAnimationSwitcher = characterAnimationSwitcher;
             _characterItemExtractor = characterItemExtractor;
@@ -37,22 +36,24 @@ namespace Units.Controllers
 
         public void Update(float deltaTime)
         {
-            _characterModel.IsMoving = _characterModel.View.NavMeshAgent.remainingDistance > _characterModel.View.NavMeshAgent.stoppingDistance;
+            _characterModel.IsMoving =
+                _characterModel.View.NavMeshAgent.remainingDistance > _characterModel.View.NavMeshAgent.stoppingDistance;
             CheckTargetForMove();
 
             if (_characterModel.IsMoving)
                 CheckStopState();
-            
+
             _characterAnimationSwitcher.UpdateAnimation(_characterModel);
             SetMovementState();
             CheckInteract();
-            _characterItemExtractor.Extract(_interactableItemTarget, _characterModel);
+            _characterItemExtractor.Extract(_characterModel);
         }
 
         private void CheckTargetForMove()
         {
-            if (_inputClicker.Click(ref _interactableItemTarget, ref _pointDestination))
+            if (_inputClicker.Click(ref _characterModel.InteractableItemTarget, ref _pointDestination))
                 MoveToPoint(_pointDestination);
+       
         }
 
         private void SetMovementState()
@@ -74,9 +75,10 @@ namespace Units.Controllers
 
         private void CheckInteract()
         {
-            _characterModel.CharacterCurrentState = _interactableItemTarget != null && _characterModel.View.NavMeshAgent.remainingDistance < 1f // todo вынести в конфиг
-                ? ECharacterState.Interact
-                : _characterModel.CharacterCurrentState;
+            _characterModel.CharacterCurrentState =
+                _characterModel.InteractableItemTarget != null && _characterModel.View.NavMeshAgent.remainingDistance < 1f // todo вынести в конфиг
+                    ? ECharacterState.Interact
+                    : _characterModel.CharacterCurrentState;
         }
     }
 }
