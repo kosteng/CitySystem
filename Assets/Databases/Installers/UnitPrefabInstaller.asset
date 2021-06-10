@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: UnitPrefabInstaller
   m_EditorClassIdentifier: 
   _player: {fileID: 1162531022978087650, guid: 54efbbe08a7c57b449488729a18a3b9c, type: 3}
+  _charactersDatabase: {fileID: 11400000, guid: 614d93cb44f52b24db29fb2f51130ad1,
+    type: 2}
