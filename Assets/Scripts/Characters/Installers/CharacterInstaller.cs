@@ -9,6 +9,7 @@ namespace Units.Installers
         {
             Container.BindInterfacesAndSelfTo<CharacterMovementController>().AsSingle();
             Container.BindInterfacesTo<CharacterAnimationSwitcher>().AsSingle();
+            Container.BindInterfacesTo<CharacterItemExtractor>().AsSingle();
         }
     }
 }
