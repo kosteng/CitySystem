@@ -2,6 +2,7 @@
 
 public interface IInteractableItem
 {
+    EInteractItemType ItemType { get; }
     bool IsExtracted { get; set; }
     Transform Transform { get; }
     float RespawnTime { get; set; }

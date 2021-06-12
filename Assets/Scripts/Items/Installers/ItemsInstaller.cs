@@ -8,5 +8,6 @@ public class ItemsInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<InteractableItemController>().AsSingle();
+        Container.BindInterfacesTo<InteractItemFactory>().AsSingle();
     }
 }

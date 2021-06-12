@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58143021837f998478a114fbcdc54448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemType: 0
 --- !u!136 &70035408
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -534,6 +535,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 05d04c02c670304449753d698e5e3b26, type: 2}
   - {fileID: 11400000, guid: f879243db0714904a86126151801dd4b, type: 2}
   - {fileID: 11400000, guid: f4d0f3938bc3565499342c11d27359ce, type: 2}
+  - {fileID: 11400000, guid: 0e7be622237ab794884950ef0f3a9efd, type: 2}
   - {fileID: 11400000, guid: 0e7be622237ab794884950ef0f3a9efd, type: 2}
   _monoInstallers:
   - {fileID: 899398273}

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class InteractableItemView : MonoBehaviour, IInteractableItem
+public class  InteractableItemView : MonoBehaviour, IInteractableItem
 {
+    [SerializeField] private EInteractItemType _itemType;
+    public EInteractItemType ItemType => _itemType;
     public bool IsExtracted { get; set; }
     public Transform Transform => transform;
     public float RespawnTime  { get;  set; } = 20f;

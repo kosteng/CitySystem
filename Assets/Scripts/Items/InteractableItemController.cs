@@ -1,19 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Engine.Mediators;
-using UnityEngine;
 using static UnityEngine.Object;
 
 
 public class InteractableItemController : IUpdatable
 {
+    private readonly IFactory<IInteractableItem> _itemFactory;
     private readonly InteractableItemView _itemView;
-    private List<IInteractableItem> _items = new List<IInteractableItem>();
-    public InteractableItemController(InteractableItemView itemView)
+    private List<IInteractableItem> _items;
+
+    public InteractableItemController(IFactory<IInteractableItem> itemFactory)
     {
-        _itemView = Instantiate(itemView, new Vector3(3, 0, 5), Quaternion.identity);
-        var objects = FindObjectsOfType<InteractableItemView>() as IInteractableItem[];
-        _items = objects.ToList();
+        _itemFactory = itemFactory;
+        
+        var interactObjects = FindObjectsOfType<InteractableItemView>() as IInteractableItem[];
+        _items = interactObjects.ToList();
+        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
     }
 
     public void Update(float deltaTime)
