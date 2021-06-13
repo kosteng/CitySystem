@@ -2,8 +2,10 @@
 {
     public enum EInteractItemType
     {
-        Tree,
-        Cube
+        TreeFir,
+        TreeOak,
+        TreePoplar,
+        TreePalm,
     }
 }
 

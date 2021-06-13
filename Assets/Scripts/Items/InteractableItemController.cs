@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Engine.Mediators;
-using Extensions.Pool;
 using static UnityEngine.Object;
 
 namespace Items
 {
     public class InteractableItemController : IUpdatable
     {
-        private readonly Items.IInteractItemFactory _itemFactory;
+        private readonly IInteractItemFactory _itemFactory;
         private readonly InteractableItemView _itemView;
         private List<IInteractableItem> _items;
 
-        public InteractableItemController(Items.IInteractItemFactory itemFactory)
+        public InteractableItemController(IInteractItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
 
@@ -20,14 +19,14 @@ namespace Items
             _items = interactObjects.ToList();
             for (int i = 0; i < 10; i++)
             {
-                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
-                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
-                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
-                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreeFir));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreeOak));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreeFir));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreeFir));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreeOak));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreePoplar));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreePoplar));
+                _items.Add(_itemFactory.Create(EInteractItemType.TreePalm));
             }
         }
 
