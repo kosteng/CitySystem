@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Items;
+using UnityEngine;
 
 public class  InteractableItemView : MonoBehaviour, IInteractableItem
 {

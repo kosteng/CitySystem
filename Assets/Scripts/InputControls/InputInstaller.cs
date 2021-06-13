@@ -1,11 +1,14 @@
 ﻿using InputControls.CameraControls;
 using Zenject;
 
-public class InputInstaller : MonoInstaller
+namespace InputControls
 {
-    public override void InstallBindings()
+    public class InputInstaller : MonoInstaller
     {
-        Container.BindInterfacesAndSelfTo<CameraController>().AsSingle();
-        Container.BindInterfacesTo<InputClicker>().AsSingle();
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesAndSelfTo<CameraController>().AsSingle();
+            Container.BindInterfacesTo<InputClicker>().AsSingle();
+        }
     }
 }

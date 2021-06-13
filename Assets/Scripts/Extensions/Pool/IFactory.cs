@@ -1,5 +1,7 @@
-﻿public interface IFactory<T>
+﻿namespace Extensions.Pool
 {
-	T Create();
-	T Create(EInteractItemType prefab);
+	public interface IFactory<T>
+	{
+		T Create();
+	}
 }

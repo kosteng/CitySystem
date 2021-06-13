@@ -8,6 +8,7 @@ namespace InputControls.CameraControls
     {
         private CameraView _cameraView;
 
+        private float _correctY;
         private float _rotation;
         private float _rotationZoom;
         private const float SIGN = 1f;
@@ -38,19 +39,32 @@ namespace InputControls.CameraControls
             _cameraView = Object.Instantiate(_cameraView, new Vector3(0f, 10f, -17f), Quaternion.identity);
         }
 
+        private void SetCorrectPosition(Transform transform)
+        {
+            var position = transform.position;
+            position = new Vector3(position.x, _correctY, position.z);
+            transform.position = position;
+        }
+        
         private void Position()
         {
             if (Input.GetKey(KeyCode.D))
-                _cameraView.transform.Translate(Vector3.right * ( SCROLL_SPEED * Time.deltaTime ), Space.Self);
+                _cameraView.transform.Translate(Vector3.right * (SCROLL_SPEED * Time.deltaTime), Space.Self);
 
             if (Input.GetKey(KeyCode.A))
-                _cameraView.transform.Translate(Vector3.left * ( SCROLL_SPEED * Time.deltaTime ), Space.Self);
+                _cameraView.transform.Translate(Vector3.left * (SCROLL_SPEED * Time.deltaTime), Space.Self);
 
             if (Input.GetKey(KeyCode.W))
-                _cameraView.transform.Translate(Vector3.forward * ( SCROLL_SPEED * Time.deltaTime ), Space.Self);
+            {
+                _cameraView.transform.Translate(Vector3.forward * (SCROLL_SPEED * Time.deltaTime), Space.Self);
+                SetCorrectPosition(_cameraView.transform);
+            }
 
             if (Input.GetKey(KeyCode.S))
-                _cameraView.transform.Translate(Vector3.back * ( SCROLL_SPEED * Time.deltaTime ), Space.Self);
+            {
+                _cameraView.transform.Translate(Vector3.back * (SCROLL_SPEED * Time.deltaTime), Space.Self);
+                SetCorrectPosition(_cameraView.transform);
+            }
         }
 
         private void Rotation()
@@ -71,6 +85,7 @@ namespace InputControls.CameraControls
 
             if (mouseWheel < 0 && _cameraView.transform.position.y < MAX_ZOOM_RANGE)
                 CalculateZoom(SIGN);
+            _correctY = _cameraView.transform.position.y;
         }
 
         private void CalculateZoom(float sign)

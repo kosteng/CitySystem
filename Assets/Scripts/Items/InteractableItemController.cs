@@ -1,36 +1,42 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Engine.Mediators;
+using Extensions.Pool;
 using static UnityEngine.Object;
 
-
-public class InteractableItemController : IUpdatable
+namespace Items
 {
-    private readonly IFactory<IInteractableItem> _itemFactory;
-    private readonly InteractableItemView _itemView;
-    private List<IInteractableItem> _items;
-
-    public InteractableItemController(IFactory<IInteractableItem> itemFactory)
+    public class InteractableItemController : IUpdatable
     {
-        _itemFactory = itemFactory;
-        
-        var interactObjects = FindObjectsOfType<InteractableItemView>() as IInteractableItem[];
-        _items = interactObjects.ToList();
-        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-        _items.Add(_itemFactory.Create(EInteractItemType.Tree));
-        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
-        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
-        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
-        _items.Add(_itemFactory.Create(EInteractItemType.Cube));
-    }
+        private readonly Items.IInteractItemFactory _itemFactory;
+        private readonly InteractableItemView _itemView;
+        private List<IInteractableItem> _items;
 
-    public void Update(float deltaTime)
-    {
-        foreach (var item in _items)
+        public InteractableItemController(Items.IInteractItemFactory itemFactory)
         {
-            item.CheckRespawnStatus();
+            _itemFactory = itemFactory;
+
+            var interactObjects = FindObjectsOfType<InteractableItemView>() as IInteractableItem[];
+            _items = interactObjects.ToList();
+            for (int i = 0; i < 10; i++)
+            {
+                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+                _items.Add(_itemFactory.Create(EInteractItemType.Tree));
+                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+                _items.Add(_itemFactory.Create(EInteractItemType.Cube));
+            }
+        }
+
+        public void Update(float deltaTime)
+        {
+            foreach (var item in _items)
+            {
+                item.CheckRespawnStatus();
+            }
         }
     }
 }

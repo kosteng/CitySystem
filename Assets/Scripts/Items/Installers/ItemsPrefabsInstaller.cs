@@ -1,17 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(menuName = "DatabasesSO/ItemsPrefabsInstaller")]
-public class ItemsPrefabsInstaller : ScriptableObjectInstaller
+namespace Items.Installers
 {
-    [SerializeField] private InteractableItemView _interactableItemView;
-    [SerializeField] private InteractItemDatabase _interactItemDatabase;
-    
-    public override void InstallBindings()
+    [CreateAssetMenu(menuName = "DatabasesSO/ItemsPrefabsInstaller")]
+    public class ItemsPrefabsInstaller : ScriptableObjectInstaller
     {
-        // Container.BindInstance(_interactableItemView);
-        Container.BindInstance(_interactItemDatabase);
+        [SerializeField] private InteractItemDatabase _interactItemDatabase;
+    
+        public override void InstallBindings()
+        {
+            Container.BindInstance(_interactItemDatabase);
+        }
     }
 }

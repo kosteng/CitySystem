@@ -1,27 +1,25 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class InteractItemFactory : IFactory<IInteractableItem>
+namespace Items
 {
-    private readonly InteractItemDatabase _itemDatabase;
-
-    public InteractItemFactory(InteractItemDatabase itemDatabase)
+    public class InteractItemFactory : IInteractItemFactory
     {
-        _itemDatabase = itemDatabase;
-    }
+        private readonly InteractItemDatabase _itemDatabase;
 
-    public IInteractableItem Create()
-    {
-        return null;
-    }
+        public InteractItemFactory(InteractItemDatabase itemDatabase)
+        {
+            _itemDatabase = itemDatabase;
+        }
 
-    public IInteractableItem Create(EInteractItemType prefab)
-    {
-        int x = Random.Range(-150, 150);
-        int z = Random.Range(-150, 150);
+        public IInteractableItem Create(EInteractItemType type)
+        {
+            int x = Random.Range(-50, 50);
+            int z = Random.Range(-50, 50);
 
-        var gPrefab = _itemDatabase.InteractableItemViews.FirstOrDefault(i => i.ItemType == prefab);
+            var prefab = _itemDatabase.InteractableItemViews.FirstOrDefault(i => i.ItemType == type);
       
-        return Object.Instantiate(gPrefab, new Vector3(x, 0, z), Quaternion.identity);
+            return Object.Instantiate(prefab, new Vector3(x, 0, z), Quaternion.identity);
+        }
     }
 }
