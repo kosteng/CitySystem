@@ -6,12 +6,12 @@ namespace Items
 {
     public class InteractItemFactory : IInteractItemFactory
     {
-        private readonly InteractItemDatabase _itemDatabase;
+        private readonly InteractItemsDatabase _itemsDatabase;
         private GameObject _parent;
 
-        public InteractItemFactory(InteractItemDatabase itemDatabase)
+        public InteractItemFactory(InteractItemsDatabase itemsDatabase)
         {
-            _itemDatabase = itemDatabase;
+            _itemsDatabase = itemsDatabase;
             _parent = new GameObject("InteractItems");
         }
 
@@ -21,7 +21,7 @@ namespace Items
             int z = Random.Range(-50, 50);
             var rotation = Random.rotation.y;
 
-            var prefab = _itemDatabase.InteractableItemViews.FirstOrDefault(i => i.ItemType == type);
+            var prefab = _itemsDatabase.InteractableItemViews.FirstOrDefault(i => i.ItemType == type);
             var item = Object.Instantiate(prefab, new Vector3(x, 0, z), Quaternion.Euler(0, rotation, 0));
             item.transform.SetParent(_parent.transform);
             

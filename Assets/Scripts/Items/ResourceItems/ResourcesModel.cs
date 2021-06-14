@@ -1,5 +1,5 @@
-﻿using System;
-using Zenject;
+﻿using Items.ResourceItems;
+using System;
 
 namespace City
 {
@@ -24,11 +24,4 @@ namespace City
             Iron.Amount = 0;
         }
     }
-    [Serializable]
-    public class ResourceItemData
-    {
-        public float Amount;
-        public float Weight;
-    }
-    
 }
