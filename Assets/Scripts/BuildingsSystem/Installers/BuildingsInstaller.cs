@@ -1,5 +1,6 @@
 ﻿using BuildingsSystem.Controllers;
 using BuildingsSystem.UI.BuildingInfoBuyPanel;
+using BuildingsSystem.Views;
 using Extensions.Pool;
 using UI.BottomPanel;
 using Zenject;

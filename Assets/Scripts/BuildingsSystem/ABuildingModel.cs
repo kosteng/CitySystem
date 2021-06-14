@@ -1,86 +1,107 @@
-﻿using System;
+﻿using BuildingsSystem.Enums;
+using BuildingsSystem.Views;
+using City;
+using System;
 using UnityEngine;
 
-public class ABuildingModel : IBuilding, IDisposable
+namespace BuildingsSystem
 {
-    private readonly CityDatabase _cityDatabase;
-    private readonly ABuildingView _view;
-    private readonly ResourcesModel _resourcesModel;
-    private EBuildingType _buildingType;
-    public event BuildingClickHandler OnBuildingClickHandler;
-
-    public virtual ABuildingView BuildingView => _view;
-    public virtual ResourcesModel Resources => _resourcesModel;
-    public virtual EBuildingType BuildingType => _buildingType;
-
-    public ABuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
-        EBuildingType buildingType)
+    public class ABuildingModel : IBuilding, IDisposable
     {
-        _cityDatabase = cityDatabase;
-        _view = view;
-        _buildingType = buildingType;
-        _resourcesModel = resourcesModel;
+        private readonly CityDatabase _cityDatabase;
+        private readonly ABuildingView _view;
+        private readonly ResourcesModel _resourcesModel;
+        private EBuildingType _buildingType;
+        public event BuildingClickHandler OnBuildingClickHandler;
+
+        public ABuildingView BuildingView => _view;
+        public ResourcesModel Resources => _resourcesModel;
+        public EBuildingType BuildingType => _buildingType;
+
+        public ABuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+            EBuildingType buildingType)
+        {
+            _cityDatabase = cityDatabase;
+            _view = view;
+            _buildingType = buildingType;
+            _resourcesModel = resourcesModel;
+        }
+
+        public void Subscribe()
+        {
+            _view.OnBuildingClick += BuildingClickButton;
+        }
+
+        public virtual void Income()
+        {
+        }
+
+        public virtual void Expense()
+        {
+        }
+
+        private void BuildingClickButton()
+        {
+            OnBuildingClickHandler?.Invoke(this);
+        }
+
+        public void Dispose()
+        {
+            _view.OnBuildingClick -= BuildingClickButton;
+        }
     }
 
-    public void Subscribe()
+    public class HouseBuildingModel : ABuildingModel
     {
-        _view.OnBuildingClick += BuildingClickButton;
+        public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        {
+        }
+
+        public override void Income()
+        {
+            Debug.Log("House");
+        }
     }
 
-    public virtual void Income()
+    public class SawBuildingModel : ABuildingModel
     {
+        public SawBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        {
+        }
+
+        public override void Income()
+        {
+            Debug.Log("Saw");
+        }
     }
 
-    public virtual void Expense()
+    public class MineBuildingModel : ABuildingModel
     {
+        public MineBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        {
+        }
+
+        public override void Income()
+        {
+            Debug.Log("Mine");
+        }
     }
 
-    private void BuildingClickButton()
+    public class StorageBuildingModel : ABuildingModel
     {
-        OnBuildingClickHandler?.Invoke(this);
-    }
 
-    public void Dispose()
-    {
-        _view.OnBuildingClick -= BuildingClickButton;
-    }
-}
-
-public class HouseBuildingModel : ABuildingModel
-{
-    public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
-        EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
-    {
-    }
-
-    public override void Income()
-    {
-        Debug.Log("House");
-    }
-}
-
-public class SawBuildingModel : ABuildingModel
-{
-    public SawBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
-        EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
-    {
-    }
-
-    public override void Income()
-    {
-        Debug.Log("Saw");
-    }
-}
-
-public class MineBuildingModel : ABuildingModel
-{
-    public MineBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
-        EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
-    {
-    }
-
-    public override void Income()
-    {
-        Debug.Log("Mine");
+        public StorageBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityDatabase cityDatabase,
+            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        {
+            
+        }
+        
+        public override void Income()
+        {
+            Debug.Log("Storage");
+        } 
     }
 }

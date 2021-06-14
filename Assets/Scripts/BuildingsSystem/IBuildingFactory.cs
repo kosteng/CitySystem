@@ -1,4 +1,6 @@
-﻿namespace BuildingsSystem
+﻿using BuildingsSystem.Views;
+
+namespace BuildingsSystem
 {
     public interface IBuildingFactory
     {

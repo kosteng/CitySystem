@@ -18,10 +18,10 @@ MonoBehaviour:
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
     costResources:
       People: 0
-      Gold: 200
+      Gold: 0
       Food: 0
-      Wood: 100
-      Stone: 100
+      Wood: 50
+      Stone: 0
       Iron: 0
       Warrior: 0
     incomeResources:
@@ -37,10 +37,10 @@ MonoBehaviour:
     _view: {fileID: 8224205777954349758, guid: dce50b715b9be4547889a1ff5f130fbe, type: 3}
     costResources:
       People: 0
-      Gold: 700
+      Gold: 0
       Food: 0
       Wood: 100
-      Stone: 300
+      Stone: 20
       Iron: 0
       Warrior: 0
     incomeResources:
@@ -68,5 +68,24 @@ MonoBehaviour:
       Food: 0
       Wood: 0
       Stone: 20
+      Iron: 0
+      Warrior: 0
+  - _buildingType: 3
+    _name: 
+    _view: {fileID: 2601116357831961104, guid: adaa01298157d8a46a5936a73d9c99a3, type: 3}
+    costResources:
+      People: 0
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
+      Iron: 0
+      Warrior: 0
+    incomeResources:
+      People: 0
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
       Iron: 0
       Warrior: 0

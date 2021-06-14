@@ -1,48 +1,51 @@
-﻿using System;
+﻿using BuildingsSystem.Views;
 using Engine.Mediators;
 using UnityEngine;
 
-public class BuildingsStacker : IUpdatable
+namespace BuildingsSystem
 {
-    private ABuildingView _flyingBuilding;
-
-    public delegate void BuildingMontageHandler(ABuildingView building);
-
-    public event BuildingMontageHandler OnBuildingMontage;
-    public void StartPlacingBuilding(ABuildingView buildingPrefab)
+    public class BuildingsStacker : IUpdatable
     {
+        private ABuildingView _flyingBuilding;
 
-        if (_flyingBuilding != null)
+        public delegate void BuildingMontageHandler(ABuildingView building);
+
+        public event BuildingMontageHandler OnBuildingMontage;
+        public void StartPlacingBuilding(ABuildingView buildingPrefab)
         {
-            //TODO возвращать в пул
-            MonoBehaviour.Destroy(_flyingBuilding.gameObject);
+
+            if (_flyingBuilding != null)
+            {
+                //TODO возвращать в пул
+                MonoBehaviour.Destroy(_flyingBuilding.gameObject);
+            }
+
+            _flyingBuilding = buildingPrefab;
         }
 
-        _flyingBuilding = buildingPrefab;
-    }
+        public void Update(float deltaTime)
+        {
+            if (_flyingBuilding == null) return;
 
-    public void Update(float deltaTime)
-    {
-        if (_flyingBuilding == null) return;
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            _flyingBuilding.SetTransparent(_flyingBuilding.IsPlaceFree);
 
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        _flyingBuilding.SetTransparent(_flyingBuilding.IsPlaceFree);
+            if (!Physics.Raycast(ray, out var hit)) return;
+            _flyingBuilding.transform.position = new Vector3(hit.point.x, 0f, hit.point.z);
 
-        if (!Physics.Raycast(ray, out var hit)) return;
-        _flyingBuilding.transform.position = new Vector3(hit.point.x, 0f, hit.point.z);
-
-        if (Input.GetMouseButtonDown(0))
-            PlaceFlyingBuilding(_flyingBuilding.IsPlaceFree);
-    }
+            if (Input.GetMouseButtonDown(0))
+                PlaceFlyingBuilding(_flyingBuilding.IsPlaceFree);
+        }
 
 
-    private void PlaceFlyingBuilding(bool isPlaceFree)
-    {
-        if (!isPlaceFree)
-            return;
+        private void PlaceFlyingBuilding(bool isPlaceFree)
+        {
+            if (!isPlaceFree)
+                return;
         
-        OnBuildingMontage?.Invoke(_flyingBuilding);
-        _flyingBuilding.SetNormal();
-        _flyingBuilding = null;
+            OnBuildingMontage?.Invoke(_flyingBuilding);
+            _flyingBuilding.SetNormal();
+            _flyingBuilding = null;
+        }
     }
 }
