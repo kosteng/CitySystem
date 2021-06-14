@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Items.Interfaces;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 

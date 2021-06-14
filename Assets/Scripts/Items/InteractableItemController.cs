@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Engine.Mediators;
+using Items.Interfaces;
 using static UnityEngine.Object;
 
 namespace Items

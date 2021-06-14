@@ -1,6 +1,9 @@
 ﻿using Units;
 
-public interface ICharacterItemExtractor
+namespace Characters.Controllers
 {
-    void Extract(CharacterModel characterModel);
+    public interface ICharacterItemExtractor
+    {
+        void Extract(CharacterModel characterModel);
+    }
 }

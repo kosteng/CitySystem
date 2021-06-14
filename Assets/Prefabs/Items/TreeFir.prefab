@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 3263720314743604103}
   - component: {fileID: 3263720314746459041}
   - component: {fileID: 3263720314745894617}
-  - component: {fileID: 8911162114778509150}
   - component: {fileID: 3263720314501506283}
   - component: {fileID: 3263720314501506288}
   - component: {fileID: 3263720314501506295}
   m_Layer: 0
-  m_Name: Fir_Tree
+  m_Name: TreeFir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &8911162114778509150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263720314743365311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58143021837f998478a114fbcdc54448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemType: 0
 --- !u!136 &3263720314501506283
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -106,7 +92,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.8857777
+  m_Radius: 2
   m_Height: 5.71314
   m_Direction: 1
   m_Center: {x: -0.000039458275, y: 2.8566525, z: -0.00022572279}
@@ -120,7 +106,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.886, y: 2.857, z: 1.886}
+  m_Extents: {x: 1.3, y: 2.857, z: 1.3}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -139,3 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 0
+  _respawnTime: 2000
+  _extractTime: 5

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8111406963898846919}
   - component: {fileID: 8111406963898846918}
   m_Layer: 0
-  m_Name: Poplar_Tree
+  m_Name: TreePoplar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.4814541
+  m_Radius: 1
   m_Height: 5.8196263
   m_Direction: 1
   m_Center: {x: 0.037836492, y: 2.9017284, z: -0.0047776103}
@@ -105,8 +105,8 @@ NavMeshObstacle:
   m_GameObject: {fileID: 8111406963898718070}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.3470001, y: 2.91, z: 1.4810001}
+  m_Shape: 0
+  m_Extents: {x: 0.7, y: 2.91, z: 0.7}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -125,3 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 2
+  _respawnTime: 2000
+  _extractTime: 5

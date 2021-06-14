@@ -1,13 +1,15 @@
-﻿using Items;
-using UnityEngine;
+﻿using UnityEngine;
 
-public interface IInteractableItem
+namespace Items.Interfaces
 {
-    EInteractItemType ItemType { get; }
-    bool IsExtracted { get; set; }
-    Transform Transform { get; }
-    float RespawnTime { get; set; }
-    float LifeTime { get; set; }
-    void Reset();
-    void CheckRespawnStatus();
+    public interface IInteractableItem
+    {
+        EInteractItemType ItemType { get; }
+        bool IsExtracted { get; set; }
+        Transform Transform { get; }
+        float RespawnTime { get; set; }
+        float ExtractTime { get; set; }
+        void Reset();
+        void CheckRespawnStatus();
+    }
 }

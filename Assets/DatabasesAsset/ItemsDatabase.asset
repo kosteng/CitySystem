@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: ItemsDatabase
   m_EditorClassIdentifier: 
   _itemViews:
-  - {fileID: 5784030826511013408, guid: 41a6970aae4d4fa48a3c82f5226b7c65, type: 3}
-  - {fileID: 8911162114778509150, guid: a794d4ee87645714580aadeb616af33c, type: 3}
+  - {fileID: 3263720314501506295, guid: a794d4ee87645714580aadeb616af33c, type: 3}
+  - {fileID: 9160127935112156334, guid: 5e4f28069c6a7614094fbbc6e5196f0e, type: 3}
+  - {fileID: 3615879907643463022, guid: d05a39e6eedb3a74eab5b1d725308114, type: 3}
+  - {fileID: 8111406963898846918, guid: 7ca968bbb7bd49141a5dc76bdc0dd15f, type: 3}

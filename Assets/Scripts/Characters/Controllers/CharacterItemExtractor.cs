@@ -1,39 +1,42 @@
-﻿using Characters;
-using Units;
+﻿using Units;
 using UnityEngine;
 
-public class CharacterItemExtractor : ICharacterItemExtractor
+namespace Characters.Controllers
 {
-    private readonly CityDatabase _cityDatabase;
-
-    public CharacterItemExtractor(CityDatabase cityDatabase)
+    public class CharacterItemExtractor : ICharacterItemExtractor
     {
-        _cityDatabase = cityDatabase;
-    }
-    public void Extract(CharacterModel characterModel)
-    {
-        if (characterModel.InteractableItemTarget == null)
-            return;
+        private readonly CityDatabase _cityDatabase;
 
-        if (characterModel.CharacterCurrentState != ECharacterState.Interact) 
-            return;
+        public CharacterItemExtractor(CityDatabase cityDatabase)
+        {
+            _cityDatabase = cityDatabase;
+        }
 
-        characterModel.InteractableItemTarget.LifeTime -= Time.deltaTime;
-        characterModel.View.transform.LookAt(characterModel.InteractableItemTarget.Transform);
-        CheckLifeStatus(characterModel);
-    }
+        public void Extract(CharacterModel characterModel)
+        {
+            if (characterModel.InteractableItemTarget == null)
+                return;
 
-    private void CheckLifeStatus(CharacterModel characterModel)
-    {
+            if (characterModel.CharacterCurrentState != ECharacterState.Interact)
+                return;
 
-        if (characterModel.InteractableItemTarget.LifeTime > 0)//bbb || !interactableItem.Transform.gameObject.activeSelf)
-            return;
+            characterModel.InteractableItemTarget.ExtractTime -= Time.deltaTime;
+            characterModel.View.transform.LookAt(characterModel.InteractableItemTarget.Transform);
+            CheckLifeStatus(characterModel);
+        }
 
-        characterModel.CharacterCurrentState = ECharacterState.Idle;
-        _cityDatabase.Model.Wood += 1f;
-        Debug.Log(_cityDatabase.Model.Wood);
-        characterModel.InteractableItemTarget.Transform.gameObject.SetActive(false);
-        characterModel.InteractableItemTarget.IsExtracted = true;
-        characterModel.InteractableItemTarget = null;
+        private void CheckLifeStatus(CharacterModel characterModel)
+        {
+            if (characterModel.InteractableItemTarget.ExtractTime > 0)
+                return;
+
+            characterModel.CharacterCurrentState = ECharacterState.Idle;
+            //todo количество выпадаемого ресурса требуется запихнуть в модель интерактивного итема
+            _cityDatabase.Model.Wood.Amount += Random.Range(3, 7);
+
+            characterModel.InteractableItemTarget.Transform.gameObject.SetActive(false);
+            characterModel.InteractableItemTarget.IsExtracted = true;
+            characterModel.InteractableItemTarget = null;
+        }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9160127935112156335}
   - component: {fileID: 9160127935112156334}
   m_Layer: 0
-  m_Name: Oak_Tree
+  m_Name: TreeOak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,8 +91,8 @@ NavMeshObstacle:
   m_GameObject: {fileID: 9160127935112085394}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.978, y: 2.657, z: 1.4180001}
+  m_Shape: 0
+  m_Extents: {x: 1, y: 2.657, z: 1}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.978153
+  m_Radius: 1.5
   m_Height: 5.3144393
   m_Direction: 1
   m_Center: {x: 0.041702807, y: 2.6472833, z: 0.09605491}
@@ -125,3 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 1
+  _respawnTime: 2000
+  _extractTime: 5

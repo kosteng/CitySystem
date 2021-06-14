@@ -1,4 +1,6 @@
-﻿namespace Items
+﻿using Items.Interfaces;
+
+namespace Items
 {
     public interface IInteractItemFactory
     {

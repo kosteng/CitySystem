@@ -1,4 +1,5 @@
-﻿using Units.Controllers;
+﻿using Characters.Controllers;
+using Units.Controllers;
 using Zenject;
 
 namespace Units.Installers

@@ -1,5 +1,6 @@
 ﻿using System;
 using Characters;
+using Items.Interfaces;
 using Units.Views;
 
 namespace Units

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4078394889389917754}
   - component: {fileID: 7551214963496747666}
   m_Layer: 0
-  m_Name: Palm_Tree
+  m_Name: TreePalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 3
+  _respawnTime: 2000
+  _extractTime: 5
 --- !u!208 &4078394889389917754
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -104,8 +106,8 @@ NavMeshObstacle:
   m_GameObject: {fileID: 6598103566759771521}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.621, y: 2.6980002, z: 1.6190001}
+  m_Shape: 0
+  m_Extents: {x: 0.7, y: 2.6980002, z: 0.7}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -121,7 +123,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.6207452
+  m_Radius: 1
   m_Height: 5.3958144
   m_Direction: 1
   m_Center: {x: -0.34729344, y: 2.7100756, z: -0.45656818}
