@@ -1,13 +1,34 @@
 ﻿using System;
+using Zenject;
 
-[Serializable]
-public class ResourcesModel
+namespace City
 {
-    public float People;
-    public float Gold;
-    public float Food;
-    public float Wood;
-    public float Stone;
-    public float Iron;
-    public float Warrior;
+    //todo переписать избрать от SO, не хранить ресурсы в SO
+    [Serializable]
+    public class ResourcesModel
+    {
+        public ResourceItemData Gold;
+        public ResourceItemData Food;
+        public ResourceItemData Wood;
+        public ResourceItemData Stone;
+        public ResourceItemData Iron;
+
+
+        public void ClearData()
+        {
+
+            Gold.Amount = 0;
+            Food.Amount = 0;
+            Wood.Amount = 0;
+            Stone.Amount = 0;
+            Iron.Amount = 0;
+        }
+    }
+    [Serializable]
+    public class ResourceItemData
+    {
+        public float Amount;
+        public float Weight;
+    }
+    
 }
