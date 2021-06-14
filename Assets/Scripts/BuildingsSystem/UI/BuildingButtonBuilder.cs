@@ -1,30 +1,37 @@
 ﻿using BuildingsSystem.Databases;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingButtonBuilder 
+namespace BuildingsSystem.UI
 {
-   private readonly AllBuildingsDatabase _allBuildingsDatabase;
-   private readonly BuildingButtonView _buttonView;
-
-   public BuildingButtonBuilder(AllBuildingsDatabase allBuildingsDatabase, BuildingButtonView buttonView)
+   public class BuildingButtonBuilder 
    {
-      _allBuildingsDatabase = allBuildingsDatabase;
-      _buttonView = buttonView;
-   }
+      private readonly AllBuildingsDatabase _allBuildingsDatabase;
+      private readonly BuildingButtonView _buttonView;
 
-   public List<BuildingButtonView> Create(Transform parent)
-   {
-      List<BuildingButtonView> list = new List<BuildingButtonView>();
-      foreach (var button in _allBuildingsDatabase.BuildingsDatabase)
+      public BuildingButtonBuilder(AllBuildingsDatabase allBuildingsDatabase, BuildingButtonView buttonView)
       {
-         var buildingButton = MonoBehaviour.Instantiate(_buttonView);
-         buildingButton.Attach(parent);
-         buildingButton.SetName(button.BuildingType.ToString());
-         buildingButton.SetBuildingType(button.BuildingType);
-         list.Add(buildingButton);
+         _allBuildingsDatabase = allBuildingsDatabase;
+         _buttonView = buttonView;
+         //todo подумать куда лучше вприхнуть, возможно следует создать отдельный класс для подобных проверок всех подсистем
+         foreach (var buildingDatabase in _allBuildingsDatabase.BuildingsDatabase)
+         {
+            buildingDatabase.VerifycationDictionary();
+         }
       }
-      return list;
+
+      public List<BuildingButtonView> Create(Transform parent)
+      {
+         List<BuildingButtonView> list = new List<BuildingButtonView>();
+         foreach (var button in _allBuildingsDatabase.BuildingsDatabase)
+         {
+            var buildingButton = MonoBehaviour.Instantiate(_buttonView);
+            buildingButton.Attach(parent);
+            buildingButton.SetName(button.BuildingType.ToString());
+            buildingButton.SetBuildingType(button.BuildingType);
+            list.Add(buildingButton);
+         }
+         return list;
+      }
    }
 }

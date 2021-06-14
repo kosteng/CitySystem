@@ -1,5 +1,7 @@
 ﻿using Items.ResourceItems;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace City
 {
@@ -7,26 +9,29 @@ namespace City
     [Serializable]
     public class ResourcesModel
     {
-        // public ResourceItemData Gold = new ResourceItemData();
-        // public ResourceItemData Food = new ResourceItemData();
-        // public ResourceItemData Wood = new ResourceItemData();
-        // public ResourceItemData Stone = new ResourceItemData();
-        // public ResourceItemData Iron = new ResourceItemData();
-
         public float Gold;
         public float Food;
         public float Wood;
         public float Stone;
         public float Iron;
-
+        
         public void ClearData()
         {
-
             Gold = 0;
             Food = 0;
             Wood = 0;
             Stone = 0;
             Iron = 0;
         }
+    }
+    
+    [Serializable]
+    public class ResourceItemPriceInfo
+    {
+        [SerializeField] private EResourceItemType _itemType;
+        [SerializeField] private float _amount;
+        public EResourceItemType ItemType => _itemType;
+        public float Amount => _amount;
+
     }
 }

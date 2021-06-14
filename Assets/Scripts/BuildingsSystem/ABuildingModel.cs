@@ -8,7 +8,6 @@ namespace BuildingsSystem
 {
     public class ABuildingModel : IBuilding, IDisposable
     {
-
         private readonly ABuildingView _view;
         private readonly ResourcesModel _resourcesModel;
         private readonly CityModel _cityModel;
@@ -22,7 +21,6 @@ namespace BuildingsSystem
         public ABuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
             EBuildingType buildingType)
         {
-
             _view = view;
             _buildingType = buildingType;
             _resourcesModel = resourcesModel;
@@ -55,8 +53,8 @@ namespace BuildingsSystem
 
     public class HouseBuildingModel : ABuildingModel
     {
-        public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityDatabase,
-            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
+            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
         {
         }
 
@@ -68,8 +66,8 @@ namespace BuildingsSystem
 
     public class SawBuildingModel : ABuildingModel
     {
-        public SawBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityDatabase,
-            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        public SawBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
+            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
         {
         }
 
@@ -81,8 +79,8 @@ namespace BuildingsSystem
 
     public class MineBuildingModel : ABuildingModel
     {
-        public MineBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityDatabase,
-            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        public MineBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
+            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
         {
         }
 
@@ -94,16 +92,16 @@ namespace BuildingsSystem
 
     public class StorageBuildingModel : ABuildingModel
     {
-
-        public StorageBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityDatabase,
-            EBuildingType buildingType) : base(view, resourcesModel, cityDatabase, buildingType)
+        public StorageBuildingModel(ABuildingView view,
+            ResourcesModel resourcesModel,
+            CityModel cityModel,
+            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
         {
-            
         }
-        
+
         public override void Income()
         {
             Debug.Log("Storage");
-        } 
+        }
     }
 }

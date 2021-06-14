@@ -16,11 +16,6 @@ namespace City
             {
                 _resourceItemsData.Add(resourceItemData);
             }
-
-            foreach (var resourceItemData in _resourceItemsData)
-            {
-                Debug.Log(resourceItemData.ResourceItemType.ToString());
-            }
         }
 
         public void AddResource(EResourceItemType type, float amount)
