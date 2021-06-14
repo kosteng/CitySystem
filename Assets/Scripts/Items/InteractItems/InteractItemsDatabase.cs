@@ -2,7 +2,7 @@
 
 namespace Items
 {
-    [CreateAssetMenu(menuName = "DatabasesSO/InteractItemDatabase")]
+    [CreateAssetMenu(menuName = "DatabasesSO/InteractItemsDatabase")]
 
     public class InteractItemsDatabase : ScriptableObject
     {

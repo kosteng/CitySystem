@@ -8,16 +8,16 @@ namespace BuildingsSystem
     {
         public bool TryPurchaseBuilding(ResourcesModel purchaser, ResourcesModel cost)
         {
-            return purchaser.Gold.Amount >= cost.Gold.Amount
-                   && purchaser.Wood.Amount >= cost.Wood.Amount
-                   && purchaser.Stone.Amount >= cost.Stone.Amount;
+            return purchaser.Gold >= cost.Gold
+                   && purchaser.Wood >= cost.Wood
+                   && purchaser.Stone >= cost.Stone;
         }
 
         public void PurchaseBuilding(ResourcesModel purchaser, ResourcesModel cost)
         {
-            purchaser.Gold.Amount -= cost.Gold.Amount;
-            purchaser.Wood.Amount -= cost.Wood.Amount;
-            purchaser.Stone.Amount -= cost.Stone.Amount;
+            purchaser.Gold -= cost.Gold;
+            purchaser.Wood -= cost.Wood;
+            purchaser.Stone -= cost.Stone;
         }
     }
 }

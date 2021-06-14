@@ -10,26 +10,25 @@ namespace City
 {
     public class CityController : IInitializable, IAttachableUi, IDisposable, IUpdatable
     {
-        private readonly CityDatabase _cityDatabase;
         private readonly CityView _cityView;
         private readonly DayCounterController _dayCounterController;
         private readonly HourController _hourController;
         private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
-        private float _peopleReproduce;
-        private float _people;
 
+        private readonly CityModel _cityModel;
+        public ResourcesModel CityResourcesModel => _cityModel.ResourcesModel;
         public CityController(
-            CityDatabase cityDatabase,
             CityView cityView,
             DayCounterController dayCounterController,
             HourController hourController,
-            BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter)
+            BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter,
+            CityModel cityModel)
         {
-            _cityDatabase = cityDatabase;
             _cityView = cityView;
             _dayCounterController = dayCounterController;
             _hourController = hourController;
             _buildingInfoBuyPanelPresenter = buildingInfoBuyPanelPresenter;
+            _cityModel = cityModel;
         }
 
         private void NextDayChanged()
@@ -39,16 +38,15 @@ namespace City
 
         private void RefreshResourcesToView()
         {
-            _cityView.Food.text = "Food: " + _cityDatabase.Model.Food.Amount;
-            _cityView.Gold.text = "Gold: " + _cityDatabase.Model.Gold.Amount;
-            _cityView.Wood.text = "Wood: " + _cityDatabase.Model.Wood.Amount;
-            _cityView.Stone.text = "Stone: " + _cityDatabase.Model.Stone.Amount; 
-            _cityView.Iron.text = "Iron: " + _cityDatabase.Model.Iron.Amount;
+            _cityView.Food.text = "Food: " + _cityModel.ResourcesModel.Food;
+            _cityView.Gold.text = "Gold: " + _cityModel.ResourcesModel.Gold;
+            _cityView.Wood.text = "Wood: " + _cityModel.ResourcesModel.Wood;
+            _cityView.Stone.text = "Stone: " + _cityModel.ResourcesModel.Stone; 
+            _cityView.Iron.text = "Iron: " + _cityModel.ResourcesModel.Iron;
         }
 
         public void Initialize()
         {
-            _cityDatabase.Model.ClearData();
             RefreshResourcesToView();
             _dayCounterController.OnDayChanged += NextDayChanged;
             _buildingInfoBuyPanelPresenter.OnBuyBuilding += RefreshResourcesToView;

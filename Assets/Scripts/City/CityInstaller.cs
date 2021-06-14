@@ -1,14 +1,14 @@
-﻿using City;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
-public class CityInstaller : MonoInstaller
+namespace City
 {
-
-    public override void InstallBindings()
+    public class CityInstaller : MonoInstaller
     {
-        Container.BindInterfacesAndSelfTo<CityController>().AsSingle().NonLazy();
+
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesAndSelfTo<CityController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CityModel>().AsSingle();
+        }
     }
 }

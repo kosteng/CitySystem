@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Items.ResourceItems
 {
@@ -10,11 +9,5 @@ namespace Items.ResourceItems
         public ResourceItemView View;
         public float Amount;
         public float Weight;
-    }
-    
-    [CreateAssetMenu(menuName = "DatabasesSO/ResourceItemsDatabase")]
-    public class ResourceItemsDatabase : ScriptableObject
-    {
-        public ResourceItemData[] ResourceItemDatas;
     }
 }

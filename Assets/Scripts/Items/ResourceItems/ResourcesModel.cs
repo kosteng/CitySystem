@@ -7,21 +7,26 @@ namespace City
     [Serializable]
     public class ResourcesModel
     {
-        public ResourceItemData Gold;
-        public ResourceItemData Food;
-        public ResourceItemData Wood;
-        public ResourceItemData Stone;
-        public ResourceItemData Iron;
+        // public ResourceItemData Gold = new ResourceItemData();
+        // public ResourceItemData Food = new ResourceItemData();
+        // public ResourceItemData Wood = new ResourceItemData();
+        // public ResourceItemData Stone = new ResourceItemData();
+        // public ResourceItemData Iron = new ResourceItemData();
 
+        public float Gold;
+        public float Food;
+        public float Wood;
+        public float Stone;
+        public float Iron;
 
         public void ClearData()
         {
 
-            Gold.Amount = 0;
-            Food.Amount = 0;
-            Wood.Amount = 0;
-            Stone.Amount = 0;
-            Iron.Amount = 0;
+            Gold = 0;
+            Food = 0;
+            Wood = 0;
+            Stone = 0;
+            Iron = 0;
         }
     }
 }

@@ -5,6 +5,7 @@ using BuildingsSystem.Controllers;
 using BuildingsSystem.Databases;
 using BuildingsSystem.Enums;
 using BuildingsSystem.Views;
+using City;
 using Engine.UI;
 using UnityEngine;
 using Zenject;
@@ -18,9 +19,10 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly BuildingButtonBuilder _buildingButtonBuilder;
         private readonly BuildingsStacker _buildingsStacker;
         private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
-        private readonly CityDatabase _cityDatabase;
         private readonly IBuildingFactory _buildingFactory;
         private readonly BuildingController _buildingController;
+        private readonly CityModel _cityModel;
+
         private List<BuildingButtonView> _buttonsList;
 
         private BuildingDatabase _currentBuilding;
@@ -31,18 +33,18 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             BuildingButtonBuilder buildingButtonBuilder,
             BuildingsStacker buildingsStacker,
             PurchaseBuildingsHandler purchaseBuildingsHandler,
-            CityDatabase cityDatabase,
             IBuildingFactory buildingFactory,
-            BuildingController buildingController)
+            BuildingController buildingController,
+            CityModel cityModel)
         {
             _view = view;
             _allBuildingsDatabase = allBuildingsDatabase;
             _buildingButtonBuilder = buildingButtonBuilder;
             _buildingsStacker = buildingsStacker;
             _purchaseBuildingsHandler = purchaseBuildingsHandler;
-            _cityDatabase = cityDatabase;
             _buildingFactory = buildingFactory;
             _buildingController = buildingController;
+            _cityModel = cityModel;
         }
 
         public void Initialize()
@@ -100,7 +102,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         {
             if (_currentBuilding == null)
                 return;
-            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResources))
+            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityModel.ResourcesModel, _currentBuilding.CostResources))
                 return;
 
             var buildingObject = _buildingFactory.Create(_currentBuilding.View);
@@ -109,8 +111,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void PurchaseBuilding(ABuildingView montageBuilding)
         {
-            _purchaseBuildingsHandler.PurchaseBuilding(_cityDatabase.Model, _currentBuilding.CostResources);
-           _buildingController.AddBuildings(_buildingFactory.Create(montageBuilding, _currentBuilding, _cityDatabase));
+            _purchaseBuildingsHandler.PurchaseBuilding(_cityModel.ResourcesModel, _currentBuilding.CostResources);
+           _buildingController.AddBuildings(_buildingFactory.Create(montageBuilding, _currentBuilding, _cityModel));
             OnBuyBuilding?.Invoke();
         }
 

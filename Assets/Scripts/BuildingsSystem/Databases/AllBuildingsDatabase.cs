@@ -30,7 +30,7 @@ namespace BuildingsSystem.Databases
         //TODO выводить только не нулевые ресурсы
         public string ShowCost()
         {
-            return $"Cost: Gold: {costResources.Gold.Amount} Wood: {costResources.Wood.Amount} Stone: {costResources.Stone.Amount}";
+            return $"Cost: Gold: {costResources.Gold} Wood: {costResources.Wood} Stone: {costResources.Stone}";
         }
 
         public EBuildingType BuildingType => _buildingType;

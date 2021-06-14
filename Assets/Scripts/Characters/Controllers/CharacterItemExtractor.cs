@@ -1,15 +1,18 @@
-﻿using Units;
+﻿using City;
+using Units;
 using UnityEngine;
 
 namespace Characters.Controllers
 {
     public class CharacterItemExtractor : ICharacterItemExtractor
     {
-        private readonly CityDatabase _cityDatabase;
+        private readonly CityController _cityController;
 
-        public CharacterItemExtractor(CityDatabase cityDatabase)
+
+        public CharacterItemExtractor(CityController cityController)
         {
-            _cityDatabase = cityDatabase;
+            _cityController = cityController;
+ 
         }
 
         public void Extract(CharacterModel characterModel)
@@ -32,7 +35,7 @@ namespace Characters.Controllers
 
             characterModel.CharacterCurrentState = ECharacterState.Idle;
             //todo количество выпадаемого ресурса требуется запихнуть в модель интерактивного итема
-            _cityDatabase.Model.Wood.Amount += Random.Range(3, 7);
+            _cityController.CityResourcesModel.Wood += Random.Range(3, 7);
 
             characterModel.InteractableItemTarget.Transform.gameObject.SetActive(false);
             characterModel.InteractableItemTarget.IsExtracted = true;

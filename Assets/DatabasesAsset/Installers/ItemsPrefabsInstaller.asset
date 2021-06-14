@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e33d3342513774aab706e67db669aa, type: 3}
   m_Name: ItemsPrefabsInstaller
   m_EditorClassIdentifier: 
-  _interactableItemView: {fileID: 5784030826511013408, guid: 41a6970aae4d4fa48a3c82f5226b7c65,
-    type: 3}
-  _interactItemDatabase: {fileID: 11400000, guid: 334331c176ae77c458c2b296ee0ef06c,
+  _interactItemsDatabase: {fileID: 11400000, guid: 334331c176ae77c458c2b296ee0ef06c,
+    type: 2}
+  _resourceItemsDatabase: {fileID: 11400000, guid: d42449f736f02e54985533f68e4d9858,
     type: 2}
