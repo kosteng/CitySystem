@@ -17,6 +17,8 @@ namespace City
 
         private readonly CityModel _cityModel;
         public ResourcesModel CityResourcesModel => _cityModel.ResourcesModel;
+        public CityModel CityModel => _cityModel;
+        
         public CityController(
             CityView cityView,
             DayCounterController dayCounterController,

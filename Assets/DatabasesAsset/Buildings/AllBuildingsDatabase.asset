@@ -17,75 +17,59 @@ MonoBehaviour:
     _name: 
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
     costResources:
-      People: 0
       Gold: 0
       Food: 0
-      Wood: 50
+      Wood: 20
       Stone: 0
       Iron: 0
-      Warrior: 0
     incomeResources:
-      People: 0
-      Gold: 10
+      Gold: 0
       Food: 0
       Wood: 0
       Stone: 0
       Iron: 0
-      Warrior: 0
   - _buildingType: 1
     _name: 
     _view: {fileID: 8224205777954349758, guid: dce50b715b9be4547889a1ff5f130fbe, type: 3}
     costResources:
-      People: 0
       Gold: 0
       Food: 0
-      Wood: 100
-      Stone: 20
-      Iron: 0
-      Warrior: 0
-    incomeResources:
-      People: 0
-      Gold: 0
-      Food: 0
-      Wood: 10
+      Wood: 0
       Stone: 0
       Iron: 0
-      Warrior: 0
+    incomeResources:
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
+      Iron: 0
   - _buildingType: 2
     _name: 
     _view: {fileID: 8224205777954349758, guid: 67a5ed5c82e6fcd4d95cd14be7fa85b8, type: 3}
     costResources:
-      People: 0
-      Gold: 7000
-      Food: 0
-      Wood: 500
-      Stone: 230
-      Iron: 0
-      Warrior: 0
-    incomeResources:
-      People: 0
       Gold: 0
       Food: 0
       Wood: 0
-      Stone: 20
+      Stone: 0
       Iron: 0
-      Warrior: 0
+    incomeResources:
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
+      Iron: 0
   - _buildingType: 3
     _name: 
     _view: {fileID: 2601116357831961104, guid: adaa01298157d8a46a5936a73d9c99a3, type: 3}
     costResources:
-      People: 0
       Gold: 0
       Food: 0
       Wood: 0
       Stone: 0
       Iron: 0
-      Warrior: 0
     incomeResources:
-      People: 0
       Gold: 0
       Food: 0
       Wood: 0
       Stone: 0
       Iron: 0
-      Warrior: 0

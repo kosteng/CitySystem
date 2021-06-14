@@ -1,4 +1,5 @@
 ﻿using City;
+using Items.ResourceItems;
 using Units;
 using UnityEngine;
 
@@ -35,7 +36,9 @@ namespace Characters.Controllers
 
             characterModel.CharacterCurrentState = ECharacterState.Idle;
             //todo количество выпадаемого ресурса требуется запихнуть в модель интерактивного итема
-            _cityController.CityResourcesModel.Wood += Random.Range(3, 7);
+            var amountResource = Random.Range(3, 7);
+            _cityController.CityResourcesModel.Wood += amountResource;
+            _cityController.CityModel.AddResource(EResourceItemType.Wood, amountResource);
 
             characterModel.InteractableItemTarget.Transform.gameObject.SetActive(false);
             characterModel.InteractableItemTarget.IsExtracted = true;

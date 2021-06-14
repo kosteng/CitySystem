@@ -54,7 +54,6 @@ namespace Units.Controllers
         {
             if (_inputClicker.Click(ref _characterModel.InteractableItemTarget, ref _pointDestination))
                 MoveToPoint(_pointDestination);
-       
         }
 
         private void SetMovementState()
