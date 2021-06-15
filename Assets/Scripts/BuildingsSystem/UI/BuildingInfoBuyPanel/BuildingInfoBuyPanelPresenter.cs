@@ -113,7 +113,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         {
             _purchaseBuildingsHandler.PurchaseBuilding(_cityModel, _currentBuilding.CostResourcesData);
 
-           _buildingController.AddBuildings(_buildingFactory.Create(montageBuilding, _currentBuilding, _cityModel));
+           _buildingController.AddBuildings(_buildingFactory.Create(_currentBuilding, _cityModel));
             OnBuyBuilding?.Invoke();
         }
 

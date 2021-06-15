@@ -1,4 +1,5 @@
-﻿using BuildingsSystem.Enums;
+﻿using BuildingsSystem.Databases;
+using BuildingsSystem.Enums;
 using BuildingsSystem.Views;
 using City;
 using System;
@@ -9,21 +10,18 @@ namespace BuildingsSystem
     public class ABuildingModel : IBuilding, IDisposable
     {
         private readonly ABuildingView _view;
-        private readonly ResourcesModel _resourcesModel;
+
         private readonly CityModel _cityModel;
         private EBuildingType _buildingType;
         public event BuildingClickHandler OnBuildingClickHandler;
 
         public ABuildingView BuildingView => _view;
-        public ResourcesModel Resources => _resourcesModel;
         public EBuildingType BuildingType => _buildingType;
 
-        public ABuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
-            EBuildingType buildingType)
+        public ABuildingModel (BuildingDatabase buildingDatabase, CityModel cityModel)
         {
-            _view = view;
-            _buildingType = buildingType;
-            _resourcesModel = resourcesModel;
+            _view = buildingDatabase.View;
+            _buildingType = buildingDatabase.BuildingType;
             _cityModel = cityModel;
         }
 
@@ -53,11 +51,10 @@ namespace BuildingsSystem
 
     public class HouseBuildingModel : ABuildingModel
     {
-        public HouseBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
-            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
+        public HouseBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
         {
         }
-
+        
         public override void Income()
         {
             Debug.Log("House");
@@ -66,8 +63,7 @@ namespace BuildingsSystem
 
     public class SawBuildingModel : ABuildingModel
     {
-        public SawBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
-            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
+        public SawBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
         {
         }
 
@@ -79,8 +75,7 @@ namespace BuildingsSystem
 
     public class MineBuildingModel : ABuildingModel
     {
-        public MineBuildingModel(ABuildingView view, ResourcesModel resourcesModel, CityModel cityModel,
-            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
+        public MineBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
         {
         }
 
@@ -92,13 +87,10 @@ namespace BuildingsSystem
 
     public class StorageBuildingModel : ABuildingModel
     {
-        public StorageBuildingModel(ABuildingView view,
-            ResourcesModel resourcesModel,
-            CityModel cityModel,
-            EBuildingType buildingType) : base(view, resourcesModel, cityModel, buildingType)
+        public StorageBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
         {
         }
-
+        
         public override void Income()
         {
             Debug.Log("Storage");

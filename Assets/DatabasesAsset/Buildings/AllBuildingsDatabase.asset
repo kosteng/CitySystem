@@ -16,74 +16,24 @@ MonoBehaviour:
   - _buildingType: 0
     _name: 
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
-    _costResources:
-      Gold: 0
-      Food: 0
-      Wood: 0
-      Stone: 0
-      Iron: 0
-    _incomeResources:
-      Gold: 0
-      Food: 0
-      Wood: 0
-      Stone: 0
-      Iron: 0
-    _resourceItemPrice:
+    _costResourcesData:
     - _itemType: 3
-      _amount: 20
+      _amount: 1
+    _incomeResourcesData:
     - _itemType: 1
-      _amount: 20
-    - _itemType: 5
-      _amount: 20
+      _amount: 1
   - _buildingType: 1
     _name: 
     _view: {fileID: 8224205777954349758, guid: dce50b715b9be4547889a1ff5f130fbe, type: 3}
-    _costResources:
-      Gold: 1
-      Food: 1
-      Wood: 1
-      Stone: 1
-      Iron: 1
-    _incomeResources:
-      Gold: 0
-      Food: 0
-      Wood: 0
-      Stone: 0
-      Iron: 0
-    _resourceItemPrice: []
+    _costResourcesData: []
+    _incomeResourcesData: []
   - _buildingType: 2
     _name: 
     _view: {fileID: 8224205777954349758, guid: 67a5ed5c82e6fcd4d95cd14be7fa85b8, type: 3}
-    _costResources:
-      Gold: 0
-      Food: 0
-      Wood: 0
-      Stone: 0
-      Iron: 0
-    _incomeResources:
-      Gold: 0
-      Food: 0
-      Wood: 0
-      Stone: 0
-      Iron: 0
-    _resourceItemPrice: []
+    _costResourcesData: []
+    _incomeResourcesData: []
   - _buildingType: 3
     _name: 
     _view: {fileID: 2601116357831961104, guid: adaa01298157d8a46a5936a73d9c99a3, type: 3}
-    _costResources:
-      Gold: 0
-      Food: 0
-      Wood: 0
-      Stone: 0
-      Iron: 0
-    _incomeResources:
-      Gold: 0
-      Food: 0
-      Wood: 0
-      Stone: 0
-      Iron: 0
-    _resourceItemPrice:
-    - _itemType: 1
-      _amount: 0
-    - _itemType: 4
-      _amount: 0
+    _costResourcesData: []
+    _incomeResourcesData: []

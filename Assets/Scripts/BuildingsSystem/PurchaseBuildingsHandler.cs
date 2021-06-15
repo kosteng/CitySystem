@@ -1,7 +1,4 @@
-﻿//TODO требуется написать универсальный механизм сравнения и обработки двух моделей не зависимый от конкретных ресурсов
-
-using City;
-using Items.ResourceItems;
+﻿using City;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,20 +7,6 @@ namespace BuildingsSystem
 {
     public class PurchaseBuildingsHandler
     {
-        public bool TryPurchaseBuilding(ResourcesModel purchaser, ResourcesModel cost)
-        {
-            return purchaser.Gold >= cost.Gold
-                   && purchaser.Wood >= cost.Wood
-                   && purchaser.Stone >= cost.Stone;
-        }
-
-        public void PurchaseBuilding(ResourcesModel purchaser, ResourcesModel cost)
-        {
-            purchaser.Gold -= cost.Gold;
-            purchaser.Wood -= cost.Wood;
-            purchaser.Stone -= cost.Stone;
-        }
-
         public void PurchaseBuilding(CityModel purchaser, List<ResourceItemPriceData> cost)
         {
             foreach (var buildingCost in cost)
@@ -40,6 +23,7 @@ namespace BuildingsSystem
         public bool TryPurchaseBuilding(CityModel purchaser, List<ResourceItemPriceData> cost)
         {
             var canPurchase = true;
+            
             foreach (var buildingCost in cost)
             {
                 var cityResource =

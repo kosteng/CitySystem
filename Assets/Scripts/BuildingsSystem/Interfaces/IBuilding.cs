@@ -8,7 +8,7 @@ public interface IBuilding
 {
     void Subscribe();
     ABuildingView BuildingView { get; }
-    ResourcesModel Resources { get; }
+ //   ResourcesModel Resources { get; }
     EBuildingType BuildingType { get; }
     void Income();
     void Expense();
