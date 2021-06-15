@@ -37,7 +37,7 @@ namespace Characters.Controllers
             characterModel.CharacterCurrentState = ECharacterState.Idle;
             //todo количество выпадаемого ресурса требуется запихнуть в модель интерактивного итема
             var amountResource = Random.Range(3, 7);
-            _cityController.CityResourcesModel.Wood += amountResource;
+
             _cityController.CityModel.AddResource(EResourceItemType.Wood, amountResource);
 
             characterModel.InteractableItemTarget.Transform.gameObject.SetActive(false);

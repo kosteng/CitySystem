@@ -1,14 +1,14 @@
 ﻿using Items.ResourceItems;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+
 
 namespace City
 {
     public class CityModel
     {
         private readonly List<ResourceItemData> _resourceItemsData = new List<ResourceItemData>();
-        public readonly ResourcesModel ResourcesModel = new ResourcesModel();
+        public List<ResourceItemData> ResourceItemsData => _resourceItemsData;
         
         public CityModel(ResourceItemsDatabase resourceItemsDatabase)
         {

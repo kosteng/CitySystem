@@ -17,11 +17,11 @@ MonoBehaviour:
     _name: 
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
     _costResources:
-      Gold: 1
-      Food: 1
-      Wood: 1
-      Stone: 1
-      Iron: 1
+      Gold: 0
+      Food: 0
+      Wood: 0
+      Stone: 0
+      Iron: 0
     _incomeResources:
       Gold: 0
       Food: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
       Stone: 0
       Iron: 0
     _resourceItemPrice:
-    - _itemType: 1
+    - _itemType: 3
       _amount: 20
     - _itemType: 1
       _amount: 20
@@ -82,4 +82,8 @@ MonoBehaviour:
       Wood: 0
       Stone: 0
       Iron: 0
-    _resourceItemPrice: []
+    _resourceItemPrice:
+    - _itemType: 1
+      _amount: 0
+    - _itemType: 4
+      _amount: 0

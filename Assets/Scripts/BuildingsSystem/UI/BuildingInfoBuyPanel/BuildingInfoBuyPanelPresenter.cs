@@ -102,7 +102,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         {
             if (_currentBuilding == null)
                 return;
-            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityModel.ResourcesModel, _currentBuilding.CostResources))
+            if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_cityModel, _currentBuilding.CostResourcesData))
                 return;
 
             var buildingObject = _buildingFactory.Create(_currentBuilding.View);
@@ -111,7 +111,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void PurchaseBuilding(ABuildingView montageBuilding)
         {
-            _purchaseBuildingsHandler.PurchaseBuilding(_cityModel.ResourcesModel, _currentBuilding.CostResources);
+            _purchaseBuildingsHandler.PurchaseBuilding(_cityModel, _currentBuilding.CostResourcesData);
+
            _buildingController.AddBuildings(_buildingFactory.Create(montageBuilding, _currentBuilding, _cityModel));
             OnBuyBuilding?.Invoke();
         }

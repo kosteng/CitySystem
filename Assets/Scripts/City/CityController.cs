@@ -2,6 +2,7 @@
 using DayChangeSystem.Controllers;
 using Engine.Mediators;
 using Engine.UI;
+using Items.ResourceItems;
 using System;
 using UnityEngine;
 using Zenject;
@@ -16,7 +17,7 @@ namespace City
         private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
 
         private readonly CityModel _cityModel;
-        public ResourcesModel CityResourcesModel => _cityModel.ResourcesModel;
+       
         public CityModel CityModel => _cityModel;
         
         public CityController(
@@ -40,11 +41,31 @@ namespace City
 
         private void RefreshResourcesToView()
         {
-            _cityView.Food.text = "Food: " + _cityModel.ResourcesModel.Food;
-            _cityView.Gold.text = "Gold: " + _cityModel.ResourcesModel.Gold;
-            _cityView.Wood.text = "Wood: " + _cityModel.ResourcesModel.Wood;
-            _cityView.Stone.text = "Stone: " + _cityModel.ResourcesModel.Stone; 
-            _cityView.Iron.text = "Iron: " + _cityModel.ResourcesModel.Iron;
+            foreach (var item in _cityModel.ResourceItemsData)
+            {
+                switch (item.ResourceItemType)
+                {
+                    case EResourceItemType.None:
+                        break;
+                    case EResourceItemType.Gold:
+                        _cityView.Gold.text = $"Gold: {item.Amount}";
+                        break;
+                    case EResourceItemType.Food:
+                        _cityView.Food.text = $"Food: {item.Amount}";
+                        break;
+                    case EResourceItemType.Wood:
+                        _cityView.Wood.text = $"Wood: {item.Amount}";
+                        break;
+                    case EResourceItemType.Stone:
+                        _cityView.Stone.text = $"Stone: {item.Amount}";
+                        break;
+                    case EResourceItemType.Iron:
+                        _cityView.Iron.text = $"Iron: {item.Amount}";
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
         public void Initialize()

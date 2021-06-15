@@ -1,7 +1,4 @@
-﻿using Items.ResourceItems;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 namespace City
 {
@@ -23,15 +20,5 @@ namespace City
             Stone = 0;
             Iron = 0;
         }
-    }
-    
-    [Serializable]
-    public class ResourceItemPriceInfo
-    {
-        [SerializeField] private EResourceItemType _itemType;
-        [SerializeField] private float _amount;
-        public EResourceItemType ItemType => _itemType;
-        public float Amount => _amount;
-
     }
 }

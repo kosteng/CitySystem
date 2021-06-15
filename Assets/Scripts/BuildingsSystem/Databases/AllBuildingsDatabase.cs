@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using ResourceItemPriceData = City.ResourceItemPriceData;
 
 namespace BuildingsSystem.Databases
 {
@@ -38,22 +39,22 @@ namespace BuildingsSystem.Databases
         [SerializeField] private ABuildingView _view;
         [SerializeField] private ResourcesModel _costResources;
         [SerializeField] private ResourcesModel _incomeResources;
-        [SerializeField] private List<ResourceItemPriceInfo> _resourceItemPrice;
-        public List<ResourceItemPriceInfo> ResourceItemPriceInfo => _resourceItemPrice;
+        [SerializeField] private List<ResourceItemPriceData> _costResourcesData;
+        [SerializeField] private List<ResourceItemPriceData> _incomeResourcesData; 
+        public List<ResourceItemPriceData> CostResourcesData => _costResourcesData;
+        public List<ResourceItemPriceData> IncomeResourcesData => _incomeResourcesData;
         public ResourcesModel CostResources => _costResources;
         public ResourcesModel IncomeResources => _incomeResources;
         public EBuildingType BuildingType => _buildingType;
         public ABuildingView View => _view;
         public Dictionary<EResourceItemType, float> BuildingCost;
+        
         //TODO выводить только не нулевые ресурсы
         public string ShowCost()
         {
             var cost = string.Empty;
             
-            if (_resourceItemPrice.Count == 0)
-                return $"Cost: Gold: {_costResources.Gold} Wood: {_costResources.Wood} Stone: {_costResources.Stone}";
-            
-            foreach (var item in _resourceItemPrice)
+            foreach (var item in _costResourcesData)
             {
                 cost += $"{item.ItemType.ToString()}: {item.Amount} ";
             }
@@ -63,15 +64,13 @@ namespace BuildingsSystem.Databases
 
         public void VerifycationDictionary()
         {
-            if (_resourceItemPrice == null)
-                _resourceItemPrice = new List<ResourceItemPriceInfo>();
-            Debug.Log(1);
+            if (_costResourcesData == null)
+                _costResourcesData = new List<ResourceItemPriceData>();
         
             BuildingCost = new Dictionary<EResourceItemType, float>();
-            foreach (var item in _resourceItemPrice)
+            foreach (var item in _costResourcesData)
             {
                 BuildingCost.Add(item.ItemType, item.Amount);
-                Debug.Log(BuildingCost.Keys + " " + BuildingCost.Values);
             }
         }
     }
