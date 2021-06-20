@@ -8,8 +8,6 @@ namespace DayChangeSystem.Installers
 {
     public class DaySystemInstaller : MonoInstaller
     {
-
-
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<DayCounterController>().AsSingle().NonLazy();

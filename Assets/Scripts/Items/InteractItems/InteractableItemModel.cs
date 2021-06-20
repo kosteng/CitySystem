@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Engine.Mediators;
 using Items;
+using Items.InteractItems;
 using Units.Controllers;
 using Units.Views;
 using UnityEngine;

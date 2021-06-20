@@ -1,6 +1,6 @@
 ﻿using System;
 using Characters;
-using Items.Interfaces;
+using Items.InteractItems.Interfaces;
 using Units.Views;
 
 namespace Units

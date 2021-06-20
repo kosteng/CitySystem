@@ -1,4 +1,4 @@
-﻿using Items.Interfaces;
+﻿using Items.InteractItems.Interfaces;
 using System.Linq;
 using UnityEngine;
 

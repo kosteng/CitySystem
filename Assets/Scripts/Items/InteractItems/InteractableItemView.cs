@@ -1,7 +1,7 @@
-﻿using Items.Interfaces;
+﻿using Items.InteractItems.Interfaces;
 using UnityEngine;
 
-namespace Items
+namespace Items.InteractItems
 {
     public class InteractableItemView : MonoBehaviour, IInteractableItem
     {
@@ -11,19 +11,20 @@ namespace Items
         public EInteractItemType ItemType => _itemType;
         public bool IsExtracted { get; set; }
         public Transform Transform => transform;
-        public float RespawnTime { get; set; } 
-        public float ExtractTime { get;  set; }
-
+        public float RespawnTime { get; set; }
+        public float ExtractTime { get; set; }
+    
         private void SetInitialData()
         {
             RespawnTime = _respawnTime;
             ExtractTime = _extractTime;
         }
+
         private void Awake()
         {
             SetInitialData();
         }
-        
+
         public void Reset()
         {
             IsExtracted = false;

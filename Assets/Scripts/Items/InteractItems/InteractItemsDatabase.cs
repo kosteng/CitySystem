@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Items.InteractItems;
+using UnityEngine;
 
 namespace Items
 {

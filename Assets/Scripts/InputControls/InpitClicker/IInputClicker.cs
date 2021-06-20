@@ -1,4 +1,4 @@
-﻿using Items.Interfaces;
+﻿using Items.InteractItems.Interfaces;
 using UnityEngine;
 
 public interface IInputClicker
