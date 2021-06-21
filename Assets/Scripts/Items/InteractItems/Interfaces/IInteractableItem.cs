@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Items.Interfaces
+namespace Items.InteractItems.Interfaces
 {
     public interface IInteractableItem
     {

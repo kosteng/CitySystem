@@ -53,14 +53,18 @@ namespace City
                     case EResourceItemType.Food:
                         _cityView.Food.text = $"Food: {item.Amount}";
                         break;
-                    case EResourceItemType.Wood:
-                        _cityView.Wood.text = $"Wood: {item.Amount}";
+                    case EResourceItemType.Log:
+                        _cityView.Log.text = $"Log: {item.Amount}";
                         break;
                     case EResourceItemType.Stone:
                         _cityView.Stone.text = $"Stone: {item.Amount}";
                         break;
                     case EResourceItemType.Iron:
                         _cityView.Iron.text = $"Iron: {item.Amount}";
+                        break;
+                    case EResourceItemType.Stick:
+                        break;
+                    case EResourceItemType.Straw:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

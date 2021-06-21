@@ -18,7 +18,11 @@ MonoBehaviour:
     _view: {fileID: 8224205777954349758, guid: ada2b6dc5cf85854abb29df09e3c0de5, type: 3}
     _costResourcesData:
     - _itemType: 3
-      _amount: 1
+      _amount: 21
+    - _itemType: 4
+      _amount: 66
+    - _itemType: 7
+      _amount: 32
     _incomeResourcesData:
     - _itemType: 1
       _amount: 1

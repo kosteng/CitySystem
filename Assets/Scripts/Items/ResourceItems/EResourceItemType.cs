@@ -5,8 +5,10 @@
         None,
         Gold,
         Food,
-        Wood,
+        Log,
+        Stick,
         Stone,
-        Iron
+        Iron,
+        Straw
     }
 }

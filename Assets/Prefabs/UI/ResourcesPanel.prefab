@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 6885767865420282433}
   - component: {fileID: 6885767865420282462}
   m_Layer: 5
-  m_Name: WoodText
+  m_Name: LogText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Wood: 0'
+  m_Text: 'Log: 0'
 --- !u!1 &6885767865977256219
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +704,7 @@ MonoBehaviour:
   People: {fileID: 6885767865226690763}
   Gold: {fileID: 6885767865977256221}
   Food: {fileID: 6885767865403500706}
-  Wood: {fileID: 6885767865420282462}
+  Log: {fileID: 6885767865420282462}
   Stone: {fileID: 6885767865029233179}
   Iron: {fileID: 6885767865288585426}
   Warrior: {fileID: 6885767864989643190}

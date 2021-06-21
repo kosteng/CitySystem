@@ -13,23 +13,24 @@ MonoBehaviour:
   m_Name: ResourceItemsDatabase
   m_EditorClassIdentifier: 
   ResourceItemsData:
-  - ResourceItemType: 1
+  - _weight: 0
+    ResourceItemType: 1
     View: {fileID: 0}
-    Amount: 0
-    Weight: 0
-  - ResourceItemType: 2
+  - _weight: 0
+    ResourceItemType: 2
     View: {fileID: 0}
-    Amount: 0
-    Weight: 0
-  - ResourceItemType: 3
+  - _weight: 0
+    ResourceItemType: 3
     View: {fileID: 0}
-    Amount: 0
-    Weight: 0
-  - ResourceItemType: 4
+  - _weight: 0
+    ResourceItemType: 4
     View: {fileID: 0}
-    Amount: 0
-    Weight: 0
-  - ResourceItemType: 5
+  - _weight: 0
+    ResourceItemType: 5
     View: {fileID: 0}
-    Amount: 0
-    Weight: 0
+  - _weight: 0
+    ResourceItemType: 4
+    View: {fileID: 0}
+  - _weight: 0
+    ResourceItemType: 7
+    View: {fileID: 0}

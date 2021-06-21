@@ -1,4 +1,5 @@
-﻿using Items.ResourceItems;
+﻿using Items.InteractItems;
+using Items.ResourceItems;
 using UnityEngine;
 using Zenject;
 
