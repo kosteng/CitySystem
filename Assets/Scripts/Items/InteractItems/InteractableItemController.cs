@@ -29,6 +29,12 @@ namespace Items
                 _items.Add(_itemFactory.Create(EInteractItemType.TreePoplar));
                 _items.Add(_itemFactory.Create(EInteractItemType.TreePoplar));
                 _items.Add(_itemFactory.Create(EInteractItemType.TreePalm));
+                _items.Add(_itemFactory.Create(EInteractItemType.BlueStone1));
+                _items.Add(_itemFactory.Create(EInteractItemType.BlueStone2));
+                _items.Add(_itemFactory.Create(EInteractItemType.BlueStone3));
+                _items.Add(_itemFactory.Create(EInteractItemType.BlueStone4));
+                _items.Add(_itemFactory.Create(EInteractItemType.Straw));
+                _items.Add(_itemFactory.Create(EInteractItemType.Straw));
             }
         }
 

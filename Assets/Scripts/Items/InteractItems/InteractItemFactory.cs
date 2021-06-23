@@ -22,8 +22,8 @@ namespace Items
             int z = Random.Range(-50, 50);
             var rotation = Random.rotation.y;
 
-            var prefab = _itemsDatabase.InteractableItemViews.FirstOrDefault(i => i.ItemType == type);
-            var item = Object.Instantiate(prefab, new Vector3(x, 0, z), Quaternion.Euler(0, rotation, 0));
+            var prefab = _itemsDatabase.InteractItemsData.FirstOrDefault(i => i.Type == type);
+            var item = Object.Instantiate(prefab.ItemView, new Vector3(x, 0, z), Quaternion.Euler(0, rotation, 0));
             item.transform.SetParent(_parent.transform);
             
             return item;

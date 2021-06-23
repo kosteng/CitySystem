@@ -10,8 +10,6 @@ namespace Items.InteractItems
 
     public class InteractItemsDatabase : ScriptableObject
     {
-        [SerializeField] private InteractableItemView[] _itemViews;
-        public InteractableItemView[] InteractableItemViews => _itemViews;
         public InteractItemsData[] InteractItemsData;
     }
     

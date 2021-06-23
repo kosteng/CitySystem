@@ -12,8 +12,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b792c4a591235bf4498c99170f4dc258, type: 3}
   m_Name: InteractItemsDatabase
   m_EditorClassIdentifier: 
-  _itemViews:
-  - {fileID: 3263720314501506295, guid: a794d4ee87645714580aadeb616af33c, type: 3}
-  - {fileID: 9160127935112156334, guid: 5e4f28069c6a7614094fbbc6e5196f0e, type: 3}
-  - {fileID: 3615879907643463022, guid: d05a39e6eedb3a74eab5b1d725308114, type: 3}
-  - {fileID: 8111406963898846918, guid: 7ca968bbb7bd49141a5dc76bdc0dd15f, type: 3}
+  InteractItemsData:
+  - _type: 0
+    _itemView: {fileID: 3263720314501506295, guid: a794d4ee87645714580aadeb616af33c,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 3
+      _minAmount: 3
+      _maxAmount: 5
+    - _itemType: 4
+      _minAmount: 1
+      _maxAmount: 10
+  - _type: 1
+    _itemView: {fileID: 9160127935112156334, guid: 5e4f28069c6a7614094fbbc6e5196f0e,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 3
+      _minAmount: 3
+      _maxAmount: 5
+    - _itemType: 4
+      _minAmount: 1
+      _maxAmount: 10
+  - _type: 2
+    _itemView: {fileID: 8111406963898846918, guid: 7ca968bbb7bd49141a5dc76bdc0dd15f,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 3
+      _minAmount: 3
+      _maxAmount: 5
+    - _itemType: 4
+      _minAmount: 1
+      _maxAmount: 10
+  - _type: 3
+    _itemView: {fileID: 3615879907643463022, guid: d05a39e6eedb3a74eab5b1d725308114,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 3
+      _minAmount: 3
+      _maxAmount: 5
+    - _itemType: 4
+      _minAmount: 3
+      _maxAmount: 5
+  - _type: 4
+    _itemView: {fileID: 5431770294127380394, guid: 807f14de546007e4392fd05d8cf729c9,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 5
+      _minAmount: 1
+      _maxAmount: 3
+  - _type: 5
+    _itemView: {fileID: 2980389987192438565, guid: ddefde5a96dbbdf408706f3e7651b834,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 5
+      _minAmount: 1
+      _maxAmount: 3
+  - _type: 6
+    _itemView: {fileID: -6057819789553396190, guid: a110265aeb4be5d48b7bf40251af5095,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 5
+      _minAmount: 1
+      _maxAmount: 3
+  - _type: 7
+    _itemView: {fileID: 1433998139148549323, guid: 2b1c68a23f88ab44d92c76a66c860f9a,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 5
+      _minAmount: 1
+      _maxAmount: 3
+  - _type: 8
+    _itemView: {fileID: 6350014289450778510, guid: 9c734f335b4aaec43817f5b17d2dc700,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 7
+      _minAmount: 1
+      _maxAmount: 8

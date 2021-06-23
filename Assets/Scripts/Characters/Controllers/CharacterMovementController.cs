@@ -8,14 +8,12 @@ namespace Units.Controllers
 {
     public class CharacterMovementController : IUpdatable
     {
-
         private readonly IInputClicker _inputClicker;
         private readonly ICharacterAnimationSwitcher _characterAnimationSwitcher;
         private readonly ICharacterItemExtractor _characterItemExtractor;
         private readonly CharacterModel _characterModel;
         private Vector3 _pointDestination;
-
-
+        
         public Transform UnitViewTransform => _characterModel.View.transform;
 
         public CharacterMovementController(
