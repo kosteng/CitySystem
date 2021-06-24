@@ -1,13 +1,18 @@
 ﻿using Engine.UI;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class CityView : APanel
+namespace City
 {
-    public Text People;
-    public Text Gold;
-    public Text Food;
-    public Text Log;
-    public Text Stone;
-    public Text Iron;
-    public Text Warrior;
+    public class CityView : APanel
+    {
+        public GameObject DebugPanel;
+        public Text People;
+        public Text Gold;
+        public Text Food;
+        public Text Log;
+        public Text Stone;
+        public Text Iron;
+        public Text Warrior;
+    }
 }

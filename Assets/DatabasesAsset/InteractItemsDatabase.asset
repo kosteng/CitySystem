@@ -88,3 +88,10 @@ MonoBehaviour:
     - _itemType: 7
       _minAmount: 1
       _maxAmount: 8
+  - _type: 9
+    _itemView: {fileID: 2755849377641025698, guid: 891fc0daf2193c240ab473ddf6dd1d0c,
+      type: 3}
+    resourceItemsPriceDataWithRandom:
+    - _itemType: 1
+      _minAmount: 1
+      _maxAmount: 8

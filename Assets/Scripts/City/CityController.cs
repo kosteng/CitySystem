@@ -41,8 +41,10 @@ namespace City
 
         private void RefreshResourcesToView()
         {
+            _cityView.Warrior.text = string.Empty;
             foreach (var item in _cityModel.ResourceItemsData)
             {
+                _cityView.Warrior.text += $"{item.ResourceItemType.ToString()} {item.Amount} \n";
                 switch (item.ResourceItemType)
                 {
                     case EResourceItemType.None:
@@ -96,6 +98,9 @@ namespace City
         public void Update(float deltaTime)
         {
             RefreshResourcesToView();
+            //todo грязный дебаг 
+            if (Input.GetKeyDown(KeyCode.R))
+                _cityView.DebugPanel.SetActive(!_cityView.DebugPanel.activeSelf);
         }
     }
 }

@@ -74,7 +74,7 @@ namespace Units.Controllers
         private void CheckInteract()
         {
             _characterModel.CharacterCurrentState =
-                _characterModel.InteractableItemTarget != null && _characterModel.View.NavMeshAgent.remainingDistance < 1f // todo вынести в конфиг
+                _characterModel.InteractableItemTarget != null && _characterModel.View.NavMeshAgent.remainingDistance < 1.3f // todo вынести в конфиг
                     ? ECharacterState.Interact
                     : _characterModel.CharacterCurrentState;
         }

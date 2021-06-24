@@ -1,4 +1,5 @@
 ﻿using InputControls.CameraControls;
+using InputControls.InpitClicker;
 using Zenject;
 
 namespace InputControls

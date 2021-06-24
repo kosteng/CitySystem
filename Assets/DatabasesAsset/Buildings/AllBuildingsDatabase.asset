@@ -29,7 +29,11 @@ MonoBehaviour:
   - _buildingType: 1
     _name: 
     _view: {fileID: 8224205777954349758, guid: dce50b715b9be4547889a1ff5f130fbe, type: 3}
-    _costResourcesData: []
+    _costResourcesData:
+    - _itemType: 3
+      _amount: 2
+    - _itemType: 7
+      _amount: 8
     _incomeResourcesData: []
   - _buildingType: 2
     _name: 
