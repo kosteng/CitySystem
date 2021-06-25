@@ -8,7 +8,7 @@ using Zenject;
 
 namespace BuildingsSystem.Controllers
 {
-    public class BuildingController : IInitializable, IDisposable
+    public class BuildingController : IInitializable, IDisposable, IBuildingController
     {
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
         private readonly DayCounterController _dayCounterController;

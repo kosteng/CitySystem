@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BuildingsSystem.UI
 {
-   public class BuildingButtonBuilder 
+   public class BuildingButtonBuilder : IBuildingButtonBuilder
    {
       private readonly AllBuildingsDatabase _allBuildingsDatabase;
       private readonly BuildingButtonView _buttonView;

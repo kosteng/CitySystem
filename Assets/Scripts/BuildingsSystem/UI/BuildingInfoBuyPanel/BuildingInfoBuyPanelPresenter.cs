@@ -16,11 +16,11 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
     {
         private readonly BuildingBuyPanelView _view;
         private readonly AllBuildingsDatabase _allBuildingsDatabase;
-        private readonly BuildingButtonBuilder _buildingButtonBuilder;
-        private readonly BuildingsStacker _buildingsStacker;
+        private readonly IBuildingButtonBuilder _buildingButtonBuilder;
+        private readonly IBuildingsStacker _buildingsStacker;
         private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
         private readonly IBuildingFactory _buildingFactory;
-        private readonly BuildingController _buildingController;
+        private readonly IBuildingController _buildingController;
         private readonly CityModel _cityModel;
 
         private List<BuildingButtonView> _buttonsList;
@@ -30,11 +30,11 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
             AllBuildingsDatabase allBuildingsDatabase,
-            BuildingButtonBuilder buildingButtonBuilder,
-            BuildingsStacker buildingsStacker,
+            IBuildingButtonBuilder buildingButtonBuilder,
+            IBuildingsStacker buildingsStacker,
             PurchaseBuildingsHandler purchaseBuildingsHandler,
             IBuildingFactory buildingFactory,
-            BuildingController buildingController,
+            IBuildingController buildingController,
             CityModel cityModel)
         {
             _view = view;

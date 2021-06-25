@@ -4,16 +4,14 @@ using UnityEngine;
 
 namespace BuildingsSystem
 {
-    public class BuildingsStacker : IUpdatable
+    public class BuildingsStacker : IUpdatable, IBuildingsStacker
     {
         private ABuildingView _flyingBuilding;
 
-        public delegate void BuildingMontageHandler(ABuildingView building);
-
         public event BuildingMontageHandler OnBuildingMontage;
+
         public void StartPlacingBuilding(ABuildingView buildingPrefab)
         {
-
             if (_flyingBuilding != null)
             {
                 //TODO возвращать в пул
@@ -42,7 +40,7 @@ namespace BuildingsSystem
         {
             if (!isPlaceFree)
                 return;
-        
+
             OnBuildingMontage?.Invoke(_flyingBuilding);
             _flyingBuilding.SetNormal();
             _flyingBuilding = null;

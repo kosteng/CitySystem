@@ -1,7 +1,10 @@
 ﻿using Items.InteractItems.Interfaces;
 using UnityEngine;
 
-public interface IInputClicker
+namespace InputControls.InpitClicker
 {
-    bool Click(ref IInteractableItem item, ref Vector3 hitPoint);
+    public interface IInputClicker
+    {
+        bool Click(ref IInteractableItem item, ref Vector3 hitPoint);
+    }
 }

@@ -9,7 +9,12 @@ using Zenject;
 
 namespace City
 {
-    public class CityController : IInitializable, IAttachableUi, IDisposable, IUpdatable
+    public interface ICityController
+    {
+        CityModel CityModel { get; }
+    }
+
+    public class CityController : ICityController, IInitializable, IAttachableUi, IDisposable, IUpdatable
     {
         private readonly CityView _cityView;
         private readonly DayCounterController _dayCounterController;
@@ -17,9 +22,9 @@ namespace City
         private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
 
         private readonly CityModel _cityModel;
-       
+
         public CityModel CityModel => _cityModel;
-        
+
         public CityController(
             CityView cityView,
             DayCounterController dayCounterController,
@@ -101,6 +106,14 @@ namespace City
             //todo грязный дебаг 
             if (Input.GetKeyDown(KeyCode.R))
                 _cityView.DebugPanel.SetActive(!_cityView.DebugPanel.activeSelf);
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                foreach (var resourceItemData in _cityModel.ResourceItemsData)
+                {
+                    resourceItemData.Amount += 1000f;
+                }
+            }
         }
     }
 }

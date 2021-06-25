@@ -9,10 +9,10 @@ namespace Characters.Controllers
 {
     public class CharacterItemExtractor : ICharacterItemExtractor
     {
-        private readonly CityController _cityController;
+        private readonly ICityController _cityController;
         private readonly InteractItemsDatabase _interactItemsDatabase;
 
-        public CharacterItemExtractor(CityController cityController, InteractItemsDatabase interactItemsDatabase)
+        public CharacterItemExtractor(ICityController cityController, InteractItemsDatabase interactItemsDatabase)
         {
             _cityController = cityController;
             _interactItemsDatabase = interactItemsDatabase;

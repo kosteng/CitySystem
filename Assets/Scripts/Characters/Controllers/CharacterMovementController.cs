@@ -1,6 +1,7 @@
 ﻿using Characters;
 using Characters.Controllers;
 using Engine.Mediators;
+using InputControls.InpitClicker;
 using UnityEngine;
 
 
