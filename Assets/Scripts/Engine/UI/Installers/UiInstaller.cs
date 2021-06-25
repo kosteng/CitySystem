@@ -14,12 +14,7 @@ namespace Engine.UI.Installers
         {
             Container.BindInterfacesTo<CanvasContainer>().AsSingle();
             Container.BindInterfacesTo<UiAttachSystem.UiAttachSystem>().AsSingle();
-
-
-
-
             Container.BindInterfacesAndSelfTo<BottomPanelPresenter>().AsSingle();
-
         }
     }
 }
