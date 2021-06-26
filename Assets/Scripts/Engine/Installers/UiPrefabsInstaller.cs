@@ -1,14 +1,15 @@
 ﻿using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using City;
+using Engine.UI;
 using Inventory;
 using UI.BottomPanel;
 using UnityEngine;
 using Zenject;
 
-namespace Engine.UI.Installers
+namespace Engine.Installers
 {
-    [CreateAssetMenu(menuName = "DatabasesSO/UIPrefabsInstaller")]
-    public class UIPrefabsInstaller : ScriptableObjectInstaller
+    [CreateAssetMenu(menuName = "DatabasesSO/Installers/UiPrefabsInstaller")]
+    public class UiPrefabsInstaller : ScriptableObjectInstaller
     {
         [SerializeField] private CanvasView _canvasView;
         [SerializeField] private BottomPanelView _bottomPanelView;
