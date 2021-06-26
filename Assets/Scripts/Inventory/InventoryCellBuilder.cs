@@ -18,7 +18,7 @@ namespace Inventory
         {
             var prefab = _inventoryCellFactory.Create();
             var resourceData = _resourceItemsDatabase.ResourceItemsData.FirstOrDefault(i => i.ResourceItemType == type);
-            prefab.Title.text = $"{resourceData.ResourceItemType.ToString()} {resourceData.Amount}";
+            prefab.Title.text = $"{resourceData.ResourceItemType.ToString()}";
             prefab.Amount = resourceData.Amount;
             prefab.SetItemType(resourceData.ResourceItemType);
             return prefab;

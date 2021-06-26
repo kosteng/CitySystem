@@ -1,16 +1,14 @@
-﻿using Items.ResourceItems;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-
-namespace City
+namespace Items.ResourceItems
 {
-    public class CityModel
+    public class ResourcesStorage
     {
         private readonly List<ResourceItemData> _resourceItemsData = new List<ResourceItemData>();
         public List<ResourceItemData> ResourceItemsData => _resourceItemsData;
         
-        public CityModel(ResourceItemsDatabase resourceItemsDatabase)
+        public ResourcesStorage(ResourceItemsDatabase resourceItemsDatabase)
         {
             foreach (var resourceItemData in resourceItemsDatabase.ResourceItemsData)
             {

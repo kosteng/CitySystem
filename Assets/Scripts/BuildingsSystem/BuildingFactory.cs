@@ -3,6 +3,7 @@ using BuildingsSystem.Enums;
 using BuildingsSystem.Interfaces;
 using BuildingsSystem.Views;
 using City;
+using Items.ResourceItems;
 using UnityEngine;
 
 namespace BuildingsSystem
@@ -10,22 +11,22 @@ namespace BuildingsSystem
     public class BuildingFactory : IBuildingFactory
     {
         public IBuilding Create(BuildingDatabase currentBuilding,
-            CityModel cityModel)
+            ResourcesStorage resourcesStorage)
         {
             switch (currentBuilding.BuildingType)
             {
                 case EBuildingType.House:
-                    return new HouseBuildingModel(currentBuilding, cityModel);
+                    return new HouseBuildingModel(currentBuilding, resourcesStorage);
 
                 case EBuildingType.SawMill:
-                    return new SawBuildingModel(currentBuilding,  cityModel);
+                    return new SawBuildingModel(currentBuilding,  resourcesStorage);
 
                 case EBuildingType.Mine:
-                    return new MineBuildingModel(currentBuilding,  cityModel);
+                    return new MineBuildingModel(currentBuilding,  resourcesStorage);
 
 
                 case EBuildingType.Storage:
-                    return new StorageBuildingModel(currentBuilding,  cityModel);
+                    return new StorageBuildingModel(currentBuilding,  resourcesStorage);
   
 
                 default: return null;

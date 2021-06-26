@@ -14,6 +14,7 @@ using Extensions.Pool;
 using InputControls.CameraControls;
 using InputControls.InpitClicker;
 using Inventory;
+using Items.ResourceItems;
 using UI.BottomPanel;
 using Units.Controllers;
 using Zenject;
@@ -51,7 +52,7 @@ namespace Engine.Installers
         private void CitySystem()
         {
             Container.BindInterfacesAndSelfTo<CityController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CityModel>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ResourcesStorage>().AsSingle();
         }
         
         private void Characters()

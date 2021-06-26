@@ -11,7 +11,7 @@ namespace City
 {
     public interface ICityController
     {
-        CityModel CityModel { get; }
+        ResourcesStorage ResourcesStorage { get; }
     }
 
     public class CityController : ICityController, IInitializable, IAttachableUi, IDisposable, IUpdatable
@@ -21,22 +21,22 @@ namespace City
         private readonly HourController _hourController;
         private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
 
-        private readonly CityModel _cityModel;
+        private readonly ResourcesStorage _resourcesStorage;
 
-        public CityModel CityModel => _cityModel;
+        public ResourcesStorage ResourcesStorage => _resourcesStorage;
 
         public CityController(
             CityView cityView,
             DayCounterController dayCounterController,
             HourController hourController,
             BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter,
-            CityModel cityModel)
+            ResourcesStorage resourcesStorage)
         {
             _cityView = cityView;
             _dayCounterController = dayCounterController;
             _hourController = hourController;
             _buildingInfoBuyPanelPresenter = buildingInfoBuyPanelPresenter;
-            _cityModel = cityModel;
+            _resourcesStorage = resourcesStorage;
         }
 
         private void NextDayChanged()
@@ -47,7 +47,7 @@ namespace City
         private void RefreshResourcesToView()
         {
             _cityView.Warrior.text = string.Empty;
-            foreach (var item in _cityModel.ResourceItemsData)
+            foreach (var item in _resourcesStorage.ResourceItemsData)
             {
                 _cityView.Warrior.text += $"{item.ResourceItemType.ToString()} {item.Amount} \n";
                 switch (item.ResourceItemType)
@@ -109,7 +109,7 @@ namespace City
 
             if (Input.GetKeyDown(KeyCode.O))
             {
-                foreach (var resourceItemData in _cityModel.ResourceItemsData)
+                foreach (var resourceItemData in _resourcesStorage.ResourceItemsData)
                 {
                     resourceItemData.Amount += 1000f;
                 }

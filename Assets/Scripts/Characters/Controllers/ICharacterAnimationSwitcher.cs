@@ -1,4 +1,5 @@
-﻿using Units;
+﻿using Characters;
+using Units;
 
 public interface ICharacterAnimationSwitcher
 {

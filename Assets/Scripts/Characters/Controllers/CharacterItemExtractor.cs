@@ -1,8 +1,6 @@
 ﻿using City;
 using Items.InteractItems;
-using Items.ResourceItems;
 using System.Linq;
-using Units;
 using UnityEngine;
 
 namespace Characters.Controllers
@@ -47,7 +45,7 @@ namespace Characters.Controllers
                 var amountResource = Random.Range(resourceItem.MinAmount, resourceItem.MaxAmount);
                 
                 Debug.Log( resourceItem.ItemType + " " + amountResource);
-                _cityController.CityModel.AddResource(resourceItem.ItemType, amountResource);
+                _cityController.ResourcesStorage.AddResource(resourceItem.ItemType, amountResource);
             }
 
             interactItem.Transform.gameObject.SetActive(false);

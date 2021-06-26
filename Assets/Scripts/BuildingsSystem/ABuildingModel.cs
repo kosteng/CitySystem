@@ -3,6 +3,7 @@ using BuildingsSystem.Enums;
 using BuildingsSystem.Interfaces;
 using BuildingsSystem.Views;
 using City;
+using Items.ResourceItems;
 using System;
 using UnityEngine;
 
@@ -12,18 +13,18 @@ namespace BuildingsSystem
     {
         private readonly ABuildingView _view;
 
-        private readonly CityModel _cityModel;
+        private readonly ResourcesStorage _resourcesStorage;
         private EBuildingType _buildingType;
         public event BuildingClickHandler OnBuildingClickHandler;
 
         public ABuildingView BuildingView => _view;
         public EBuildingType BuildingType => _buildingType;
 
-        public ABuildingModel (BuildingDatabase buildingDatabase, CityModel cityModel)
+        public ABuildingModel (BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage)
         {
             _view = buildingDatabase.View;
             _buildingType = buildingDatabase.BuildingType;
-            _cityModel = cityModel;
+            _resourcesStorage = resourcesStorage;
         }
 
         public void Subscribe()
@@ -52,7 +53,7 @@ namespace BuildingsSystem
 
     public class HouseBuildingModel : ABuildingModel
     {
-        public HouseBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
+        public HouseBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
         
@@ -64,7 +65,7 @@ namespace BuildingsSystem
 
     public class SawBuildingModel : ABuildingModel
     {
-        public SawBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
+        public SawBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
 
@@ -76,7 +77,7 @@ namespace BuildingsSystem
 
     public class MineBuildingModel : ABuildingModel
     {
-        public MineBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
+        public MineBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
 
@@ -88,7 +89,7 @@ namespace BuildingsSystem
 
     public class StorageBuildingModel : ABuildingModel
     {
-        public StorageBuildingModel(BuildingDatabase buildingDatabase, CityModel cityModel) : base(buildingDatabase, cityModel)
+        public StorageBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
         
