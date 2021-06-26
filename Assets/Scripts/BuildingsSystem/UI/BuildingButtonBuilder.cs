@@ -1,4 +1,5 @@
 ﻿using BuildingsSystem.Databases;
+using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,15 +7,15 @@ namespace BuildingsSystem.UI
 {
    public class BuildingButtonBuilder : IBuildingButtonBuilder
    {
-      private readonly AllBuildingsDatabase _allBuildingsDatabase;
+      private readonly BuildingsModelDatabase _buildingsModelDatabase;
       private readonly BuildingButtonView _buttonView;
 
-      public BuildingButtonBuilder(AllBuildingsDatabase allBuildingsDatabase, BuildingButtonView buttonView)
+      public BuildingButtonBuilder(BuildingsModelDatabase buildingsModelDatabase, BuildingButtonView buttonView)
       {
-         _allBuildingsDatabase = allBuildingsDatabase;
+         _buildingsModelDatabase = buildingsModelDatabase;
          _buttonView = buttonView;
          //todo подумать куда лучше вприхнуть, возможно следует создать отдельный класс для подобных проверок всех подсистем
-         foreach (var buildingDatabase in _allBuildingsDatabase.BuildingsDatabase)
+         foreach (var buildingDatabase in _buildingsModelDatabase.BuildingsDatabase)
          {
             buildingDatabase.VerifycationDictionary();
          }
@@ -23,7 +24,7 @@ namespace BuildingsSystem.UI
       public List<BuildingButtonView> Create(Transform parent)
       {
          List<BuildingButtonView> list = new List<BuildingButtonView>();
-         foreach (var button in _allBuildingsDatabase.BuildingsDatabase)
+         foreach (var button in _buildingsModelDatabase.BuildingsDatabase)
          {
             var buildingButton = MonoBehaviour.Instantiate(_buttonView);
             buildingButton.Attach(parent);

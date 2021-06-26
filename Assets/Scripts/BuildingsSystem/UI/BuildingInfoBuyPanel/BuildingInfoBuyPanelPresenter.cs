@@ -15,7 +15,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
     public class BuildingInfoBuyPanelPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BuildingBuyPanelView _view;
-        private readonly AllBuildingsDatabase _allBuildingsDatabase;
+        private readonly BuildingsModelDatabase _buildingsModelDatabase;
         private readonly IBuildingButtonBuilder _buildingButtonBuilder;
         private readonly IBuildingsStacker _buildingsStacker;
         private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
@@ -29,7 +29,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public event Action OnBuyBuilding;
 
         public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
-            AllBuildingsDatabase allBuildingsDatabase,
+            BuildingsModelDatabase buildingsModelDatabase,
             IBuildingButtonBuilder buildingButtonBuilder,
             IBuildingsStacker buildingsStacker,
             PurchaseBuildingsHandler purchaseBuildingsHandler,
@@ -38,7 +38,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             CityModel cityModel)
         {
             _view = view;
-            _allBuildingsDatabase = allBuildingsDatabase;
+            _buildingsModelDatabase = buildingsModelDatabase;
             _buildingButtonBuilder = buildingButtonBuilder;
             _buildingsStacker = buildingsStacker;
             _purchaseBuildingsHandler = purchaseBuildingsHandler;
@@ -87,7 +87,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private void ShowBuildingData(EBuildingType buildingType)
         {
-            foreach (var building in _allBuildingsDatabase.BuildingsDatabase.Where(building =>
+            foreach (var building in _buildingsModelDatabase.BuildingsDatabase.Where(building =>
                 building.BuildingType == buildingType))
             {
                 _currentBuilding = building;

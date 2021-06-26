@@ -10,7 +10,7 @@ namespace BuildingsSystem.Controllers
 {
     public class BuildingController : IInitializable, IDisposable, IBuildingController
     {
-        private readonly AllBuildingsDatabase _allBuildingsDatabase;
+        private readonly BuildingsModelDatabase _buildingsModelDatabase;
         private readonly DayCounterController _dayCounterController;
         private readonly HourController _hourController;
         private readonly BuildingWindowInfoPresenter _buildingWindowInfoPresenter;
