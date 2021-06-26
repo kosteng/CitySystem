@@ -1,13 +1,8 @@
 ﻿using Items.ResourceItems;
 using System.Linq;
-using UnityEngine;
 
 namespace Inventory
 {
-    public interface IInventoryCellBuilder
-    {
-        InventoryCellView Build(EResourceItemType type);
-    }
     public class InventoryCellBuilder : IInventoryCellBuilder
     {
         private readonly IInventoryCellFactory _inventoryCellFactory;
@@ -23,9 +18,9 @@ namespace Inventory
         {
             var prefab = _inventoryCellFactory.Create();
             var resourceData = _resourceItemsDatabase.ResourceItemsData.FirstOrDefault(i => i.ResourceItemType == type);
-            Debug.Log(resourceData.ResourceItemType.ToString());
-            prefab.Title.text = $"{resourceData.ResourceItemType.ToString()} " +
-                                $"{resourceData.Amount}";
+            prefab.Title.text = $"{resourceData.ResourceItemType.ToString()} {resourceData.Amount}";
+            prefab.Amount = resourceData.Amount;
+            prefab.SetItemType(resourceData.ResourceItemType);
             return prefab;
         }
     }

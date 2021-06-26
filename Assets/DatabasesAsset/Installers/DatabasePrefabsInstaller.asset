@@ -30,3 +30,5 @@ MonoBehaviour:
   _moon: {fileID: 5110370504633707208, guid: 219e3c28b9934b648b63d1a4432cd5e5, type: 3}
   _cameraView: {fileID: 1644961497289866044, guid: dd5f6c43423fead4ca1f13c9aee0b111,
     type: 3}
+  _inventoryCell: {fileID: 5045853151615434146, guid: 7c23e6c7b1ce2984f9f271eb310df722,
+    type: 3}

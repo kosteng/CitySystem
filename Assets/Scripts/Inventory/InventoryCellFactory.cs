@@ -2,10 +2,6 @@
 
 namespace Inventory
 {
-    public interface IInventoryCellFactory
-    {
-        InventoryCellView Create();
-    }
     public class InventoryCellFactory : IInventoryCellFactory
     {
         private readonly InventoryCellView _view;
