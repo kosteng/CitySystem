@@ -24,5 +24,5 @@ MonoBehaviour:
     type: 3}
   _buildingWindowInfoView: {fileID: 6347630093621401535, guid: 14bec2a3c2e0e14468f0e5fcd40a8a82,
     type: 3}
-  _inventoryView: {fileID: 7639927262684802031, guid: e0d7703df3642414583880b3c88218a4,
+  _inventoryView: {fileID: -3729975646443175812, guid: e0d7703df3642414583880b3c88218a4,
     type: 3}

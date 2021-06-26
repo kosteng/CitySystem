@@ -1,5 +1,6 @@
 ﻿using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using City;
+using DayChangeSystem.Views;
 using Engine.UI;
 using Inventory;
 using UI.BottomPanel;

@@ -1,4 +1,5 @@
-﻿using Engine.UI;
+﻿using DayChangeSystem.Views;
+using Engine.UI;
 using UnityEngine;
 
 namespace DayChangeSystem.Controllers

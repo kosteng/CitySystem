@@ -84,6 +84,8 @@ namespace Engine.Installers
         private void InventorySystem()
         {
             Container.BindInterfacesTo<InventoryPresenter>().AsSingle();
+            Container.BindInterfacesTo<InventoryCellFactory>().AsSingle();
+            Container.BindInterfacesTo<InventoryCellBuilder>().AsSingle();
         }
         
         private void Items()

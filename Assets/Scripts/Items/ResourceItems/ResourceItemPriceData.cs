@@ -12,16 +12,4 @@ namespace Items.ResourceItems
         public EResourceItemType ItemType => _itemType;
         public float Amount => _amount;
     }
-    
-    [Serializable]
-    public class ResourceItemPriceDataWithRandom
-    {
-        [SerializeField] private EResourceItemType _itemType;
-        [SerializeField] private int _minAmount;
-        [SerializeField] private int _maxAmount;
-
-        public EResourceItemType ItemType => _itemType;
-        public int MinAmount => _minAmount;
-        public int MaxAmount => _maxAmount;
-    }
 }

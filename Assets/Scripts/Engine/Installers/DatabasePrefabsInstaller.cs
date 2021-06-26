@@ -3,6 +3,7 @@ using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using City;
 using DayChangeSystem.Databases;
 using DayChangeSystem.Views;
+using Inventory;
 using Items.InteractItems;
 using Items.ResourceItems;
 using Units.Views;
@@ -26,6 +27,7 @@ namespace Engine.Installers
         [SerializeField] private SunView _sun;
         [SerializeField] private GameObject _moon;
         [SerializeField] private CameraView _cameraView;
+        [SerializeField] private InventoryCellView _inventoryCell;
         public override void InstallBindings()
         {
             Buildings();
@@ -62,6 +64,7 @@ namespace Engine.Installers
 
         private void Inventory()
         {
+            Container.BindInstance(_inventoryCell);
         }
 
         private void Items()
