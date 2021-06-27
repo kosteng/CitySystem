@@ -15,6 +15,7 @@ using InputControls;
 using InputControls.CameraControls;
 using InputControls.InpitClicker;
 using Inventory;
+using Items.ResourceItems;
 using UI.BottomPanel;
 using Units.Controllers;
 using Zenject;
@@ -93,6 +94,7 @@ namespace Engine.Installers
         {
             Container.BindInterfacesAndSelfTo<Items.InteractableItemController>().AsSingle();
             Container.BindInterfacesTo<Items.InteractItemFactory>().AsSingle();
+            Container.BindInterfacesTo<ResourceItemsTransfer>().AsSingle();
         }
 
         private void Ui()

@@ -10,6 +10,7 @@ namespace InputControls
         void CheatAddResources(IResourcesStorage resourcesStorage);
         void ShowHideCityResourcesPanel(GameObject panel);
         void PrintResources(IResourcesStorage resourcesStorage, string type);
+        bool UseTransfer();
     }
 
     public class PlayerInputControls : IPlayerInputControls
@@ -48,8 +49,13 @@ namespace InputControls
         {
             foreach (var data in resourcesStorage.ResourceItemsData)
             {
-              Debug.Log($"{type} {data.ResourceItemType} {data.Amount}");  
+                Debug.Log($"{type} {data.ResourceItemType} {data.Amount}");
             }
+        }
+
+        public bool UseTransfer()
+        {
+            return Input.GetKeyDown(KeyCode.C);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Engine.Mediators;
+﻿using City;
+using Engine.Mediators;
 using Engine.UI;
 using InputControls;
 using Items.ResourceItems;
@@ -16,26 +17,23 @@ namespace Inventory
         private readonly IInventoryCellBuilder _inventoryCellBuilder;
         private readonly IResourcesStorage _resourcesStorage;
         private readonly IPlayerInputControls _playerInputControls;
+        private readonly IResourceItemsTransfer _resourceItemsTransfer;
+        private readonly ICityController _cityController;
         private readonly List<InventoryCellView> _cells = new List<InventoryCellView>();
 
         public InventoryPresenter(InventoryView view,
             IInventoryCellBuilder inventoryCellBuilder,
             CharacterMovementController characterMovementController,
-            IPlayerInputControls playerInputControls)
+            IPlayerInputControls playerInputControls,
+            IResourceItemsTransfer resourceItemsTransfer,
+            ICityController cityController)
         {
             _view = view;
             _inventoryCellBuilder = inventoryCellBuilder;
             _resourcesStorage = characterMovementController.CharacterModel.ResourcesStorage;
             _playerInputControls = playerInputControls;
-            // _view.gameObject.SetActive(false);
-            // foreach (var itemData in _resourcesStorage.ResourceItemsData)
-            // {
-            //     var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, _view.ScrollView, _view.ToggleGroup);
-            //     
-            //     cell.Subscribe(OnCellClick);
-            //
-            //     _cells.Add(cell);
-            // }
+            _resourceItemsTransfer = resourceItemsTransfer;
+            _cityController = cityController;
         }
 
         public void Attach(Transform parent)
@@ -64,6 +62,8 @@ namespace Inventory
 
         public void Update(float deltaTime)
         {
+            _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, EResourceItemType.Log, 13);
+
             if (_playerInputControls.PressInventoryButton())
             {
                 if (!_view.gameObject.activeSelf)
@@ -73,12 +73,18 @@ namespace Inventory
 
                 _view.gameObject.SetActive(!_view.gameObject.activeSelf);
             }
+            
+            if (_playerInputControls.UseTransfer())
+            {
+                Debug.Log(1);
+                _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, EResourceItemType.Log, 10);
+            }
+            
         }
 
         private void OnCellClick(bool isOnToggle, InventoryCellView cell)
         {
             cell.SetColor(isOnToggle);
-
         }
 
         public void Initialize()
@@ -86,9 +92,7 @@ namespace Inventory
             _playerInputControls.CheatAddResources(_resourcesStorage);
             if (_cells.Count > 0)
                 return;
-            
-
-            
+            _resourcesStorage.OnChanced += RefreshData;
             foreach (var itemData in _resourcesStorage.ResourceItemsData)
             {
                 var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, _view.ScrollView, _view.ToggleGroup);
@@ -105,6 +109,7 @@ namespace Inventory
             {
                 inventoryCellView.Unsubscribe();
             }
+            _resourcesStorage.OnChanced -= RefreshData;
         }
     }
 }

@@ -39,7 +39,6 @@ namespace City
             _hourController = hourController;
             _resourcesStorage = new ResourcesStorage(resourceItemsDatabase); // todo фабрика
             _playerInputControls = playerInputControls;
-            _resourcesStorage.OnChanced += RefreshResourcesToView;
         }
 
         private void NextDayChanged()
@@ -87,6 +86,7 @@ namespace City
             _resourcesStorage.OnChanced += RefreshResourcesToView;
             _dayCounterController.OnDayChanged += NextDayChanged;
             _hourController.OnHourChanged += RefreshResourcesToView;
+            RefreshResourcesToView();
         }
 
         public void Attach(Transform parent)
