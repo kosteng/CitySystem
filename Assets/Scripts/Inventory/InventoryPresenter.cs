@@ -59,11 +59,15 @@ namespace Inventory
                 }
             }
         }
+        
+//todo удалить если не понадобится
+        private void Transfer()
+        {
+            _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, EResourceItemType.Log, 13);
+        }
 
         public void Update(float deltaTime)
         {
-            _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, EResourceItemType.Log, 13);
-
             if (_playerInputControls.PressInventoryButton())
             {
                 if (!_view.gameObject.activeSelf)
@@ -73,13 +77,6 @@ namespace Inventory
 
                 _view.gameObject.SetActive(!_view.gameObject.activeSelf);
             }
-            
-            if (_playerInputControls.UseTransfer())
-            {
-                Debug.Log(1);
-                _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, EResourceItemType.Log, 10);
-            }
-            
         }
 
         private void OnCellClick(bool isOnToggle, InventoryCellView cell)
@@ -93,16 +90,22 @@ namespace Inventory
             if (_cells.Count > 0)
                 return;
             _resourcesStorage.OnChanced += RefreshData;
+            
             foreach (var itemData in _resourcesStorage.ResourceItemsData)
             {
                 var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, _view.ScrollView, _view.ToggleGroup);
                 
-                cell.Subscribe(OnCellClick);
+                cell.Subscribe(OnCellClick, OnShowTransferWindow);
 
                 _cells.Add(cell);
             }
         }
 
+        private void OnShowTransferWindow(InventoryCellView cell)
+        {
+            _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, cell.ItemType, 1);
+        }
+        
         public void Dispose()
         {
             foreach (var inventoryCellView in _cells)

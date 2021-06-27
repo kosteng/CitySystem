@@ -9,8 +9,7 @@ namespace Items.ResourceItems
         [SerializeField] private float _weight;
         public EResourceItemType ResourceItemType;
         public ResourceItemView View;
-    //    [NonSerialized] 
-        public float Amount;
+        [NonSerialized] public float Amount;
         public float Weight => _weight;
 
         public ResourceItemData(float weight, EResourceItemType resourceItemType, ResourceItemView view, float amount)

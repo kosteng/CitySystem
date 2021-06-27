@@ -10,6 +10,7 @@ namespace Inventory
         [SerializeField] private Image _cellBorder;
         [SerializeField] private Text _amount;
         [SerializeField] private Toggle _toggle;
+        [SerializeField] private Button _transferButton;
         
         private EResourceItemType _itemType;
         
@@ -20,16 +21,20 @@ namespace Inventory
         public void SetItemType(EResourceItemType type)
         {
             _itemType = type;
-        }
+        }       
 
-        public void Subscribe(Action<bool, InventoryCellView> onCellClick)
+        public void Subscribe(Action<bool, InventoryCellView> onCellClick, Action<InventoryCellView> onButtonClick)
         {
             _toggle.onValueChanged.AddListener(b => onCellClick?.Invoke(b, this));
+
+            _transferButton.onClick.AddListener(() => onButtonClick?.Invoke(this));
+
         }
         
         public void Unsubscribe()
         {
             _toggle.onValueChanged.RemoveAllListeners();
+            _transferButton.onClick.RemoveAllListeners();
         }
 
         public void RefreshAmount()

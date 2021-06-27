@@ -28,7 +28,7 @@ namespace InputControls
 
         public bool PressInventoryButton()
         {
-            return Input.GetKeyDown(KeyCode.Space);
+            return Input.GetKeyDown(KeyCode.I);
         }
 
         public void CheatAddResources(IResourcesStorage resourcesStorage)
