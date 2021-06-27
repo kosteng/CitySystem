@@ -8,6 +8,7 @@ using BuildingsSystem.Views;
 using City;
 using Engine.UI;
 using Items.ResourceItems;
+using Units.Controllers;
 using UnityEngine;
 using Zenject;
 
@@ -22,12 +23,11 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly PurchaseBuildingsHandler _purchaseBuildingsHandler;
         private readonly IBuildingFactory _buildingFactory;
         private readonly IBuildingController _buildingController;
-        private readonly ResourcesStorage _resourcesStorage;
+        private readonly IResourcesStorage _resourcesStorage;
 
         private List<BuildingButtonView> _buttonsList;
 
         private BuildingDatabase _currentBuilding;
-        public event Action OnBuyBuilding;
 
         public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
             BuildingsModelDatabase buildingsModelDatabase,
@@ -36,7 +36,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             PurchaseBuildingsHandler purchaseBuildingsHandler,
             IBuildingFactory buildingFactory,
             IBuildingController buildingController,
-            ResourcesStorage resourcesStorage)
+            CharacterMovementController characterMovementController)
         {
             _view = view;
             _buildingsModelDatabase = buildingsModelDatabase;
@@ -45,7 +45,8 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _purchaseBuildingsHandler = purchaseBuildingsHandler;
             _buildingFactory = buildingFactory;
             _buildingController = buildingController;
-            _resourcesStorage = resourcesStorage;
+
+            _resourcesStorage = characterMovementController.CharacterModel.ResourcesStorage;
         }
 
         public void Initialize()
@@ -115,7 +116,6 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _purchaseBuildingsHandler.PurchaseBuilding(_resourcesStorage, _currentBuilding.CostResourcesData);
 
            _buildingController.AddBuildings(_buildingFactory.Create(_currentBuilding, _resourcesStorage));
-            OnBuyBuilding?.Invoke();
         }
 
         public void Dispose()

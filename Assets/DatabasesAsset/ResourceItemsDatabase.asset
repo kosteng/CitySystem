@@ -29,7 +29,7 @@ MonoBehaviour:
     ResourceItemType: 5
     View: {fileID: 0}
   - _weight: 0
-    ResourceItemType: 4
+    ResourceItemType: 6
     View: {fileID: 0}
   - _weight: 0
     ResourceItemType: 7

@@ -8,7 +8,7 @@ namespace BuildingsSystem
 {
     public class PurchaseBuildingsHandler
     {
-        public void PurchaseBuilding(ResourcesStorage purchaser, List<ResourceItemPriceData> cost)
+        public void PurchaseBuilding(IResourcesStorage purchaser, List<ResourceItemPriceData> cost)
         {
             foreach (var buildingCost in cost)
             {
@@ -21,7 +21,7 @@ namespace BuildingsSystem
             }
         }
 
-        public bool TryPurchaseBuilding(ResourcesStorage purchaser, List<ResourceItemPriceData> cost)
+        public bool TryPurchaseBuilding(IResourcesStorage purchaser, List<ResourceItemPriceData> cost)
         {
             var canPurchase = true;
             

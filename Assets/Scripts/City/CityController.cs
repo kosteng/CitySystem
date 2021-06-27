@@ -2,6 +2,7 @@
 using DayChangeSystem.Controllers;
 using Engine.Mediators;
 using Engine.UI;
+using InputControls;
 using Items.ResourceItems;
 using System;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace City
 {
     public interface ICityController
     {
-        ResourcesStorage ResourcesStorage { get; }
+        IResourcesStorage ResourcesStorage { get; }
     }
 
     public class CityController : ICityController, IInitializable, IAttachableUi, IDisposable, IUpdatable
@@ -19,24 +20,26 @@ namespace City
         private readonly CityView _cityView;
         private readonly DayCounterController _dayCounterController;
         private readonly HourController _hourController;
-        private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
+        private readonly ResourceItemsDatabase _resourceItemsDatabase;
 
-        private readonly ResourcesStorage _resourcesStorage;
+        private readonly IResourcesStorage _resourcesStorage;
+        private readonly IPlayerInputControls _playerInputControls;
 
-        public ResourcesStorage ResourcesStorage => _resourcesStorage;
+        public IResourcesStorage ResourcesStorage => _resourcesStorage;
 
         public CityController(
             CityView cityView,
             DayCounterController dayCounterController,
             HourController hourController,
-            BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter,
-            ResourcesStorage resourcesStorage)
+            ResourceItemsDatabase resourceItemsDatabase,
+            IPlayerInputControls playerInputControls)
         {
             _cityView = cityView;
             _dayCounterController = dayCounterController;
             _hourController = hourController;
-            _buildingInfoBuyPanelPresenter = buildingInfoBuyPanelPresenter;
-            _resourcesStorage = resourcesStorage;
+            _resourcesStorage = new ResourcesStorage(resourceItemsDatabase); // todo фабрика
+            _playerInputControls = playerInputControls;
+            _resourcesStorage.OnChanced += RefreshResourcesToView;
         }
 
         private void NextDayChanged()
@@ -82,8 +85,9 @@ namespace City
         public void Initialize()
         {
             RefreshResourcesToView();
+            _resourcesStorage.OnChanced += RefreshResourcesToView;
             _dayCounterController.OnDayChanged += NextDayChanged;
-            _buildingInfoBuyPanelPresenter.OnBuyBuilding += RefreshResourcesToView;
+            
             _hourController.OnHourChanged += RefreshResourcesToView;
         }
 
@@ -95,25 +99,17 @@ namespace City
         public void Dispose()
         {
             _dayCounterController.OnDayChanged -= NextDayChanged;
-            _buildingInfoBuyPanelPresenter.OnBuyBuilding -= RefreshResourcesToView;
+
             _hourController.OnHourChanged -= RefreshResourcesToView;
+            _resourcesStorage.OnChanced -= RefreshResourcesToView;
         }
 
 //todo убрать обновление каждый кадр после тестов
         public void Update(float deltaTime)
         {
-            RefreshResourcesToView();
+          //  RefreshResourcesToView();
             //todo грязный дебаг 
-            if (Input.GetKeyDown(KeyCode.R))
-                _cityView.DebugPanel.SetActive(!_cityView.DebugPanel.activeSelf);
-
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                foreach (var resourceItemData in _resourcesStorage.ResourceItemsData)
-                {
-                    resourceItemData.Amount += 1000f;
-                }
-            }
+            _playerInputControls.ShowHideCityResourcesPanel(_cityView.DebugPanel);
         }
     }
 }

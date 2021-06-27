@@ -11,7 +11,7 @@ namespace BuildingsSystem
     public class BuildingFactory : IBuildingFactory
     {
         public IBuilding Create(BuildingDatabase currentBuilding,
-            ResourcesStorage resourcesStorage)
+            IResourcesStorage resourcesStorage)
         {
             switch (currentBuilding.BuildingType)
             {

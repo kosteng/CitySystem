@@ -1,5 +1,6 @@
 ﻿using BuildingsSystem.Databases;
 using BuildingsSystem.UI.BuildingInfoBuyPanel;
+using Characters;
 using City;
 using DayChangeSystem.Databases;
 using DayChangeSystem.Views;

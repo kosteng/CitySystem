@@ -1,11 +1,12 @@
-﻿using Characters;
-using System.Collections.Generic;
-using Units;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "DatabasesSO/CharactersDatabase")]
-public class CharactersDatabase : ScriptableObject
+namespace Characters
 {
-    [SerializeField] private List<CharacterModel> _characterModels;
-    public List<CharacterModel> CharacterModels => _characterModels;
+    [CreateAssetMenu(menuName = "DatabasesSO/CharactersDatabase")]
+    public class CharactersDatabase : ScriptableObject
+    {
+        [SerializeField] private List<CharacterModel> _characterModels;
+        public List<CharacterModel> CharacterModels => _characterModels;
+    }
 }

@@ -11,10 +11,10 @@ using DayChangeSystem.Models;
 using Engine.Mediators;
 using Engine.UI.Canvas;
 using Extensions.Pool;
+using InputControls;
 using InputControls.CameraControls;
 using InputControls.InpitClicker;
 using Inventory;
-using Items.ResourceItems;
 using UI.BottomPanel;
 using Units.Controllers;
 using Zenject;
@@ -52,7 +52,6 @@ namespace Engine.Installers
         private void CitySystem()
         {
             Container.BindInterfacesAndSelfTo<CityController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<ResourcesStorage>().AsSingle();
         }
         
         private void Characters()
@@ -64,7 +63,7 @@ namespace Engine.Installers
         
         private void DaySystem()
         {
-            Container.BindInterfacesAndSelfTo<DayCounterController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<DayCounterController>().AsSingle();
             Container.BindInterfacesAndSelfTo<HourController>().AsSingle();
             Container.BindInterfacesAndSelfTo<DayCounterPresenter>().AsSingle();
             Container.BindInterfacesTo<DayModel>().AsSingle();
@@ -80,6 +79,7 @@ namespace Engine.Installers
         {
             Container.BindInterfacesAndSelfTo<CameraController>().AsSingle();
             Container.BindInterfacesTo<InputClicker>().AsSingle();
+            Container.BindInterfacesTo<PlayerInputControls>().AsSingle();
         }
         
         private void InventorySystem()

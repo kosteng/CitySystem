@@ -13,14 +13,14 @@ namespace BuildingsSystem
     {
         private readonly ABuildingView _view;
 
-        private readonly ResourcesStorage _resourcesStorage;
+        private readonly IResourcesStorage _resourcesStorage;
         private EBuildingType _buildingType;
         public event BuildingClickHandler OnBuildingClickHandler;
 
         public ABuildingView BuildingView => _view;
         public EBuildingType BuildingType => _buildingType;
 
-        public ABuildingModel (BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage)
+        public ABuildingModel (BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage)
         {
             _view = buildingDatabase.View;
             _buildingType = buildingDatabase.BuildingType;
@@ -53,7 +53,7 @@ namespace BuildingsSystem
 
     public class HouseBuildingModel : ABuildingModel
     {
-        public HouseBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public HouseBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
         
@@ -65,7 +65,7 @@ namespace BuildingsSystem
 
     public class SawBuildingModel : ABuildingModel
     {
-        public SawBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public SawBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
 
@@ -77,7 +77,7 @@ namespace BuildingsSystem
 
     public class MineBuildingModel : ABuildingModel
     {
-        public MineBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public MineBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
 
@@ -89,7 +89,7 @@ namespace BuildingsSystem
 
     public class StorageBuildingModel : ABuildingModel
     {
-        public StorageBuildingModel(BuildingDatabase buildingDatabase, ResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public StorageBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
         {
         }
         

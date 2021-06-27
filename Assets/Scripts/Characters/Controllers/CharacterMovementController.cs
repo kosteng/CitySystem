@@ -1,7 +1,9 @@
 ﻿using Characters;
 using Characters.Controllers;
 using Engine.Mediators;
+using InputControls;
 using InputControls.InpitClicker;
+using Items.ResourceItems;
 using UnityEngine;
 
 
@@ -10,25 +12,28 @@ namespace Units.Controllers
     public class CharacterMovementController : IUpdatable
     {
         private readonly IInputClicker _inputClicker;
+        private readonly IPlayerInputControls _playerInputControls;
         private readonly ICharacterAnimationSwitcher _characterAnimationSwitcher;
         private readonly ICharacterItemExtractor _characterItemExtractor;
         private readonly CharacterModel _characterModel;
         private Vector3 _pointDestination;
         
         public Transform UnitViewTransform => _characterModel.View.transform;
-
+        public CharacterModel CharacterModel => _characterModel;
         public CharacterMovementController(
             CharactersDatabase charactersDatabase,
             IInputClicker inputClicker,
+            IPlayerInputControls playerInputControls,
             ICharacterAnimationSwitcher characterAnimationSwitcher,
-            ICharacterItemExtractor characterItemExtractor
-        )
+            ICharacterItemExtractor characterItemExtractor,
+            ResourceItemsDatabase resourceItemsDatabase)
         {
             _inputClicker = inputClicker;
+            _playerInputControls = playerInputControls;
             _characterAnimationSwitcher = characterAnimationSwitcher;
             _characterItemExtractor = characterItemExtractor;
-            _characterModel = new CharacterModel();
 
+            _characterModel = new CharacterModel(resourceItemsDatabase);
             //todo нужна фабрика
             if (_characterModel.View == null)
                 _characterModel.View = Object.Instantiate(charactersDatabase.CharacterModels[0].View);
@@ -36,6 +41,7 @@ namespace Units.Controllers
 
         public void Update(float deltaTime)
         {
+            _playerInputControls.PressCheatAddResources(_characterModel.ResourcesStorage);
             _characterModel.IsMoving =
                 _characterModel.View.NavMeshAgent.remainingDistance > _characterModel.View.NavMeshAgent.stoppingDistance;
             CheckTargetForMove();
