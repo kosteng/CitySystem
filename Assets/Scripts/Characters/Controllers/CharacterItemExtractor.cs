@@ -7,12 +7,11 @@ namespace Characters.Controllers
 {
     public class CharacterItemExtractor : ICharacterItemExtractor
     {
-        private readonly ICityController _cityController;
+
         private readonly InteractItemsDatabase _interactItemsDatabase;
 
-        public CharacterItemExtractor(ICityController cityController, InteractItemsDatabase interactItemsDatabase)
+        public CharacterItemExtractor(InteractItemsDatabase interactItemsDatabase)
         {
-            _cityController = cityController;
             _interactItemsDatabase = interactItemsDatabase;
         }
 
@@ -35,6 +34,7 @@ namespace Characters.Controllers
             
             if (interactItem.ExtractTime > 0)
                 return;
+            //todo думаю добавить в словарик
             var resources =
                 _interactItemsDatabase.InteractItemsData.FirstOrDefault(i => i.Type == interactItem.ItemType);
             
@@ -43,9 +43,9 @@ namespace Characters.Controllers
             foreach (var resourceItem in resources.ResourceItemsPriceDataWithRandom)
             {
                 var amountResource = Random.Range(resourceItem.MinAmount, resourceItem.MaxAmount);
-                
-                Debug.Log( resourceItem.ItemType + " " + amountResource);
-                _cityController.ResourcesStorage.AddResource(resourceItem.ItemType, amountResource);
+
+                Debug.Log($"{resourceItem.ItemType} {amountResource}");
+                characterModel.ResourcesStorage.AddResource(resourceItem.ItemType, amountResource);
             }
 
             interactItem.Transform.gameObject.SetActive(false);

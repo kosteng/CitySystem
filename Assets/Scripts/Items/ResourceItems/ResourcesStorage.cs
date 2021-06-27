@@ -23,7 +23,11 @@ namespace Items.ResourceItems
         {
             foreach (var resourceItemData in resourceItemsDatabase.ResourceItemsData)
             {
-                _resourceItemsData.Add(resourceItemData);
+                _resourceItemsData.Add(new ResourceItemData(resourceItemData.Weight,
+                    resourceItemData.ResourceItemType,
+                    resourceItemData.View,
+                    resourceItemData.Amount));
+
             }
         }
 

@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace Units.Controllers
 {
+    //todo класс фактически стал полностью контроллировать перса, нужно переделать
     public class CharacterMovementController : IUpdatable
     {
         private readonly IInputClicker _inputClicker;
@@ -17,7 +18,7 @@ namespace Units.Controllers
         private readonly ICharacterItemExtractor _characterItemExtractor;
         private readonly CharacterModel _characterModel;
         private Vector3 _pointDestination;
-        
+
         public Transform UnitViewTransform => _characterModel.View.transform;
         public CharacterModel CharacterModel => _characterModel;
         public CharacterMovementController(
@@ -34,6 +35,7 @@ namespace Units.Controllers
             _characterItemExtractor = characterItemExtractor;
 
             _characterModel = new CharacterModel(resourceItemsDatabase);
+            
             //todo нужна фабрика
             if (_characterModel.View == null)
                 _characterModel.View = Object.Instantiate(charactersDatabase.CharacterModels[0].View);
@@ -53,9 +55,6 @@ namespace Units.Controllers
             SetMovementState();
             CheckInteract();
             _characterItemExtractor.Extract(_characterModel);
-            
-            if (Input.GetKeyDown(KeyCode.H))
-                _playerInputControls.PrintResources(_characterModel.ResourcesStorage,"Character");
         }
 
         private void CheckTargetForMove()

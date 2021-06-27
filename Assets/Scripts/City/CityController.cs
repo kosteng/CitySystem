@@ -86,7 +86,6 @@ namespace City
         {
             _resourcesStorage.OnChanced += RefreshResourcesToView;
             _dayCounterController.OnDayChanged += NextDayChanged;
-            
             _hourController.OnHourChanged += RefreshResourcesToView;
         }
 
@@ -98,19 +97,15 @@ namespace City
         public void Dispose()
         {
             _dayCounterController.OnDayChanged -= NextDayChanged;
-
             _hourController.OnHourChanged -= RefreshResourcesToView;
             _resourcesStorage.OnChanced -= RefreshResourcesToView;
         }
-
-//todo убрать обновление каждый кадр после тестов
+        
         public void Update(float deltaTime)
         {
-            RefreshResourcesToView();
             //todo грязный дебаг 
             _playerInputControls.ShowHideCityResourcesPanel(_cityView.DebugPanel);
-            if (Input.GetKeyDown(KeyCode.G))
-                _playerInputControls.PrintResources(_resourcesStorage,"City");
+
         }
     }
 }
