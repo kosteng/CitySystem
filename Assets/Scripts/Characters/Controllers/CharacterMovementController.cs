@@ -53,6 +53,9 @@ namespace Units.Controllers
             SetMovementState();
             CheckInteract();
             _characterItemExtractor.Extract(_characterModel);
+            
+            if (Input.GetKeyDown(KeyCode.H))
+                _playerInputControls.PrintResources(_characterModel.ResourcesStorage,"Character");
         }
 
         private void CheckTargetForMove()

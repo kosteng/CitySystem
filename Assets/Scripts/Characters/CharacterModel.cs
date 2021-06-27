@@ -1,5 +1,4 @@
-﻿using City;
-using Items.InteractItems.Interfaces;
+﻿using Items.InteractItems.Interfaces;
 using Items.ResourceItems;
 using System;
 using Units.Views;

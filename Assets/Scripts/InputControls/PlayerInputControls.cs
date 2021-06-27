@@ -9,6 +9,7 @@ namespace InputControls
         bool PressInventoryButton();
         void CheatAddResources(IResourcesStorage resourcesStorage);
         void ShowHideCityResourcesPanel(GameObject panel);
+        void PrintResources(IResourcesStorage resourcesStorage, string type);
     }
 
     public class PlayerInputControls : IPlayerInputControls
@@ -41,6 +42,14 @@ namespace InputControls
         {
             if (Input.GetKeyDown(KeyCode.C))
                 panel.gameObject.SetActive(!panel.gameObject.activeSelf);
+        }
+
+        public void PrintResources(IResourcesStorage resourcesStorage, string type)
+        {
+            foreach (var data in resourcesStorage.ResourceItemsData)
+            {
+              Debug.Log($"{type} {data.ResourceItemType} {data.Amount}");  
+            }
         }
     }
 }
