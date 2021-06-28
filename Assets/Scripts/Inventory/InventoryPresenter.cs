@@ -66,14 +66,12 @@ namespace Inventory
 
         private void OnConfirmClick(EResourceItemType type, float amount)
         {
-            Debug.Log("OnConfirmClick" + type.ToString() + amount);
             _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, type, amount);
             _transferPopupView.Hide();
         }
 
         private void OnTransferSliderChanced(float value)
         {
-            Debug.Log("OnTransferSliderChanced" + value);
             _transferPopupView.SetCurrentAmount(value);
         }
 
@@ -132,7 +130,6 @@ namespace Inventory
         {
             var maxAmount = _resourcesStorage.GetAmountResource(cell.ItemType);
             _transferPopupView.Show(cell.ItemType, maxAmount);
-            //   _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, cell.ItemType, 1);
         }
 
         public void Dispose()
