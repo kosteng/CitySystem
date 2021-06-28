@@ -8,6 +8,8 @@ namespace Inventory
     {
         [SerializeField] private ScrollRect _scrollVRect;
         [SerializeField] private ToggleGroup _toggleGroup;
+        [SerializeField] private GameObject _transferPopup;
+        
         public Transform ScrollView => _scrollVRect.content;
         public ScrollRect ScrollRect => _scrollVRect;
         public ToggleGroup ToggleGroup => _toggleGroup;

@@ -6,6 +6,7 @@ namespace Items.ResourceItems
 {
     public interface IResourcesStorage
     {
+        float GetAmountResource(EResourceItemType type);
         void AddResource(EResourceItemType type, float amount);
         void RemoveResource(EResourceItemType type, float amount);
         List<ResourceItemData> ResourceItemsData { get; }
@@ -29,6 +30,11 @@ namespace Items.ResourceItems
                     resourceItemData.Amount));
 
             }
+        }
+
+        public float GetAmountResource(EResourceItemType type)
+        {
+            return _resourceItemsData.FirstOrDefault(i => i.ResourceItemType == type).Amount;
         }
 
         public void AddResource(EResourceItemType type, float amount)

@@ -19,6 +19,8 @@ namespace Engine.Installers
         [SerializeField] private DayCounterView _dayCounterView;
         [SerializeField] private BuildingWindowInfoView _buildingWindowInfoView;
         [SerializeField] private InventoryView _inventoryView;
+        [SerializeField] private TransferPopupView _transferPopupView;
+        
         public override void InstallBindings()
         {
             Container.Bind<CanvasView>().FromComponentInNewPrefab(_canvasView).AsSingle();
@@ -28,6 +30,7 @@ namespace Engine.Installers
             Container.Bind<DayCounterView>().FromComponentInNewPrefab(_dayCounterView).AsSingle();
             Container.Bind<BuildingWindowInfoView>().FromComponentInNewPrefab(_buildingWindowInfoView).AsSingle();
             Container.Bind<InventoryView>().FromComponentInNewPrefab(_inventoryView).AsSingle();
+            Container.Bind<TransferPopupView>().FromComponentInNewPrefab(_transferPopupView).AsSingle();
         }
     }
 }
