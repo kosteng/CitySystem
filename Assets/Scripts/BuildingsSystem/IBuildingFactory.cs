@@ -8,7 +8,7 @@ namespace BuildingsSystem
 {
     public interface IBuildingFactory
     {
-        IBuilding Create(BuildingDatabase currentBuilding, IResourcesStorage resourcesStorage);
+        IBuilding Create(ABuildingView view, BuildingDatabase currentBuilding, IResourcesStorage resourcesStorage);
         ABuildingView Create(ABuildingView montageBuilding);
     }
 }

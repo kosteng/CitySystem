@@ -10,23 +10,23 @@ namespace BuildingsSystem
 {
     public class BuildingFactory : IBuildingFactory
     {
-        public IBuilding Create(BuildingDatabase currentBuilding,
+        public IBuilding Create(ABuildingView view, BuildingDatabase currentBuilding,
             IResourcesStorage resourcesStorage)
         {
             switch (currentBuilding.BuildingType)
             {
                 case EBuildingType.House:
-                    return new HouseBuildingModel(currentBuilding, resourcesStorage);
+                    return new HouseBuildingModel(view, currentBuilding, resourcesStorage);
 
                 case EBuildingType.SawMill:
-                    return new SawBuildingModel(currentBuilding,  resourcesStorage);
+                    return new SawBuildingModel(view, currentBuilding,  resourcesStorage);
 
                 case EBuildingType.Mine:
-                    return new MineBuildingModel(currentBuilding,  resourcesStorage);
+                    return new MineBuildingModel(view, currentBuilding,  resourcesStorage);
 
 
                 case EBuildingType.Storage:
-                    return new StorageBuildingModel(currentBuilding,  resourcesStorage);
+                    return new StorageBuildingModel(view, currentBuilding,  resourcesStorage);
   
 
                 default: return null;

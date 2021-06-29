@@ -24,7 +24,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         private readonly IBuildingFactory _buildingFactory;
         private readonly IBuildingController _buildingController;
         private readonly IResourcesStorage _resourcesStorage;
-
+        private ABuildingView _prefabBuilding;
         private List<BuildingButtonView> _buttonsList;
 
         private BuildingDatabase _currentBuilding;
@@ -107,15 +107,14 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             if (!_purchaseBuildingsHandler.TryPurchaseBuilding(_resourcesStorage, _currentBuilding.CostResourcesData))
                 return;
 
-            var buildingObject = _buildingFactory.Create(_currentBuilding.View);
-            _buildingsStacker.StartPlacingBuilding(buildingObject);
+            _prefabBuilding = _buildingFactory.Create(_currentBuilding.View);
+            _buildingsStacker.StartPlacingBuilding(_prefabBuilding);
         }
 
         private void PurchaseBuilding(ABuildingView montageBuilding)
         {
             _purchaseBuildingsHandler.PurchaseBuilding(_resourcesStorage, _currentBuilding.CostResourcesData);
-
-           _buildingController.AddBuildings(_buildingFactory.Create(_currentBuilding, _resourcesStorage));
+            _buildingController.AddBuildings(_buildingFactory.Create(_prefabBuilding, _currentBuilding, _resourcesStorage));
         }
 
         public void Dispose()

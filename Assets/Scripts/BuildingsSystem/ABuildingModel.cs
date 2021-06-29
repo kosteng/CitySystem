@@ -20,9 +20,9 @@ namespace BuildingsSystem
         public ABuildingView BuildingView => _view;
         public EBuildingType BuildingType => _buildingType;
 
-        public ABuildingModel (BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage)
+        public ABuildingModel (ABuildingView view, BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage)
         {
-            _view = buildingDatabase.View;
+            _view = view;
             _buildingType = buildingDatabase.BuildingType;
             _resourcesStorage = resourcesStorage;
         }
@@ -53,7 +53,7 @@ namespace BuildingsSystem
 
     public class HouseBuildingModel : ABuildingModel
     {
-        public HouseBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public HouseBuildingModel(ABuildingView view, BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(view, buildingDatabase, resourcesStorage)
         {
         }
         
@@ -65,7 +65,7 @@ namespace BuildingsSystem
 
     public class SawBuildingModel : ABuildingModel
     {
-        public SawBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public SawBuildingModel(ABuildingView view, BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(view, buildingDatabase, resourcesStorage)
         {
         }
 
@@ -77,7 +77,7 @@ namespace BuildingsSystem
 
     public class MineBuildingModel : ABuildingModel
     {
-        public MineBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public MineBuildingModel(ABuildingView view, BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(view, buildingDatabase, resourcesStorage)
         {
         }
 
@@ -89,7 +89,7 @@ namespace BuildingsSystem
 
     public class StorageBuildingModel : ABuildingModel
     {
-        public StorageBuildingModel(BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(buildingDatabase, resourcesStorage)
+        public StorageBuildingModel(ABuildingView view, BuildingDatabase buildingDatabase, IResourcesStorage resourcesStorage) : base(view, buildingDatabase, resourcesStorage)
         {
         }
         
