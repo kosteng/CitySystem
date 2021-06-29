@@ -26,3 +26,5 @@ MonoBehaviour:
     type: 3}
   _inventoryView: {fileID: -3729975646443175812, guid: e0d7703df3642414583880b3c88218a4,
     type: 3}
+  _transferPopupView: {fileID: 5205867015988698640, guid: 2a969fbcbb32ab446a8e23b7cf4d8a50,
+    type: 3}
