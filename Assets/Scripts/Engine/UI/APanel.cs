@@ -9,5 +9,20 @@ namespace Engine.UI
             var rectTransform = (RectTransform) transform;
             rectTransform.SetParent(parent, false);
         }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void SwitchActiveState()
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+        }
     }
 }

@@ -6,12 +6,16 @@ namespace Inventory
 {
     public class InventoryView : APanel
     {
-        [SerializeField] private ScrollRect _scrollVRect;
-        [SerializeField] private ToggleGroup _toggleGroup;
-        [SerializeField] private GameObject _transferPopup;
+        [SerializeField] private ScrollRect _leftSideScroll;
+        [SerializeField] private ToggleGroup _leftSideToggleGroup;
         
-        public Transform ScrollView => _scrollVRect.content;
-        public ScrollRect ScrollRect => _scrollVRect;
-        public ToggleGroup ToggleGroup => _toggleGroup;
+        [SerializeField] private ScrollRect _rightSideScroll;
+        [SerializeField] private ToggleGroup _rightSideToggleGroup;
+
+        public Transform LeftSideScroll => _leftSideScroll.content;
+        public ToggleGroup LeftSideToggleGroup => _leftSideToggleGroup;
+        
+        public Transform RightSideScroll => _rightSideScroll.content;
+        public ToggleGroup RightSideToggleGroup => _rightSideToggleGroup;
     }
 }

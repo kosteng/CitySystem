@@ -1,5 +1,34 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!208 &4801432959020458065
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381577270636159774}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.018000001, y: 0.027, z: 0.028}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.018000001, y: 0.0050000004, z: -0.004}
+  m_TimeToStationary: 0.5
+--- !u!65 &20784484764749783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381577270636159774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.036512394, y: 0.05431036, z: 0.055715468}
+  m_Center: {x: 0.018237067, y: 0.0045356834, z: -0.0038370918}
 --- !u!1 &8693307966694839102
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainRenderer: {fileID: 1381577270638362078}
   Size: {x: 10, y: 10}
+  _boxCollider: {fileID: 20784484764749783}
+  _navMeshObstacle: {fileID: 4801432959020458065}
 --- !u!65 &5170492965275988545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146,6 +177,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53bcbe80f2d2a0b43987b394e46d45b2, type: 3}
+--- !u!1 &1381577270636159774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 53bcbe80f2d2a0b43987b394e46d45b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1381577270636062142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1381577270635937598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 53bcbe80f2d2a0b43987b394e46d45b2,

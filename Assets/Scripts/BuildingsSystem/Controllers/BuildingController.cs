@@ -44,7 +44,7 @@ namespace BuildingsSystem.Controllers
             building.OnBuildingClickHandler -= OpenBuildingWindow;
         }
 
-        private void OpenBuildingWindow(ABuildingModel buildingView)
+        private void OpenBuildingWindow(IBuilding buildingView)
         {
             _buildingWindowInfoPresenter.Show(buildingView);
         }

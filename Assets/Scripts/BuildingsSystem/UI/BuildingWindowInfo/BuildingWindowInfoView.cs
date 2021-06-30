@@ -22,5 +22,6 @@ namespace UI.BottomPanel
         {
             _closeButton.onClick.RemoveAllListeners();
         }
+
     }
 }

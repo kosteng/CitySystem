@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainRenderer: {fileID: 2601116358308759369}
   Size: {x: 10, y: 10}
+  _boxCollider: {fileID: 2129352815445412837}
+  _navMeshObstacle: {fileID: 492596674444434074}
 --- !u!65 &2601116357831961199
 BoxCollider:
   m_ObjectHideFlags: 0

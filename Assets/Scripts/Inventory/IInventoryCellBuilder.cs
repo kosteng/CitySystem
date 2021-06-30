@@ -6,6 +6,6 @@ namespace Inventory
 {
     public interface IInventoryCellBuilder
     {
-        InventoryCellView Build(EResourceItemType type, Transform contentParent, ToggleGroup toggleGroup);
+        InventoryCellView Build(EResourceItemType type, Transform contentParent, ToggleGroup toggleGroup, EInventoryCellSide side);
     }
 }

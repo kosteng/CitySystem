@@ -1,6 +1,9 @@
 ﻿using BuildingsSystem;
+using BuildingsSystem.Enums;
+using BuildingsSystem.Interfaces;
 using System;
 using Engine.UI;
+using Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -10,19 +13,30 @@ namespace UI.BottomPanel
     public class BuildingWindowInfoPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BuildingWindowInfoView _view;
+        private readonly IInventoryPresenter _inventoryPresenter;
+        private readonly InventoryView _inventoryView;
 
 
-        public BuildingWindowInfoPresenter(BuildingWindowInfoView view)
+        public BuildingWindowInfoPresenter(BuildingWindowInfoView view, IInventoryPresenter inventoryPresenter)
         {
             _view = view;
+            _inventoryPresenter = inventoryPresenter;
+
         }
 
-        public void Show(ABuildingModel buildingModel)
+        public void Show(IBuilding buildingModel)
         {
             if (EventSystem.current.IsPointerOverGameObject())
               return;
             _view.gameObject.SetActive(true);
             _view.SetName(buildingModel.BuildingType.ToString());
+            if (buildingModel.BuildingType == EBuildingType.Storage)
+            {
+                _view.Hide();
+                _inventoryPresenter.Show();
+            }
+
+
         }
         private void Subscribe()
         {

@@ -5,13 +5,19 @@ using InputControls;
 using Items.ResourceItems;
 using System;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using Units.Controllers;
 using UnityEngine;
 using Zenject;
 
 namespace Inventory
 {
-    public class InventoryPresenter : IAttachableUi, IUpdatable, IInitializable, IDisposable
+    public interface IInventoryPresenter
+    {
+        void Show();
+    }
+
+    public class InventoryPresenter : IInventoryPresenter, IAttachableUi, IUpdatable, IInitializable, IDisposable
     {
         private readonly InventoryView _view;
         private readonly TransferPopupView _transferPopupView;
@@ -20,7 +26,8 @@ namespace Inventory
         private readonly IPlayerInputControls _playerInputControls;
         private readonly IResourceItemsTransfer _resourceItemsTransfer;
         private readonly ICityController _cityController;
-        private readonly List<InventoryCellView> _cells = new List<InventoryCellView>();
+        private readonly List<InventoryCellView> _leftSideCells = new List<InventoryCellView>();
+        private readonly List<InventoryCellView> _rightSideCells = new List<InventoryCellView>();
 
         public InventoryPresenter(InventoryView view,
             TransferPopupView transferPopupView,
@@ -39,21 +46,41 @@ namespace Inventory
             _cityController = cityController;
         }
 
+        public void Show()
+        {
+            RefreshData();
+            _view.Show();
+        }
+
         public void Initialize()
         {
-            _view.gameObject.SetActive(false);
+            _view.Hide();
             _playerInputControls.CheatAddResources(_resourcesStorage);
-            if (_cells.Count > 0)
+            
+            if (_leftSideCells.Count > 0 && _rightSideCells.Count > 0)
                 return;
+            
             _resourcesStorage.OnChanced += RefreshData;
+            _cityController.ResourcesStorage.OnChanced += RefreshData;
+            
+            foreach (var itemData in _cityController.ResourcesStorage.ResourceItemsData)
+            {
+                var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, _view.RightSideScroll,
+                    _view.RightSideToggleGroup, EInventoryCellSide.RightSide);
+            
+                cell.Subscribe(OnCellClick, OnShowTransferWindow);
+            
+                _rightSideCells.Add(cell);
+            }
 
             foreach (var itemData in _resourcesStorage.ResourceItemsData)
             {
-                var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, _view.ScrollView, _view.ToggleGroup);
+                var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, _view.LeftSideScroll,
+                    _view.LeftSideToggleGroup, EInventoryCellSide.LeftSide);
 
                 cell.Subscribe(OnCellClick, OnShowTransferWindow);
 
-                _cells.Add(cell);
+                _leftSideCells.Add(cell);
             }
 
             _transferPopupView.Subscribe(OnCancelClick, OnConfirmClick, OnTransferSliderChanced);
@@ -64,9 +91,18 @@ namespace Inventory
             _transferPopupView.Hide();
         }
 
-        private void OnConfirmClick(EResourceItemType type, float amount)
+        private void OnConfirmClick(EResourceItemType type, float amount, EInventoryCellSide side)
         {
-            _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, type, amount);
+            if (side == EInventoryCellSide.LeftSide)
+            {
+                _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, type, amount);
+            }
+            
+            else
+            {
+                _resourceItemsTransfer.Transfer(_cityController.ResourcesStorage,_resourcesStorage, type, amount);
+            }
+            
             _transferPopupView.Hide();
         }
 
@@ -83,7 +119,7 @@ namespace Inventory
 
         private void RefreshData()
         {
-            foreach (var cell in _cells)
+            foreach (var cell in _leftSideCells)
             {
                 foreach (var resourceItemData in _resourcesStorage.ResourceItemsData)
                 {
@@ -98,7 +134,24 @@ namespace Inventory
                     break;
                 }
             }
+
+            foreach (var cell in _rightSideCells)
+            {
+                foreach (var resourceItemData in _cityController.ResourcesStorage.ResourceItemsData)
+                {
+                    if (cell.ItemType != resourceItemData.ResourceItemType)
+                        continue;
+
+                    cell.Amount = resourceItemData.Amount;
+                    cell.gameObject.SetActive(cell.Amount > 0);
+
+                    cell.RefreshAmount();
+
+                    break;
+                }
+            }
         }
+
 
 //todo удалить если не понадобится
         private void Transfer()
@@ -117,30 +170,39 @@ namespace Inventory
                 }
 
                 _transferPopupView.Hide();
-                _view.gameObject.SetActive(!_view.gameObject.activeSelf);
+                _view.SwitchActiveState();
+                //   _view.gameObject.SetActive(!_view.gameObject.activeSelf);
             }
         }
 
-        private void OnCellClick(bool isOnToggle, InventoryCellView cell)
+        private void OnCellClick(bool isOnToggle, InventoryCellView cell, EInventoryCellSide side)
         {
             cell.SetColor(isOnToggle);
         }
 
-        private void OnShowTransferWindow(InventoryCellView cell)
+        private void OnShowTransferWindow(InventoryCellView cell, EInventoryCellSide side)
         {
-            var maxAmount = _resourcesStorage.GetAmountResource(cell.ItemType);
-            _transferPopupView.Show(cell.ItemType, maxAmount);
+            var maxAmount = side == EInventoryCellSide.LeftSide
+                ? _resourcesStorage.GetAmountResource(cell.ItemType)
+                : _cityController.ResourcesStorage.GetAmountResource(cell.ItemType);
+            
+            _transferPopupView.Show(cell, maxAmount);
         }
 
         public void Dispose()
         {
-            foreach (var inventoryCellView in _cells)
+            foreach (var inventoryCellView in _leftSideCells)
             {
                 inventoryCellView.Unsubscribe();
             }
 
+            foreach (var inventoryCellView in _rightSideCells)
+            {
+                inventoryCellView.Unsubscribe();
+            }
             _transferPopupView.UnSubscribe();
             _resourcesStorage.OnChanced -= RefreshData;
+            _cityController.ResourcesStorage.OnChanced -= RefreshData;
         }
     }
 }

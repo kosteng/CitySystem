@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 //TODO вернуть абстрактность классу
 namespace BuildingsSystem.Views
@@ -8,11 +9,27 @@ namespace BuildingsSystem.Views
     {
         [SerializeField] private Renderer MainRenderer;
         [SerializeField] private Vector2Int Size = Vector2Int.one;
+        [SerializeField] private BoxCollider _boxCollider;
+        [SerializeField] private NavMeshObstacle _navMeshObstacle;
 
         public Action OnBuildingClick;
 
-        public bool IsPlaceFree { get; private set; } = true;
+        private void Awake()
+        {
+            _boxCollider.enabled = false;
+            _navMeshObstacle.enabled = false;
+        }
+        public bool IsPlaceFree { get; private set; } = true; //todo возможно стоит эту логику решать в контроллере а не вьюхе
 
+        public void EnableBoxCollider()
+        {
+            _boxCollider.enabled = true;
+        }
+
+        public void EnableNavMeshObstacle()
+        {
+            _navMeshObstacle.enabled = true;
+        }
         public void SetTransparent(bool available)
         {
             if (available)

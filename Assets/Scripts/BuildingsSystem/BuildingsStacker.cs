@@ -43,6 +43,8 @@ namespace BuildingsSystem
 
             OnBuildingMontage?.Invoke(_flyingBuilding);
             _flyingBuilding.SetNormal();
+            _flyingBuilding.EnableBoxCollider();
+            _flyingBuilding.EnableNavMeshObstacle();
             _flyingBuilding = null;
         }
     }

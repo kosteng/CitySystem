@@ -5,7 +5,7 @@ using City;
 
 namespace BuildingsSystem.Interfaces
 {
-    public delegate void BuildingClickHandler(ABuildingModel building); //todo скорее всего нужно переделать
+    public delegate void BuildingClickHandler(IBuilding building); //todo скорее всего нужно переделать
     public interface IBuilding
     {
         void Subscribe();
