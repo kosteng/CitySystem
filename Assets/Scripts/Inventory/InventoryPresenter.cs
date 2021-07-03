@@ -50,28 +50,32 @@ namespace Inventory
         {
             RefreshData();
             _view.Show();
+            _view.ShowRightSidePanel();
         }
 
         public void Initialize()
         {
             _view.Hide();
             _playerInputControls.CheatAddResources(_resourcesStorage);
-            
+
             if (_leftSideCells.Count > 0 && _rightSideCells.Count > 0)
                 return;
-            
+
             _resourcesStorage.OnChanced += RefreshData;
             _cityController.ResourcesStorage.OnChanced += RefreshData;
-            
+
             foreach (var itemData in _cityController.ResourcesStorage.ResourceItemsData)
             {
                 var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, _view.RightSideScroll,
                     _view.RightSideToggleGroup, EInventoryCellSide.RightSide);
-            
+
                 cell.Subscribe(OnCellClick, OnShowTransferWindow);
-            
+
                 _rightSideCells.Add(cell);
             }
+            
+            if (_view.InventoryRightSideState == EInventoryRightSideState.Equipment)
+                return;
 
             foreach (var itemData in _resourcesStorage.ResourceItemsData)
             {
@@ -95,14 +99,22 @@ namespace Inventory
         {
             if (side == EInventoryCellSide.LeftSide)
             {
-                _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, type, amount);
+                if (_view.InventoryRightSideState == EInventoryRightSideState.Equipment)
+                {
+                    _resourceItemsTransfer.Transfer(_resourcesStorage, type, amount);
+                }
+                else
+                {
+                    _resourceItemsTransfer.Transfer(_resourcesStorage, _cityController.ResourcesStorage, type, amount);
+                }
+
             }
-            
+
             else
             {
-                _resourceItemsTransfer.Transfer(_cityController.ResourcesStorage,_resourcesStorage, type, amount);
+                _resourceItemsTransfer.Transfer(_cityController.ResourcesStorage, _resourcesStorage, type, amount);
             }
-            
+
             _transferPopupView.Hide();
         }
 
@@ -117,6 +129,7 @@ namespace Inventory
             _transferPopupView.Attach(parent);
         }
 
+//todo переписать
         private void RefreshData()
         {
             foreach (var cell in _leftSideCells)
@@ -135,6 +148,9 @@ namespace Inventory
                 }
             }
 
+            if (_view.InventoryRightSideState == EInventoryRightSideState.Equipment)
+                return;
+            
             foreach (var cell in _rightSideCells)
             {
                 foreach (var resourceItemData in _cityController.ResourcesStorage.ResourceItemsData)
@@ -169,9 +185,9 @@ namespace Inventory
                     RefreshData();
                 }
 
-                _transferPopupView.Hide();
+                _view.ShowCharacterEquipmentPanel();
                 _view.SwitchActiveState();
-                //   _view.gameObject.SetActive(!_view.gameObject.activeSelf);
+                _transferPopupView.Hide();
             }
         }
 
@@ -185,7 +201,7 @@ namespace Inventory
             var maxAmount = side == EInventoryCellSide.LeftSide
                 ? _resourcesStorage.GetAmountResource(cell.ItemType)
                 : _cityController.ResourcesStorage.GetAmountResource(cell.ItemType);
-            
+
             _transferPopupView.Show(cell, maxAmount);
         }
 
@@ -200,6 +216,7 @@ namespace Inventory
             {
                 inventoryCellView.Unsubscribe();
             }
+
             _transferPopupView.UnSubscribe();
             _resourcesStorage.OnChanced -= RefreshData;
             _cityController.ResourcesStorage.OnChanced -= RefreshData;
