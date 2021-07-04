@@ -1,4 +1,5 @@
 ﻿using Engine.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +14,9 @@ namespace Inventory
         [SerializeField] private ToggleGroup _rightSideToggleGroup;
         [SerializeField] private GameObject _rightSideScrollPanel;
         [SerializeField] private GameObject _characterEquipment;
+        [SerializeField] private TextMeshProUGUI _totalWeight;
 
-        private EInventoryRightSideState _inventoryRightSideState; //todo это не логика для вьюху, лучше вынести в презентер
-        public EInventoryRightSideState InventoryRightSideState => _inventoryRightSideState;
+
         public Transform LeftSideScroll => _leftSideScroll.content;
         public ToggleGroup LeftSideToggleGroup => _leftSideToggleGroup;
         
@@ -24,16 +25,19 @@ namespace Inventory
 
         public void ShowRightSidePanel()
         {
-            _inventoryRightSideState = EInventoryRightSideState.Change;
             _rightSideScrollPanel.SetActive(true);
             _characterEquipment.SetActive(false);
         }
 
         public void ShowCharacterEquipmentPanel()
         {
-            _inventoryRightSideState = EInventoryRightSideState.Equipment;
             _rightSideScrollPanel.SetActive(false);
             _characterEquipment.SetActive(true);
+        }
+
+        public void SetWeight(float value)
+        {
+            _totalWeight.text = value.ToString("F");
         }
     }
 }

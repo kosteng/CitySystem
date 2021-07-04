@@ -10,6 +10,8 @@ namespace Items.ResourceItems
         void AddResource(EResourceItemType type, float amount);
         void RemoveResource(EResourceItemType type, float amount);
         List<ResourceItemData> ResourceItemsData { get; }
+        float GetTotalWeight();
+        float GetResourceWeight(EResourceItemType type);
         event Action OnChanced;
     }
 
@@ -18,8 +20,9 @@ namespace Items.ResourceItems
         private readonly List<ResourceItemData> _resourceItemsData = new List<ResourceItemData>();
 
         public List<ResourceItemData> ResourceItemsData => _resourceItemsData;
+      
         public event Action OnChanced;
-
+        
         public ResourcesStorage(ResourceItemsDatabase resourceItemsDatabase)
         {
             foreach (var resourceItemData in resourceItemsDatabase.ResourceItemsData)
@@ -30,11 +33,6 @@ namespace Items.ResourceItems
                     resourceItemData.Amount));
 
             }
-        }
-
-        public float GetAmountResource(EResourceItemType type)
-        {
-            return _resourceItemsData.FirstOrDefault(i => i.ResourceItemType == type).Amount;
         }
 
         public void AddResource(EResourceItemType type, float amount)
@@ -54,5 +52,22 @@ namespace Items.ResourceItems
             item.Amount -= amount;
             OnChanced?.Invoke();
         }
+                
+        public float GetTotalWeight()
+        {
+            return _resourceItemsData.Sum(i => i.Weight * i.Amount);
+        }
+
+        public float GetResourceWeight(EResourceItemType type)
+        {
+            return _resourceItemsData.Where(itemData => itemData.ResourceItemType == type)
+                .Select(itemData => itemData.Amount * itemData.Weight).FirstOrDefault();
+        }
+        
+        public float GetAmountResource(EResourceItemType type)
+        {
+            return _resourceItemsData.FirstOrDefault(i => i.ResourceItemType == type).Amount;
+        }
+
     }
 }
