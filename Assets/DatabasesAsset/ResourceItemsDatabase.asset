@@ -19,18 +19,18 @@ MonoBehaviour:
   - _weight: 0
     ResourceItemType: 2
     View: {fileID: 0}
-  - _weight: 0
+  - _weight: 2.5
     ResourceItemType: 3
     View: {fileID: 0}
-  - _weight: 0
+  - _weight: 0.1
     ResourceItemType: 4
     View: {fileID: 0}
-  - _weight: 0
+  - _weight: 1
     ResourceItemType: 5
     View: {fileID: 0}
-  - _weight: 0
+  - _weight: 1
     ResourceItemType: 6
     View: {fileID: 0}
-  - _weight: 0
+  - _weight: 0.04
     ResourceItemType: 7
     View: {fileID: 0}
