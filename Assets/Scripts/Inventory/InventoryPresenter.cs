@@ -53,22 +53,26 @@ namespace Inventory
         {
             RefreshData();
             _view.Show();
-            _view.ShowRightSidePanel();
+            ShowRightSidePanel();
             _rightSideState = EInventoryRightSideState.Change;
         }
-
+        
         private void InitCells(List<InventoryCellView> sideCells, IResourcesStorage resourcesStorage, Transform parent, EInventoryCellSide side)
         {
+            var toggleGroup = side == EInventoryCellSide.LeftSide
+                ? _view.LeftSidePanel.ToggleGroup
+                : _view.RightSidePanel.ToggleGroup;
+            
             foreach (var itemData in resourcesStorage.ResourceItemsData)
             {
-                var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, parent,
-                    _view.RightSideToggleGroup, side);
+                var cell = _inventoryCellBuilder.Build(itemData.ResourceItemType, parent, toggleGroup, side);
 
                 cell.Subscribe(OnCellClick, OnShowTransferWindow);
 
                 sideCells.Add(cell);
             }
         }
+        
         public void Initialize()
         {
             _view.Hide();
@@ -80,10 +84,10 @@ namespace Inventory
             _characterResourcesStorage.OnChanced += RefreshData;
             _cityController.ResourcesStorage.OnChanced += RefreshData;
 
-            InitCells(_leftSideCells, _characterResourcesStorage, _view.LeftSideScroll, EInventoryCellSide.LeftSide);
+            InitCells(_leftSideCells, _characterResourcesStorage, _view.LeftSidePanel.ScrollParentContent, EInventoryCellSide.LeftSide);
             
             if (_rightSideState == EInventoryRightSideState.Change)
-                InitCells(_rightSideCells, _cityController.ResourcesStorage, _view.RightSideScroll, EInventoryCellSide.RightSide);
+                InitCells(_rightSideCells, _cityController.ResourcesStorage, _view.RightSidePanel.ScrollParentContent, EInventoryCellSide.RightSide);
             
             _transferPopupView.Subscribe(OnCancelClick, OnConfirmClick, OnTransferSliderChanced);
         }
@@ -149,10 +153,13 @@ namespace Inventory
         {
             FillCells(_leftSideCells, _characterResourcesStorage);
 
-            _view.SetWeight(_characterResourcesStorage.GetTotalWeight());
+            _view.LeftSidePanel.SetWeight(_characterResourcesStorage.GetTotalWeight());
 
             if (_rightSideState == EInventoryRightSideState.Change)
+            {
                 FillCells(_rightSideCells, _cityController.ResourcesStorage);
+                _view.RightSidePanel.SetWeight(_cityController.ResourcesStorage.GetTotalWeight());
+            }
         }
 
 
@@ -163,6 +170,18 @@ namespace Inventory
                 13);
         }
 
+        private void ShowCharacterEquipmentPanel()
+        {
+            _view.RightSidePanel.Hide();
+            _view.CharacterInventoryEquipmentView.Show();
+        }
+        
+        private void ShowRightSidePanel()
+        {
+            _view.RightSidePanel.Show();
+            _view.CharacterInventoryEquipmentView.Hide();
+            _view.LeftSidePanel.ToggleGroup.ActiveToggles();
+        }
         public void Update(float deltaTime)
         {
             if (_playerInputControls.PressInventoryButton())
@@ -173,7 +192,7 @@ namespace Inventory
                 }
 
                 _rightSideState = EInventoryRightSideState.Equipment;
-                _view.ShowCharacterEquipmentPanel();
+                ShowCharacterEquipmentPanel();
                 _view.SwitchActiveState();
                 _transferPopupView.Hide();
             }

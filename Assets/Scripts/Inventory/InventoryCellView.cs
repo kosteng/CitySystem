@@ -21,8 +21,6 @@ namespace Inventory
         public EResourceItemType ItemType => _itemType;
         public EInventoryCellSide InventoryCellSide => _cellSide;
 
-        private ResourceItemData _resourceItemData;
-
         public void Subscribe(Action<bool, InventoryCellView, EInventoryCellSide> onCellClick, Action<InventoryCellView, EInventoryCellSide> onButtonClick)
         {
             _toggle.onValueChanged.AddListener(b => onCellClick?.Invoke(b, this, _cellSide));
@@ -32,10 +30,9 @@ namespace Inventory
 
         public void Init(ResourceItemData itemData, EInventoryCellSide side, ToggleGroup toggleGroup)
         {
-            _resourceItemData = itemData;
             _title.text = itemData.ResourceItemType.ToString();
             _amount.text = itemData.Amount.ToString();
-            _weight.text = itemData.Weight.ToString();
+            _weight.text = itemData.Weight.ToString("0.##");
             _itemType = itemData.ResourceItemType;
             _cellSide = side;
             _toggle.group = toggleGroup;
@@ -50,7 +47,7 @@ namespace Inventory
         public void Refresh(float amount, float weight)
         {
             _amount.text = amount.ToString();
-            _weight.text = weight.ToString("F");
+            _weight.text = weight.ToString("0.##");
         }
 
         public void SetColor(bool isSelected)

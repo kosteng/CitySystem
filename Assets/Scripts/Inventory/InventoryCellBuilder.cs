@@ -22,13 +22,7 @@ namespace Inventory
             var resourceData = _resourceItemsDatabase.ResourceItemsData.FirstOrDefault(i => i.ResourceItemType == type);
             
             prefab.Init(resourceData, side, toggleGroup);
-          //  prefab.Title.text = $"{resourceData.ResourceItemType.ToString()}";
-            
-      //      prefab.Amount = resourceData.Amount;
-     //       prefab.SetCellSide(side);
-
             prefab.transform.SetParent(contentParent);
-       //     prefab.SetToggleGroup(toggleGroup);
             
             return prefab;
         }
