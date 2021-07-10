@@ -1,4 +1,5 @@
 ﻿using Engine.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +7,9 @@ namespace DayChangeSystem.Views
 {
     public class DayCounterView : APanel
     {
-        [SerializeField] private Text _dayText;
-        [SerializeField] private Text _seasonText;
-        [SerializeField] private Text _hourText;
+        [SerializeField] private TextMeshProUGUI _dayText;
+        [SerializeField] private TextMeshProUGUI _seasonText;
+        [SerializeField] private TextMeshProUGUI _hourText;
 
         public void SetHour(string value)
         {

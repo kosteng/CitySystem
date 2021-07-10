@@ -68,8 +68,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         //TODO рефакторинг зиз
         private void Subscribe()
         {
-            _view.OnBuyBuildingClickButton += BuyBuilding;
-            _view.Subscribe(CloseInfoBuyView, CloseInfoBuyView);
+            _view.Subscribe(CloseInfoBuyView, CloseInfoBuyView, BuyBuilding);
             _buildingsStacker.OnBuildingMontage += PurchaseBuilding;
 
             foreach (var buttons in _buttonsList)
@@ -120,7 +119,6 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         public void Dispose()
         {
             _view.Unsubscribe();
-            _view.OnBuyBuildingClickButton -= BuyBuilding;
             _buildingsStacker.OnBuildingMontage -= PurchaseBuilding;
 
             foreach (var buttons in _buttonsList)

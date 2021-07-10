@@ -1,6 +1,7 @@
 ﻿using BuildingsSystem.Enums;
 using System;
 using Engine.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,17 +11,17 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
     {
         [SerializeField] private Button _buyBuildingButton;
         [SerializeField] private Button _closeButton;
-        [SerializeField] private Text _nameBuildingText;
-        [SerializeField] private Text _costBuildingText;
+        [SerializeField] private TextMeshProUGUI _nameBuildingText;
+        [SerializeField] private TextMeshProUGUI _costBuildingText;
         [SerializeField] private Transform _buildingButtonsPanel;
        
         private EBuildingType _currentType;
         public Transform BuildingButtonsPanel => _buildingButtonsPanel;
         public delegate void BuildingTypeHandler(EBuildingType type);
-        public event BuildingTypeHandler OnBuyBuildingClickButton;
 
-        public void Subscribe(Action onBuyButton, Action onCloseButton)
+        public void Subscribe(Action onBuyButton, Action onCloseButton, BuildingTypeHandler onBuyBuildingClickButton)
         {
+            _buyBuildingButton.onClick.AddListener(() => onBuyBuildingClickButton?.Invoke(_currentType));
             _buyBuildingButton.onClick.AddListener(onBuyButton.Invoke);
             _closeButton.onClick.AddListener(onCloseButton.Invoke);
         }
@@ -28,11 +29,6 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         {
             _buyBuildingButton.onClick.RemoveAllListeners();
             _closeButton.onClick.RemoveAllListeners();
-        }
-
-        public void BuyBuildingClick()
-        {
-            OnBuyBuildingClickButton?.Invoke(_currentType);
         }
 
         public void SetName(string name)

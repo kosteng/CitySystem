@@ -1,5 +1,6 @@
 ﻿using BuildingsSystem.Enums;
 using Engine.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 {
     public class BuildingButtonView : APanel
     {
-        [SerializeField] private Text _nameText;
+        [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private Button _button;
         [SerializeField] private EBuildingType _buildingType;
     
@@ -21,14 +22,9 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
         }
         public void Subscribe()
         {
-            _button.onClick.AddListener(OnButtonClick);
+            _button.onClick.AddListener(() => OnBuildingClickButton?.Invoke(_buildingType));
         }
-
-        private void OnButtonClick()
-        {
-            OnBuildingClickButton?.Invoke(_buildingType);
-        }
-
+        
         public void SetBuildingType(EBuildingType type)
         {
             _buildingType = type;
@@ -36,7 +32,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         public void Unsubscribe()
         {
-            _button.onClick.RemoveListener(OnButtonClick);
+            _button.onClick.RemoveAllListeners();
         }
     }
 }
