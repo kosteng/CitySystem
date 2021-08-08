@@ -65,7 +65,6 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
             _view.Attach(parent);
         }
 
-        //TODO рефакторинг зиз
         private void Subscribe()
         {
             _view.Subscribe(CloseInfoBuyView, CloseInfoBuyView, BuyBuilding);
