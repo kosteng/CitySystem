@@ -14,23 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResourceItemsData:
   - _weight: 0
+    _description: Gold
     ResourceItemType: 1
     View: {fileID: 0}
   - _weight: 0
+    _description: Food
     ResourceItemType: 2
     View: {fileID: 0}
   - _weight: 2.5
+    _description: Log
     ResourceItemType: 3
     View: {fileID: 0}
   - _weight: 0.1
+    _description: Stick
     ResourceItemType: 4
     View: {fileID: 0}
   - _weight: 1
+    _description: Stone
     ResourceItemType: 5
     View: {fileID: 0}
   - _weight: 1
+    _description: Iron
     ResourceItemType: 6
     View: {fileID: 0}
   - _weight: 0.04
+    _description: Straw
     ResourceItemType: 7
     View: {fileID: 0}

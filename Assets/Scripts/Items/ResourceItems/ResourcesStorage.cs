@@ -30,8 +30,8 @@ namespace Items.ResourceItems
                 _resourceItemsData.Add(new ResourceItemData(resourceItemData.Weight,
                     resourceItemData.ResourceItemType,
                     resourceItemData.View,
-                    resourceItemData.Amount));
-
+                    resourceItemData.Amount,
+                    resourceItemData.Description));
             }
         }
 
@@ -68,6 +68,5 @@ namespace Items.ResourceItems
         {
             return _resourceItemsData.FirstOrDefault(i => i.ResourceItemType == type).Amount;
         }
-
     }
 }

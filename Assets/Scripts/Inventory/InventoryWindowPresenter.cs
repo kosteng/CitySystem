@@ -17,7 +17,7 @@ namespace Inventory
         void ShowChange();
         void ShowCharacterInventory();
     }
-
+    //todo перенести логику обработки TransferPopupView в отдельный пресентер
     public class InventoryWindowPresenter : IInventoryWindowPresenter, IAttachableUi, IUpdatable, IInitializable, IDisposable
     {
         private readonly InventoryView _view;
@@ -174,8 +174,7 @@ namespace Inventory
                 _view.RightSidePanel.SetWeight(_cityController.ResourcesStorage.GetTotalWeight());
             }
         }
-
-
+        
 //todo удалить если не понадобится
         private void Transfer()
         {
@@ -219,10 +218,25 @@ namespace Inventory
         private void OnCellClick(bool isOnToggle, InventoryCellView cell, EInventoryCellSide side)
         {
             cell.SetColor(isOnToggle);
+            
+            switch (side)
+            {
+                case EInventoryCellSide.LeftSide:
+                    _view.LeftSidePanel.SetDescription(cell.GetDescription());
+                    break;
+                case EInventoryCellSide.RightSide:
+                    _view.RightSidePanel.SetDescription(cell.GetDescription());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(side), side, null);
+            }
         }
 
         private void OnShowTransferWindow(InventoryCellView cell, EInventoryCellSide side)
         {
+            if (_rightSideState == EInventoryRightSideState.Equipment)
+                return;
+            
             var maxAmount = side == EInventoryCellSide.LeftSide
                 ? _characterResourcesStorage.GetAmountResource(cell.ItemType)
                 : _cityController.ResourcesStorage.GetAmountResource(cell.ItemType);
