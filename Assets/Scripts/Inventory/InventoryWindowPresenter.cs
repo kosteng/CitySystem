@@ -12,12 +12,13 @@ using Zenject;
 
 namespace Inventory
 {
-    public interface IInventoryPresenter
+    public interface IInventoryWindowPresenter
     {
-        void Show();
+        void ShowChange();
+        void ShowCharacterInventory();
     }
 
-    public class InventoryPresenter : IInventoryPresenter, IAttachableUi, IUpdatable, IInitializable, IDisposable
+    public class InventoryWindowPresenter : IInventoryWindowPresenter, IAttachableUi, IUpdatable, IInitializable, IDisposable
     {
         private readonly InventoryView _view;
         private readonly TransferPopupView _transferPopupView;
@@ -32,7 +33,7 @@ namespace Inventory
         
         private EInventoryRightSideState _rightSideState;
         
-        public InventoryPresenter(InventoryView view,
+        public InventoryWindowPresenter(InventoryView view,
             TransferPopupView transferPopupView,
             IInventoryCellBuilder inventoryCellBuilder,
             CharacterMovementController characterMovementController,
@@ -49,12 +50,23 @@ namespace Inventory
             _cityController = cityController;
         }
 
-        public void Show()
+        public void ShowChange()
         {
             RefreshData();
             _view.Show();
+ 
             ShowRightSidePanel();
             _rightSideState = EInventoryRightSideState.Change;
+        }
+
+        public void ShowCharacterInventory()
+        {
+            SetEquipmentState();
+        }
+
+        private void OnCloseButtonClick()
+        {
+            _view.Hide();
         }
         
         private void InitCells(List<InventoryCellView> sideCells, IResourcesStorage resourcesStorage, Transform parent, EInventoryCellSide side)
@@ -76,6 +88,7 @@ namespace Inventory
         public void Initialize()
         {
             _view.Hide();
+            _view.Subscribe(OnCloseButtonClick);
             _playerInputControls.CheatAddResources(_characterResourcesStorage);
 
             if (_leftSideCells.Count > 0 && _rightSideCells.Count > 0)
@@ -182,19 +195,24 @@ namespace Inventory
             _view.CharacterInventoryEquipmentView.Hide();
             _view.LeftSidePanel.ToggleGroup.ActiveToggles();
         }
+
+        private void SetEquipmentState()
+        {
+            if (!_view.gameObject.activeSelf)
+            {
+                RefreshData();
+            }
+
+            _rightSideState = EInventoryRightSideState.Equipment;
+            ShowCharacterEquipmentPanel();
+            _view.SwitchActiveState();
+            _transferPopupView.Hide();
+        }
         public void Update(float deltaTime)
         {
             if (_playerInputControls.PressInventoryButton())
             {
-                if (!_view.gameObject.activeSelf)
-                {
-                    RefreshData();
-                }
-
-                _rightSideState = EInventoryRightSideState.Equipment;
-                ShowCharacterEquipmentPanel();
-                _view.SwitchActiveState();
-                _transferPopupView.Hide();
+                SetEquipmentState();
             }
         }
 
@@ -223,7 +241,8 @@ namespace Inventory
             {
                 inventoryCellView.Unsubscribe();
             }
-
+            
+            _view.Unsubscribe();
             _transferPopupView.UnSubscribe();
             _characterResourcesStorage.OnChanced -= RefreshData;
             _cityController.ResourcesStorage.OnChanced -= RefreshData;

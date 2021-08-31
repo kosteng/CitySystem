@@ -13,15 +13,13 @@ namespace UI.BottomPanel
     public class BuildingWindowInfoPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BuildingWindowInfoView _view;
-        private readonly IInventoryPresenter _inventoryPresenter;
+        private readonly IInventoryWindowPresenter _inventoryWindowPresenter;
         private readonly InventoryView _inventoryView;
-
-
-        public BuildingWindowInfoPresenter(BuildingWindowInfoView view, IInventoryPresenter inventoryPresenter)
+        
+        public BuildingWindowInfoPresenter(BuildingWindowInfoView view, IInventoryWindowPresenter inventoryWindowPresenter)
         {
             _view = view;
-            _inventoryPresenter = inventoryPresenter;
-
+            _inventoryWindowPresenter = inventoryWindowPresenter;
         }
 
         public void Show(IBuilding buildingModel)
@@ -33,20 +31,21 @@ namespace UI.BottomPanel
             if (buildingModel.BuildingType == EBuildingType.Storage)
             {
                 _view.Hide();
-                _inventoryPresenter.Show();
+                _inventoryWindowPresenter.ShowChange();
             }
-
-
         }
+        
         private void Subscribe()
         {
             Hide();
             _view.Subscribe(Hide);
         }
+        
         public void Hide()
         {
             _view.gameObject.SetActive(false);
         }
+        
         public void Dispose()
         {
             _view.Unsubscribe();

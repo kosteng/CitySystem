@@ -40,7 +40,7 @@ namespace Engine.Installers
 
         private void BuildingsSystem()
         {
-            Container.BindInterfacesAndSelfTo<BuildingInfoBuyPanelPresenter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildingPurchaseWindowPresenter>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingButtonBuilder>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingsStacker>().AsSingle();
@@ -85,7 +85,7 @@ namespace Engine.Installers
         
         private void InventorySystem()
         {
-            Container.BindInterfacesTo<InventoryPresenter>().AsSingle();
+            Container.BindInterfacesTo<InventoryWindowPresenter>().AsSingle();
             Container.BindInterfacesTo<InventoryCellFactory>().AsSingle();
             Container.BindInterfacesTo<InventoryCellBuilder>().AsSingle();
         }

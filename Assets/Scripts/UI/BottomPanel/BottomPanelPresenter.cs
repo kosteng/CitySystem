@@ -1,6 +1,7 @@
 ﻿using System;
 using BuildingsSystem.UI.BuildingInfoBuyPanel;
 using Engine.UI;
+using Inventory;
 using UnityEngine;
 using Zenject;
 
@@ -9,19 +10,26 @@ namespace UI.BottomPanel
     public class BottomPanelPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BottomPanelView _view;
-        private readonly BuildingInfoBuyPanelPresenter _buildingInfoBuyPanelPresenter;
+        private readonly BuildingPurchaseWindowPresenter _buildingPurchaseWindowPresenter;
+        private readonly IInventoryWindowPresenter _inventoryWindowPresenter;
 
-        public BottomPanelPresenter(BottomPanelView view, BuildingInfoBuyPanelPresenter buildingInfoBuyPanelPresenter)
+        public BottomPanelPresenter(BottomPanelView view, BuildingPurchaseWindowPresenter buildingPurchaseWindowPresenter, IInventoryWindowPresenter inventoryWindowPresenter)
         {
             _view = view;
-            _buildingInfoBuyPanelPresenter = buildingInfoBuyPanelPresenter;
+            _buildingPurchaseWindowPresenter = buildingPurchaseWindowPresenter;
+            _inventoryWindowPresenter = inventoryWindowPresenter;
         }
 
-        private void Show()
+        private void OnShowBuildingsPurchaseWindow()
         {
-            _buildingInfoBuyPanelPresenter.Show();
+            _buildingPurchaseWindowPresenter.Show();
         }
 
+        private void OnShowInventoryWindow()
+        {
+            _inventoryWindowPresenter.ShowCharacterInventory();
+        }
+        
         public void Dispose()
         {
             _view.Unsubscribe();
@@ -34,7 +42,7 @@ namespace UI.BottomPanel
 
         public void Initialize()
         {
-            _view.Subscribe(Show);
+            _view.Subscribe(OnShowBuildingsPurchaseWindow, OnShowInventoryWindow);
         }
     }
 }

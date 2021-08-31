@@ -14,7 +14,7 @@ using Zenject;
 
 namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 {
-    public class BuildingInfoBuyPanelPresenter : IDisposable, IAttachableUi, IInitializable
+    public class BuildingPurchaseWindowPresenter : IDisposable, IAttachableUi, IInitializable
     {
         private readonly BuildingBuyPanelView _view;
         private readonly BuildingsModelDatabase _buildingsModelDatabase;
@@ -29,7 +29,7 @@ namespace BuildingsSystem.UI.BuildingInfoBuyPanel
 
         private BuildingDatabase _currentBuilding;
 
-        public BuildingInfoBuyPanelPresenter(BuildingBuyPanelView view,
+        public BuildingPurchaseWindowPresenter(BuildingBuyPanelView view,
             BuildingsModelDatabase buildingsModelDatabase,
             IBuildingButtonBuilder buildingButtonBuilder,
             IBuildingsStacker buildingsStacker,
