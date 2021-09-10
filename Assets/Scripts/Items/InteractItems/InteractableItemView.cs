@@ -8,7 +8,9 @@ namespace Items.InteractItems
         [SerializeField] private EInteractItemType _itemType;
         [SerializeField] private float _respawnTime = 2000f;
         [SerializeField] private float _extractTime = 5f;
+        [SerializeField] private float _radiusToInteract = 2f;
         public EInteractItemType ItemType => _itemType;
+        public float RadiusToInteract => _radiusToInteract;
         public bool IsExtracted { get; set; }
         public Transform Transform => transform;
         public float RespawnTime { get; set; }

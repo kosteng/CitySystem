@@ -5,6 +5,7 @@ namespace Items.InteractItems.Interfaces
     public interface IInteractableItem
     {
         EInteractItemType ItemType { get; }
+        float RadiusToInteract { get; }
         bool IsExtracted { get; set; }
         Transform Transform { get; }
         float RespawnTime { get; set; }

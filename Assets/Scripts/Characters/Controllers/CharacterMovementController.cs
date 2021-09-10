@@ -21,6 +21,7 @@ namespace Units.Controllers
 
         public Transform UnitViewTransform => _characterModel.View.transform;
         public CharacterModel CharacterModel => _characterModel;
+
         public CharacterMovementController(
             CharactersDatabase charactersDatabase,
             IInputClicker inputClicker,
@@ -35,7 +36,7 @@ namespace Units.Controllers
             _characterItemExtractor = characterItemExtractor;
 
             _characterModel = new CharacterModel(resourceItemsDatabase);
-            
+
             //todo нужна фабрика
             if (_characterModel.View == null)
                 _characterModel.View = Object.Instantiate(charactersDatabase.CharacterModels[0].View);
@@ -45,7 +46,8 @@ namespace Units.Controllers
         {
             _playerInputControls.PressCheatAddResources(_characterModel.ResourcesStorage);
             _characterModel.IsMoving =
-                _characterModel.View.NavMeshAgent.remainingDistance > _characterModel.View.NavMeshAgent.stoppingDistance;
+                _characterModel.View.NavMeshAgent.remainingDistance >
+                _characterModel.View.NavMeshAgent.stoppingDistance;
             CheckTargetForMove();
 
             if (_characterModel.IsMoving)
@@ -60,12 +62,16 @@ namespace Units.Controllers
         private void CheckTargetForMove()
         {
             if (_inputClicker.Click(ref _characterModel.InteractableItemTarget, ref _pointDestination))
+            {
+                _characterModel.View.NavMeshAgent.ResetPath();
                 MoveToPoint(_pointDestination);
+            }
         }
 
         private void SetMovementState()
         {
-            _characterModel.CharacterCurrentState = _characterModel.IsMoving ? ECharacterState.Move : ECharacterState.Idle;
+            _characterModel.CharacterCurrentState =
+                _characterModel.IsMoving ? ECharacterState.Move : ECharacterState.Idle;
         }
 
         private void MoveToPoint(Vector3 point)
@@ -77,13 +83,21 @@ namespace Units.Controllers
 
         private void CheckStopState()
         {
+            if (!_characterModel.IsMoving)
+                _characterModel.View.NavMeshAgent.ResetPath();
             _characterModel.View.NavMeshAgent.isStopped = !_characterModel.IsMoving;
         }
 
         private void CheckInteract()
         {
+            if (_characterModel.InteractableItemTarget == null)
+                return;
+
+            var remainingDistance = _characterModel.View.NavMeshAgent.remainingDistance;
+            var radius = _characterModel.InteractableItemTarget.RadiusToInteract;
+
             _characterModel.CharacterCurrentState =
-                _characterModel.InteractableItemTarget != null && _characterModel.View.NavMeshAgent.remainingDistance < 1.3f // todo вынести в конфиг
+                remainingDistance < radius && remainingDistance > 0.1f // todo вынести в конфиг
                     ? ECharacterState.Interact
                     : _characterModel.CharacterCurrentState;
         }
